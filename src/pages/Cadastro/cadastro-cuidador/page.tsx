@@ -1,16 +1,7 @@
 import ErrorMessage from '@/_components/ErrorMessage/error';
+import InputMask from '@/_components/Mask/mask';
 import { Button } from '@/_components/ui/button';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-// interface Cep {
-//     cep?: string;
-//     rua?: string;
-//     bairro?: string;
-//     cidade?: string;
-//     estado?: string;
-// }
+import { useForm, Controller } from 'react-hook-form';
 
 interface FormProps {
     name: string;
@@ -19,21 +10,46 @@ interface FormProps {
     password_confirmation: string;
     cpf: string;
     description: string;
-    address: string;
     address_number: string;
     phone: string;
+    cep: string;
+    street?: string;
+    neighborhood?: string;
+    city?: string;
+    state?: string;
 }
 
 export default function CadastroCuidador() {
-    // const [enderecoCep, setCep] = useState<Cep>({});
     const {
         register,
         handleSubmit,
+        setError,
+        setValue,
         watch,
+        control,
         formState: { errors }
-    } = useForm<FormProps>();
+    } = useForm<FormProps>({
+        mode: 'all',
+        defaultValues: {
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            cpf: '',
+            description: '',
+            address_number: '',
+            phone: '',
+            cep: '',
+            street: '',
+            neighborhood: '',
+            city: '',
+            state: ''
+        }
+    });
 
     const senha = watch('password');
+    const cepDigitado = watch('cep');
+
     const validaSenha = {
         obrigatorio: (e: string) =>
             !!e || 'Por favor, preencha este campo novamente',
@@ -42,28 +58,35 @@ export default function CadastroCuidador() {
         senhaIgual: (e: string) => e === senha || 'As senhas não são iguais'
     };
 
-    // function manipularCep(e: React.ChangeEvent<HTMLInputElement>) {
-    //     let cep = e.target.value.replace(/\D/g, '');
-    //     setCep({
-    //         cep
-    //     });
-    //     if (cep.length === 8) {
-    //         fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    //             .then((resposta) => resposta.json())
-    //             .then((dados) => {
-    //                 setCep((cepAntigo) => ({
-    //                     ...cepAntigo,
-    //                     rua: dados.logradouro,
-    //                     bairro: dados.bairro,
-    //                     cidade: dados.localidade,
-    //                     estado: dados.uf
-    //                 }));
-    //             });
-    //     }
-    // }
+    const fetchEndereco = async (cep: string) => {
+        if (!cep) {
+            setError('cep', {
+                type: 'manual',
+                message: 'CEP é invalido'
+            });
+            return;
+        }
+        try {
+            const response = await fetch(
+                `https://viacep.com.br/ws/${cep}/json/`
+            );
+            const data = await response.json();
+
+            if (response.ok) {
+                setValue('street', data.logradouro);
+                setValue('neighborhood', data.bairro);
+                setValue('city', data.localidade);
+                setValue('state', data.uf);
+            } else {
+                throw new Error('CEP não encontrado');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     async function onSubmit(data: FormProps) {
-        //    console.log(data);
+        console.log(data);
         const user = await fetch('http://localhost:8000/user', {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
@@ -80,15 +103,19 @@ export default function CadastroCuidador() {
         <div className='flex items-start justify-center min-h-screen bg-gradient-to-b from-blue-200 to-blue-500'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-96 bg-white p-6 rounded-lg shadow-lg'
+                className='w-96 bg-gradient-to-b from-blue-200 to-blue-500 p-8 rounded-3xl shadow-lg'
             >
-                <label htmlFor='name' className='block'>
+                <label
+                    htmlFor='name'
+                    className='block text-lg font-bold text-white-600'
+                    style={{ textShadow: '0 2px 0 rgba(255, 255, 255, 0.5)' }}
+                >
                     Nome:
                 </label>
                 <input
                     id='name'
                     type='text'
-                    className={`block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
                         errors.name ? 'border-red-500' : ''
                     }`}
                     placeholder='Digite seu nome'
@@ -98,13 +125,17 @@ export default function CadastroCuidador() {
                     <ErrorMessage>{errors.name.message}</ErrorMessage>
                 )}
 
-                <label htmlFor='email' className='block mt-4'>
-                    Email:
+                <label
+                    htmlFor='email'
+                    className='block mt-4 text-lg font-bold text-white-600'
+                    style={{ textShadow: '0 2px 0 rgba(255, 255, 255, 0.5)' }}
+                >
+                    E-mail:
                 </label>
                 <input
                     id='email'
                     type='email'
-                    className={`block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1  ${
+                    className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  ${
                         errors.email ? 'border-red-500' : ''
                     }`}
                     placeholder='Digite seu e-mail'
@@ -120,7 +151,7 @@ export default function CadastroCuidador() {
                 <input
                     id='password'
                     type='password'
-                    className={`block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1 ${
+                    className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
                         errors.password ? 'border-red-500' : ''
                     }`}
                     placeholder='Digite uma senha'
@@ -142,7 +173,7 @@ export default function CadastroCuidador() {
                 <input
                     id='password_confirmation'
                     type='password'
-                    className={`block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1 ${
+                    className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
                         errors.password_confirmation ? 'border-red-500' : ''
                     }`}
                     placeholder='Repita a senha'
@@ -157,14 +188,14 @@ export default function CadastroCuidador() {
                     </ErrorMessage>
                 )}
 
-                <label htmlFor='cpf' className='block mt-4'>
+                <label htmlFor='cpf' className='block mt-4 px-2'>
                     CPF:
                 </label>
                 <input
                     id='cpf'
                     type='text'
                     maxLength={11}
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
                     placeholder='Digite seu CPF'
                     {...register('cpf')}
                 />
@@ -174,37 +205,72 @@ export default function CadastroCuidador() {
                 </label>
                 <textarea
                     id='description'
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
                     placeholder='Digite uma descrição sobre você'
                     {...register('description')}
                 ></textarea>
-                {/* 
+
                 <label htmlFor='cep' className='block mt-4'>
                     CEP:
                 </label>
                 <input
                     id='cep'
                     type='text'
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
+                    className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                        errors.cep ? 'border-red-500' : ''
+                    }`}
                     placeholder='Digite o CEP'
-                    onChange={manipularCep}
-                    maxLength={8}
+                    {...register('cep', {
+                        required: 'CEP é obrigatório'
+                    })}
+                    onBlur={(e) => {
+                        fetchEndereco(cepDigitado);
+                    }}
                 />
-                <ul>
-                    <li id='neighborhood'>Bairro: {enderecoCep.bairro}</li>
-                    <li id='city'>Cidade: {enderecoCep.cidade}</li>
-                    <li id='state'>Estado: {enderecoCep.estado}</li>
-                </ul> */}
+                {errors.cep && (
+                    <ErrorMessage>{errors.cep.message}</ErrorMessage>
+                )}
 
-                <label htmlFor='address' className='block mt-4'>
-                    Endereço
+                <label htmlFor='street' className='block mt-4'>
+                    Rua:
                 </label>
                 <input
-                    id='address'
+                    id='street'
                     type='text'
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
-                    placeholder='Digite seu endereço'
-                    {...register('address')}
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    placeholder='Digite a rua'
+                    {...register('street')}
+                />
+                <label htmlFor='neighborhood' className='block mt-4'>
+                    Bairro:
+                </label>
+                <input
+                    id='neighborhood'
+                    type='text'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    placeholder='Digite o bairro'
+                    {...register('neighborhood')}
+                />
+                <label htmlFor='city' className='block mt-4'>
+                    Cidade:
+                </label>
+                <input
+                    id='city'
+                    type='text'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    placeholder='Digite a cidade'
+                    {...register('city')}
+                />
+
+                <label htmlFor='state' className='block mt-4'>
+                    Estado:
+                </label>
+                <input
+                    id='state'
+                    type='text'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    placeholder='Digite o estado'
+                    {...register('state')}
                 />
 
                 <label htmlFor='address_number' className='block mt-4'>
@@ -213,20 +279,38 @@ export default function CadastroCuidador() {
                 <input
                     id='address_number'
                     type='text'
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
                     placeholder='Digite o número da casa'
                     {...register('address_number')}
                 />
 
-                <label htmlFor='phone' className='block mt-4'>
-                    Telefone:
-                </label>
-                <input
-                    id='phone'
-                    type='text'
-                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
-                    placeholder='Exemplo: (99) 99999-9999'
-                    {...register('phone')}
+                <Controller
+                    control={control}
+                    name='phone'
+                    rules={{
+                        pattern: {
+                            value: /^\(\d{2,3}\) \d{5}-\d{4}$/,
+                            message: 'Telefone inválido'
+                        },
+                        required: 'Telefone é obrigatório'
+                    }}
+                    render={({ field }) => (
+                        <>
+                            <label htmlFor=''>Telefone</label>
+                            <InputMask
+                                className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                                mask='(99) 99999-9999'
+                                placeholder='Digite seu telefone'
+                                $error={!!errors.phone}
+                                onChange={field.onChange}
+                            />
+                            {errors.phone && (
+                                <ErrorMessage>
+                                    {errors.phone.message}
+                                </ErrorMessage>
+                            )}
+                        </>
+                    )}
                 />
 
                 <Button

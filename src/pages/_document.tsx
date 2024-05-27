@@ -6,6 +6,7 @@ export default function Document() {
         <Html lang='bt-br'>
             <Head />
             <link rel='shortcut icon' href='/old.png' type='image/x-icon' />
+
             <body>
                 <Header />
                 <Main />

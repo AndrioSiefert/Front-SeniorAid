@@ -9,7 +9,7 @@ export default function Header() {
     const [busca, setBusca] = useState('');
 
     return (
-        <div className='flex flex-col md:flex-row justify-between items-center bg-black pt-4 px-4 gap-3'>
+        <div className='flex flex-col md:flex-row justify-between items-center bg-gradient-to-r from-cyan-500 to-blue-500 pt-4 px-4 gap-3'>
             <div className='flex items-center'>
                 <Link href='/'>
                     <Image
