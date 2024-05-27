@@ -3,8 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import { useState } from 'react';
 
 export default function Header() {
+    const [busca, setBusca] = useState('');
+
     return (
         <div className='flex flex-col md:flex-row justify-between items-center bg-black pt-4 px-4 gap-3'>
             <div className='flex items-center'>
@@ -26,7 +29,7 @@ export default function Header() {
                     <Input
                         placeholder='Buscar por serviços...'
                         type='text'
-                        className='rounded-full border-none text-center p-2 w-96'
+                        className='rounded-full border-none text-center p-2 w-96 bg-red-50'
                     />
 
                     <Button
