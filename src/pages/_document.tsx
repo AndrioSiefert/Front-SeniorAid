@@ -1,3 +1,4 @@
+import Header from '@/_components/header';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
@@ -6,6 +7,7 @@ export default function Document() {
             <Head />
             <link rel='shortcut icon' href='/old.png' type='image/x-icon' />
             <body>
+                <Header />
                 <Main />
                 <NextScript />
             </body>

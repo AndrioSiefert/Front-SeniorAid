@@ -1,3 +1,4 @@
+import { Button } from '@/_components/ui/button';
 import { useState } from 'react';
 
 interface Cep {
@@ -12,13 +13,14 @@ export default function CadastroCuidador() {
     const [enderecoCep, setCep] = useState<Cep>({});
 
     function manipularCep(e: React.ChangeEvent<HTMLInputElement>) {
-        const cep = e.target.value;
+        let cep = e.target.value.replace(/\D/g, '');
         setCep({
             cep
         });
-        if (cep && cep.length === 8) {
-            fetch(`https://viacep.com.br/ws/${cep}/json/`).then((resposta) =>
-                resposta.json().then((dados) => {
+        if (cep.length === 8) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then((resposta) => resposta.json())
+                .then((dados) => {
                     setCep((cepAntigo) => ({
                         ...cepAntigo,
                         rua: dados.logradouro,
@@ -26,13 +28,13 @@ export default function CadastroCuidador() {
                         cidade: dados.localidade,
                         estado: dados.uf
                     }));
-                })
-            );
+                });
         }
     }
+
     return (
-        <div className='flex justify-center bg-amber-100'>
-            <form className='w-96'>
+        <div className='flex items-start justify-center min-h-screen bg-gradient-to-b from-blue-200 to-blue-500'>
+            <form className='w-96 bg-white p-6 rounded-lg shadow-lg'>
                 <label htmlFor='name' className='block'>
                     Nome:
                 </label>
@@ -64,6 +66,17 @@ export default function CadastroCuidador() {
                     name='password'
                     className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
                     placeholder='Digite uma senha'
+                />
+
+                <label htmlFor='password' className='block mt-4'>
+                    Digite novamente a sua Senha:
+                </label>
+                <input
+                    id='password'
+                    type='password'
+                    name='password'
+                    className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1'
+                    placeholder='Digite novamente a sua senha'
                 />
 
                 <label htmlFor='cpf' className='block mt-4'>
@@ -106,7 +119,6 @@ export default function CadastroCuidador() {
                     <li>Cidade: {enderecoCep.cidade}</li>
                     <li>Estado: {enderecoCep.estado}</li>
                 </ul>
-
                 <label htmlFor='phone' className='block mt-4'>
                     Telefone:
                 </label>
@@ -118,12 +130,12 @@ export default function CadastroCuidador() {
                     placeholder='Digite seu telefone'
                 />
 
-                <button
+                <Button
                     type='submit'
                     className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
                 >
-                    Submit
-                </button>
+                    Criar Conta
+                </Button>
             </form>
         </div>
     );

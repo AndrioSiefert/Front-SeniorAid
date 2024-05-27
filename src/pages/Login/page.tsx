@@ -1,5 +1,7 @@
+import { Button } from '@/_components/ui/button';
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Login() {
@@ -11,7 +13,7 @@ export default function Login() {
     }
 
     return (
-        <div className='flex items-center h-screen bg-HomeNav'>
+        <div className='flex items-center h-screen'>
             <div className='w-1/2'>
                 <Image
                     src='/loginn.png'
@@ -34,17 +36,23 @@ export default function Login() {
 
                     <div>
                         <form>
-                            <label htmlFor='email'>E-mail</label>
-                            <input
-                                className='rounded-full'
-                                type='email'
-                                id='email'
-                                name='email'
-                            />
-                            <div className='mt-4'>
-                                <label htmlFor='password'>Senha</label>
+                            <div className='flex justify-normal'>
+                                <label className='p-2' htmlFor='email'>
+                                    E-mail:
+                                </label>
                                 <input
-                                    className='rounded-full'
+                                    className='rounded-full border-2 border-gray-300 p-2 w-96'
+                                    type='email'
+                                    id='email'
+                                    name='email'
+                                />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='p-2' htmlFor='password'>
+                                    Senha:
+                                </label>
+                                <input
+                                    className='rounded-full border-2 border-gray-300 p-2 w-96'
                                     type={senhaVisivel ? 'text' : 'password'}
                                     id='password'
                                     name='password'
@@ -63,13 +71,13 @@ export default function Login() {
                             </div>
 
                             <div className='mt-4'>
-                                <p className='italic'>Esqueceu sua senha?</p>
-                                <button>Entrar</button>
+                                <Button>Entrar</Button>
+
                                 <p>ou</p>
-                                <p>
-                                    Não tem uma conta?
-                                    <button>Criar conta</button>
-                                </p>
+
+                                <Link href='/Cadastro/SelectionPage/page'>
+                                    <Button>Criar conta</Button>
+                                </Link>
                             </div>
                         </form>
                     </div>
