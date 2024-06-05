@@ -1,24 +1,10 @@
 export default function Order() {
+    // function trocarUsuario(isUser) {
+    //     const usuarioLogado = user.some((e) => user.id === isUser);
+    // }
     return (
         <div>
-            <aside>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href='#'>Inico</a>
-                        </li>
-                        <li>
-                            <a href='#'>Sobre nós</a>
-                        </li>
-                        <li>
-                            <a href='#'>Serviços</a>
-                        </li>
-                        <li>
-                            <a href='#'>Contato</a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
+            <h1>Order</h1>
         </div>
     );
 }

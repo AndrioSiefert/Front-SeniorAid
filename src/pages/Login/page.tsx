@@ -1,4 +1,5 @@
 import { Button } from '@/_components/ui/button';
+import http from '@/http';
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,10 +8,25 @@ import { useState } from 'react';
 export default function Login() {
     const [senhaVisivel, setSenhaVisivel] = useState(false);
     const [senhaValue, setSenhaValue] = useState('');
+    const [emailValue, setEmailValue] = useState('');
 
     function visibilidadeSenha() {
         setSenhaVisivel(!senhaVisivel);
     }
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        http.post('user/login', {
+            email: emailValue,
+            password: senhaValue
+        })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <div className='flex items-center h-screen'>
@@ -35,7 +51,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className='flex justify-normal'>
                                 <label className='p-2' htmlFor='email'>
                                     E-mail:
@@ -45,6 +61,9 @@ export default function Login() {
                                     type='email'
                                     id='email'
                                     name='email'
+                                    onChange={(e) => {
+                                        setEmailValue(e.target.value);
+                                    }}
                                 />
                             </div>
                             <div className='mt-4'>

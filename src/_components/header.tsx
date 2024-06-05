@@ -3,11 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { loginContext } from '@/context/LoginContext';
 
 export default function Header() {
-    const [busca, setBusca] = useState('');
-
     return (
         <div className='flex flex-col md:flex-row justify-between items-center bg-gradient-to-r from-cyan-500 to-blue-500 pt-4 px-4 gap-3'>
             <div className='flex items-center'>
@@ -43,6 +42,10 @@ export default function Header() {
             </div>
 
             <div className='flex space-x-4'>
+                <Link href='/Perfil/page'>
+                    <h1 className='font-semibold text-white text-[15px]'></h1>
+                </Link>
+
                 <Link href='/Login/page' className='text-white'>
                     <h1 className='font-semibold text-white text-[15px]'>
                         Login

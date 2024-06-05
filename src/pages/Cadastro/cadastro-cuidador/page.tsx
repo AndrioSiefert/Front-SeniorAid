@@ -1,23 +1,9 @@
+import ICuidador from '@/Interface/ICuidador';
 import ErrorMessage from '@/_components/ErrorMessage/error';
 import InputMask from '@/_components/Mask/mask';
 import { Button } from '@/_components/ui/button';
+import http from '@/http';
 import { useForm, Controller } from 'react-hook-form';
-
-interface FormProps {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-    cpf: string;
-    description: string;
-    address_number: string;
-    phone: string;
-    cep: string;
-    street?: string;
-    neighborhood?: string;
-    city?: string;
-    state?: string;
-}
 
 export default function CadastroCuidador() {
     const {
@@ -28,23 +14,8 @@ export default function CadastroCuidador() {
         watch,
         control,
         formState: { errors }
-    } = useForm<FormProps>({
-        mode: 'all',
-        defaultValues: {
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            cpf: '',
-            description: '',
-            address_number: '',
-            phone: '',
-            cep: '',
-            street: '',
-            neighborhood: '',
-            city: '',
-            state: ''
-        }
+    } = useForm<ICuidador>({
+        mode: 'all'
     });
 
     const senha = watch('password');
@@ -85,19 +56,15 @@ export default function CadastroCuidador() {
         }
     };
 
-    async function onSubmit(data: FormProps) {
-        console.log(data);
-        const user = await fetch('http://localhost:8000/user', {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ ...data })
-        });
-        if (user.status == 200) {
-            alert('Ok! user cadastrado com sucesso');
-        } else {
-            alert('Erro ao cadastrar o user');
-        }
-    }
+    const onSubmit = async (data: ICuidador) => {
+        http.post('user', data)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <div className='flex items-start justify-center min-h-screen bg-gradient-to-b from-blue-200 to-blue-500'>
@@ -124,7 +91,6 @@ export default function CadastroCuidador() {
                 {errors.name && (
                     <ErrorMessage>{errors.name.message}</ErrorMessage>
                 )}
-
                 <label
                     htmlFor='email'
                     className='block mt-4 text-lg font-bold text-white-600'
@@ -144,7 +110,6 @@ export default function CadastroCuidador() {
                 {errors.email && (
                     <ErrorMessage>{errors.email.message}</ErrorMessage>
                 )}
-
                 <label htmlFor='password' className='block mt-4'>
                     Senha:
                 </label>
@@ -166,7 +131,6 @@ export default function CadastroCuidador() {
                 {errors.password && (
                     <ErrorMessage>{errors.password.message}</ErrorMessage>
                 )}
-
                 <label htmlFor='password_confirmation' className='block mt-4'>
                     Confirmação de Senha:
                 </label>
@@ -199,7 +163,6 @@ export default function CadastroCuidador() {
                     placeholder='Digite seu CPF'
                     {...register('cpf')}
                 />
-
                 <label htmlFor='description' className='block mt-4'>
                     Descrição:
                 </label>
@@ -209,7 +172,6 @@ export default function CadastroCuidador() {
                     placeholder='Digite uma descrição sobre você'
                     {...register('description')}
                 ></textarea>
-
                 <label htmlFor='cep' className='block mt-4'>
                     CEP:
                 </label>
@@ -230,7 +192,6 @@ export default function CadastroCuidador() {
                 {errors.cep && (
                     <ErrorMessage>{errors.cep.message}</ErrorMessage>
                 )}
-
                 <label htmlFor='street' className='block mt-4'>
                     Rua:
                 </label>
@@ -261,7 +222,6 @@ export default function CadastroCuidador() {
                     placeholder='Digite a cidade'
                     {...register('city')}
                 />
-
                 <label htmlFor='state' className='block mt-4'>
                     Estado:
                 </label>
@@ -272,7 +232,6 @@ export default function CadastroCuidador() {
                     placeholder='Digite o estado'
                     {...register('state')}
                 />
-
                 <label htmlFor='address_number' className='block mt-4'>
                     Número da Casa:
                 </label>
@@ -283,7 +242,16 @@ export default function CadastroCuidador() {
                     placeholder='Digite o número da casa'
                     {...register('address_number')}
                 />
-
+                <label htmlFor='photo' className='block mt-4'>
+                    Foto:
+                </label>
+                <input
+                    id='photo'
+                    type='text'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    placeholder='Coloque uma foto sua'
+                    {...register('photo')}
+                />
                 <Controller
                     control={control}
                     name='phone'
@@ -312,7 +280,6 @@ export default function CadastroCuidador() {
                         </>
                     )}
                 />
-
                 <Button
                     type='submit'
                     className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
