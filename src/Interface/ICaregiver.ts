@@ -1,4 +1,5 @@
-interface ICuidador {
+interface ICaregiver {
+    id?: string;
     name: string;
     email: string;
     password: string;
@@ -12,7 +13,7 @@ interface ICuidador {
     neighborhood?: string;
     city?: string;
     state?: string;
-    photo?: string;
+    photo: string;
 }
 
-export default ICuidador;
+export default ICaregiver;

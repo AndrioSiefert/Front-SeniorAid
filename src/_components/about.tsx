@@ -4,7 +4,7 @@ export default function About() {
     return (
         <div className='p-4'>
             <section>
-                <h3>Sobre</h3>
+                <h3>Sobre nós</h3>
             </section>
         </div>
     );

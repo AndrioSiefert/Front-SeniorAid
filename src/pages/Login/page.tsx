@@ -1,14 +1,30 @@
 import { Button } from '@/_components/ui/button';
+import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+
+interface JwtPayload {
+    id: number;
+    name: string;
+}
 
 export default function Login() {
     const [senhaVisivel, setSenhaVisivel] = useState(false);
     const [senhaValue, setSenhaValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
+    const { userId, userName, mudaId, mudaNome } = useContext(LoginContext);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (userId && userName) {
+            router.push('/');
+        }
+    }, [userId, userName, router]);
 
     function visibilidadeSenha() {
         setSenhaVisivel(!senhaVisivel);
@@ -16,16 +32,22 @@ export default function Login() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        http.post('user/login', {
-            email: emailValue,
-            password: senhaValue
-        })
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
+        try {
+            const response = await http.post('caregiver/login', {
+                email: emailValue,
+                password: senhaValue
             });
+
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            const decoded = jwtDecode<JwtPayload>(token);
+            mudaId(decoded.id);
+            mudaNome(decoded.name);
+
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -90,7 +112,7 @@ export default function Login() {
                             </div>
 
                             <div className='mt-4'>
-                                <Button>Entrar</Button>
+                                <Button type='submit'>Entrar</Button>
 
                                 <p>ou</p>
 

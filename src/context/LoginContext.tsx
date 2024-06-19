@@ -1,24 +1,46 @@
-import { ReactNode, createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
-interface ChildProps {
-    children: ReactNode;
+interface LoginContextData {
+    userId: number | null;
+    userName: string;
+    mudaId: (id: number | null) => void;
+    mudaNome: (name: string) => void;
 }
 
-interface LoginContextProps {
-    userId: string | null;
-    setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+interface LoginProviderProps {
+    children: React.ReactNode;
 }
 
-export const LoginContext = createContext<LoginContextProps | undefined>(
-    undefined
+export const LoginContext = createContext<LoginContextData>(
+    {} as LoginContextData
 );
 
-export const LoginProvider = ({ children }: ChildProps) => {
-    const [userId, setUserId] = useState<string | null>(null);
+function LoginProvider({ children }: LoginProviderProps) {
+    const [userId, setUserId] = useState<number | null>(null);
+    const [userName, setUserName] = useState<string>('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decoded: any = jwtDecode(token);
+            setUserId(decoded.id);
+            setUserName(decoded.name);
+        }
+    }, []);
+
+    function mudaId(id: number | null) {
+        setUserId(id);
+    }
+    function mudaNome(name: string) {
+        setUserName(name);
+    }
 
     return (
-        <LoginContext.Provider value={{ userId, setUserId }}>
+        <LoginContext.Provider value={{ userId, userName, mudaId, mudaNome }}>
             {children}
         </LoginContext.Provider>
     );
-};
+}
+
+export default LoginProvider;

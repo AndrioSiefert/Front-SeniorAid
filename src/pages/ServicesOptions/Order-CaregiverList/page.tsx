@@ -1,13 +1,14 @@
+import ICaregiver from '@/Interface/ICaregiver';
+import http from '@/http';
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-export default function Cuidadores() {
+const OrderSenior = () => {
     const [caregivers, setCaregivers] = useState([]);
 
     useEffect(() => {
-        axios
-            .get('http://localhost:8000/user')
+        http.get('caregiver')
             .then((res) => {
                 setCaregivers(res.data);
             })
@@ -20,7 +21,7 @@ export default function Cuidadores() {
         <div className='p-4'>
             <h1 className='text-3xl font-bold mb-4'>Chame um Cuidador</h1>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {caregivers.map((caregiver: any) => (
+                {caregivers.map((caregiver: ICaregiver) => (
                     <div
                         key={caregiver.id}
                         className='bg-white rounded-lg shadow-md p-4'
@@ -43,4 +44,6 @@ export default function Cuidadores() {
             </div>
         </div>
     );
-}
+};
+
+export default OrderSenior;
