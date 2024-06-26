@@ -7,7 +7,7 @@ const Footer = () => {
             <div className='container mx-auto text-center'>
                 <p>&copy; 2024 Senior Aid. Todos os direitos reservados.</p>
                 <p>
-                    Feito com <span className='text-red-500'>❤️</span> por Você.
+                    Feito de <span className='text-red-500'>❤️</span> para Você.
                 </p>
             </div>
         </footer>

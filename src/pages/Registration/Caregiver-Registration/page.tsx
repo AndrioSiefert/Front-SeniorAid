@@ -1,4 +1,4 @@
-import ICuidador from '@/Interface/ICuidador';
+import ICaregiver from '@/Interface/ICaregiver';
 import ErrorMessage from '@/_components/ErrorMessage/error';
 import InputMask from '@/_components/Mask/mask';
 import { Button } from '@/_components/ui/button';
@@ -14,7 +14,7 @@ export default function CadastroCuidador() {
         watch,
         control,
         formState: { errors }
-    } = useForm<ICuidador>({
+    } = useForm<ICaregiver>({
         mode: 'all'
     });
 
@@ -56,8 +56,8 @@ export default function CadastroCuidador() {
         }
     };
 
-    const onSubmit = async (data: ICuidador) => {
-        http.post('user', data)
+    const onSubmit = async (data: ICaregiver) => {
+        http.post('caregiver', data)
             .then((response) => {
                 console.log(response);
             })
@@ -91,6 +91,7 @@ export default function CadastroCuidador() {
                 {errors.name && (
                     <ErrorMessage>{errors.name.message}</ErrorMessage>
                 )}
+
                 <label
                     htmlFor='email'
                     className='block mt-4 text-lg font-bold text-white-600'
@@ -242,6 +243,13 @@ export default function CadastroCuidador() {
                     placeholder='Digite o número da casa'
                     {...register('address_number')}
                 />
+
+                <input
+                    type='hidden'
+                    value='caregiver'
+                    {...register('userType')}
+                />
+
                 <label htmlFor='photo' className='block mt-4'>
                     Foto:
                 </label>

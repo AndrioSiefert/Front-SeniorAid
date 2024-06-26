@@ -1,4 +1,5 @@
 interface ISeniorForm {
+    id?: string;
     serviceType: string;
     dateService: string;
     startTime: string;

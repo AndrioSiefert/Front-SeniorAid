@@ -1,8 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+.expanded {
+  transition: height 0.5s ease-in-out;
+}
+
+.noto-sans {
+  font-family: "Noto Sans", sans-serif;
+}
+
 
 .img-logo {
-  width: 150px;
+  width: 200px;
   height: 150px;
+}
+
+/* Estilo para o header */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #317302;
+  padding: 10px 20px; 
+  height: 150px; 
+}
+
+/* Estilo para o menu */
+.menu {
+  display: flex;
+  gap: 10px;
+}
+
+/* Estilo para os itens do menu */
+.menu-item {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Estilo para o input de busca */
+.search-input {
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Estilo para o botão de busca */
+.search-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }

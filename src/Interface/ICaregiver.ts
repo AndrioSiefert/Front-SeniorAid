@@ -1,5 +1,5 @@
 interface ICaregiver {
-    id?: string;
+    id?: number;
     name: string;
     email: string;
     password: string;
@@ -14,6 +14,7 @@ interface ICaregiver {
     city?: string;
     state?: string;
     photo: string;
+    userType: string;
 }
 
 export default ICaregiver;
