@@ -14,7 +14,7 @@ export default function About() {
                     Como eu sei que preciso de um cuidador?
                 </h1>
                 <div
-                    className={` noto-sans overflow-hidden transition-all duration-500 ${
+                    className={` noto-sans overflow-hidden transition-all  ${
                         isExpanded ? 'max-h-full' : 'max-h-20'
                     } rounded-lg border border-gray-300 shadow-md p-4 text-lg text-gray-800 font-medium leading-relaxed`}
                 >

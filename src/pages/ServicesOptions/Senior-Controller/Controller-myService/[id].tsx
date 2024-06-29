@@ -7,95 +7,114 @@ import { useEffect, useState } from 'react';
 const ServiceRequestDetails = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [requestDetails, setRequestDetails] =
-        useState<IServiceRequest | null>(null);
+    const [serviceRequests, setServiceRequests] = useState<IServiceRequest[]>(
+        []
+    );
 
     useEffect(() => {
-        if (id) {
-            http.get(`/service-request/details/${id}`)
-                .then((response) => {
-                    setRequestDetails(response.data);
-                })
-                .catch((error) => {
-                    console.error(
-                        'Erro ao carregar detalhes da solicitação',
-                        error
-                    );
-                });
-        }
-    }, [id]);
+        fetchServiceRequests();
+    }, []);
 
-    const handleAcceptRequest = async () => {
+    const fetchServiceRequests = async () => {
+        try {
+            const response = await http.get(`/service-request/all`);
+            setServiceRequests(response.data);
+        } catch (error) {
+            console.error('Erro ao carregar solicitações de serviço', error);
+        }
+    };
+
+    const handleAcceptRequest = async (id: number) => {
         try {
             const response = await http.put(`/service-request/accept/${id}`, {
                 accepted: true
             });
             console.log('Solicitação aceita com sucesso', response.data);
-
-            setRequestDetails((prevState) => {
-                if (prevState) {
-                    return {
-                        ...prevState,
-                        accepted: true
-                    };
-                }
-                return prevState;
-            });
+            fetchServiceRequests();
         } catch (error) {
             console.error('Erro ao aceitar solicitação', error);
         }
     };
 
-    const handleDeclineRequest = async () => {
+    const handleDeclineRequest = async (id: number) => {
         try {
             const response = await http.delete(`/service-request/${id}`);
             console.log('Solicitação recusada com sucesso', response.data);
-
-            router.push('/');
+            fetchServiceRequests();
         } catch (error) {
             console.error('Erro ao recusar solicitação', error);
         }
     };
 
-    if (!requestDetails) {
-        return (
-            <div className='flex justify-center items-center h-screen'>
-                Carregando...
-            </div>
-        );
-    }
-
     return (
-        <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>
-                Detalhes da Solicitação de Serviço
-            </h1>
+        <div className='max-w-3xl mx-auto mt-8'>
+            <h1 className='text-2xl font-bold mb-4'>Propostas de Serviço</h1>
 
-            <p>
-                <span className='font-bold'>ID:</span> {requestDetails.id}
-            </p>
-            <p>
-                <span className='font-bold'>Caregiver:</span>{' '}
-                {requestDetails.caregiver.name}
-            </p>
-            <p>
-                <span className='font-bold'>Serviço:</span>{' '}
-                {requestDetails.service.serviceType}
-            </p>
-            <p>
-                <span className='font-bold'>Aceito:</span>{' '}
-                {requestDetails.accepted ? 'Sim' : 'Não'}
-            </p>
+            {serviceRequests.length === 0 ? (
+                <p>Nenhuma proposta de serviço encontrada.</p>
+            ) : (
+                <ul className='divide-y divide-gray-300'>
+                    {serviceRequests.map((request) => (
+                        <li key={request.id} className='py-4'>
+                            <div className='flex justify-between items-center'>
+                                <div>
+                                    <p>
+                                        <span className='font-bold'>ID:</span>{' '}
+                                        {request.id}
+                                    </p>
+                                    <p>
+                                        <span className='font-bold'>
+                                            Caregiver:
+                                        </span>{' '}
+                                        {request.caregiver.name}
+                                    </p>
+                                    <p>
+                                        <span className='font-bold'>
+                                            Serviço:
+                                        </span>{' '}
+                                        {request.service.serviceType}
+                                    </p>
+                                    <p>
+                                        <span className='font-bold'>
+                                            Aceito:
+                                        </span>{' '}
+                                        {request.accepted ? 'Sim' : 'Não'}
+                                    </p>
+                                </div>
+                                {!request.accepted && (
+                                    <div className='space-x-2'>
+                                        <Button
+                                            onClick={() =>
+                                                handleAcceptRequest(request.id)
+                                            }
+                                        >
+                                            Aceitar
+                                        </Button>
+                                        <Button
+                                            onClick={() =>
+                                                handleDeclineRequest(request.id)
+                                            }
+                                        >
+                                            Recusar
+                                        </Button>
+                                    </div>
+                                )}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
 
-            <div className='mt-8 flex justify-between'>
-                {!requestDetails.accepted && (
-                    <>
-                        <Button onClick={handleAcceptRequest}>Aceitar</Button>
-                        <Button onClick={handleDeclineRequest}>Recusar</Button>
-                    </>
-                )}
-
-                <Button onClick={() => router.push('/')}>Voltar</Button>
+            <div className='mt-8'>
+                <Button
+                    onClick={() =>
+                        router.push(
+                            `/ServicesOptions/Senior-Controller/List-Service/${id}`
+                        )
+                    }
+                >
+                    Voltar
+                </Button>
             </div>
         </div>
     );

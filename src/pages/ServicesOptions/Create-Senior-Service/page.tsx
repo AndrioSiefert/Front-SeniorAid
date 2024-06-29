@@ -1,7 +1,8 @@
 import ISeniorForm from '@/Interface/ISenior-Form';
 import { Button } from '@/_components/ui/button';
+import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SeniorService() {
@@ -9,11 +10,14 @@ export default function SeniorService() {
         mode: 'all'
     });
 
+    const { userId } = useContext(LoginContext);
+
     const onSubmit = async (data: ISeniorForm) => {
         console.log('Dados enviados:', data);
         try {
             console.log('Enviando requisição...');
-            const response = await http.post('service', data);
+            const requestData = { ...data, seniorId: userId };
+            const response = await http.post('seniorService', requestData);
             console.log('Resposta do servidor:', response);
             alert('Solicitação enviada com sucesso!');
         } catch (error) {

@@ -51,7 +51,9 @@ const EditContractSenior = () => {
         if (id) {
             http.put(`/seniorService/${id}`, formData).then((response) => {
                 setContract(response.data);
-                router.push(`/ServicesOptions/Contract-Senior/${id}`);
+                router.push(
+                    `/ServicesOptions/Senior-Controller/List-Service/${id}`
+                );
             });
         }
     };
@@ -161,7 +163,7 @@ const EditContractSenior = () => {
                     <Button
                         onClick={() =>
                             router.push(
-                                '/ServicesOptions/List-Service/Order-SeniorList/page'
+                                `/ServicesOptions/Senior-Controller/List-Service/${id}`
                             )
                         }
                     >

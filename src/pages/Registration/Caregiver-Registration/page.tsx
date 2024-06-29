@@ -67,16 +67,12 @@ export default function CadastroCuidador() {
     };
 
     return (
-        <div className='flex items-start justify-center min-h-screen bg-gradient-to-b from-blue-200 to-blue-500'>
+        <div className='flex items-start justify-center min-h-screen register'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-96 bg-gradient-to-b from-blue-200 to-blue-500 p-8 rounded-3xl shadow-lg'
+                className='w-96  form p-8 rounded-3xl shadow-lg'
             >
-                <label
-                    htmlFor='name'
-                    className='block text-lg font-bold text-white-600'
-                    style={{ textShadow: '0 2px 0 rgba(255, 255, 255, 0.5)' }}
-                >
+                <label htmlFor='name' className='block text-lg  text-white-600'>
                     Nome:
                 </label>
                 <input
@@ -94,8 +90,7 @@ export default function CadastroCuidador() {
 
                 <label
                     htmlFor='email'
-                    className='block mt-4 text-lg font-bold text-white-600'
-                    style={{ textShadow: '0 2px 0 rgba(255, 255, 255, 0.5)' }}
+                    className='block mt-4 text-lg text-white-600'
                 >
                     E-mail:
                 </label>
