@@ -8,10 +8,22 @@ const SeniorProposals = () => {
     const [proposals, setProposals] = useState<ISeniorService[]>([]);
 
     useEffect(() => {
-        http.get('/seniorService').then((response) => {
-            setProposals(response.data);
-        });
+        fetchProposals();
     }, []);
+
+    const fetchProposals = async () => {
+        try {
+            const response = await http.get('/seniorService');
+            const services = response.data.filter((service: any) => {
+                return !service.serviceRequests.some(
+                    (request: any) => request.accepted
+                );
+            });
+            setProposals(services);
+        } catch (error) {
+            console.error('Erro ao buscar propostas:', error);
+        }
+    };
 
     const redirectToContract = (id: number | undefined) => {
         router.push(`/ServicesOptions/Contract-Senior/${id}`);
@@ -27,7 +39,9 @@ const SeniorProposals = () => {
                     <h3 className='text-lg font-semibold'>
                         {service.serviceType}
                     </h3>
-                    <p className='text-gray-600'>Valor: {service.price}</p>
+                    <p className='text-gray-600'>
+                        Valor: R$ {service.price.toLocaleString()}
+                    </p>
                     <p className='text-gray-600'>
                         Localização: {service.location}
                     </p>

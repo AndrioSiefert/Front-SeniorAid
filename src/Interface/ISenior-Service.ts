@@ -1,14 +1,16 @@
+import ISenior from './ISenior';
+
 interface ISeniorService {
     id?: number;
     serviceType: string;
-    dateService: Date;
-    startTime: string;
-    endTime: string;
-    medication: string;
+    dateService: string;
+    time: string;
+    medications: string;
     location: string;
     description: string;
     price: string;
     urgencyLevel: string;
+    seniorId: string;
     senior: ISenior;
 }
 

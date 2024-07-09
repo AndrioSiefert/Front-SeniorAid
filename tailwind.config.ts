@@ -19,7 +19,7 @@ const config = {
         },
         extend: {
             colors: {
-                customPink: '#E14269',
+                verdeSelva: '#9FA48E',
                 customLightPink: '#ffe1e3',
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',

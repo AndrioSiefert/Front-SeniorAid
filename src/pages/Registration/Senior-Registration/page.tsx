@@ -1,8 +1,9 @@
 import { Button } from '@/_components/ui/button';
 import http from '@/http';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ErrorMessage from '@/_components/ErrorMessage/error';
+import ISenior from '@/Interface/ISenior';
+import { useRouter } from 'next/router';
 
 export default function CadastroSenior() {
     const {
@@ -15,6 +16,7 @@ export default function CadastroSenior() {
     } = useForm<ISenior>({
         mode: 'all'
     });
+    const router = useRouter();
 
     const cepDigitado = watch('cep');
 
@@ -26,6 +28,7 @@ export default function CadastroSenior() {
             });
             return;
         }
+
         try {
             const response = await fetch(
                 `https://viacep.com.br/ws/${cep}/json/`
@@ -46,13 +49,12 @@ export default function CadastroSenior() {
     };
 
     const onSubmit = async (data: ISenior) => {
-        http.post('senior', data)
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        http.post('senior', data).then((response) => {
+            console.log(response);
+        });
+        router.push('/').catch((error) => {
+            console.log(error);
+        });
     };
 
     return (

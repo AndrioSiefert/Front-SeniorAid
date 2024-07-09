@@ -15,3 +15,5 @@ interface ISenior {
     description: string;
     userType: string;
 }
+
+export default ISenior;

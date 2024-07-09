@@ -1,115 +1,79 @@
 import ISeniorService from '@/Interface/ISenior-Service';
 import { Button } from '@/_components/ui/button';
+import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { formatISODateToBrazilian } from '@/utils/dateUtils';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 const ContractSenior = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [contract, setContract] = useState<ISeniorService | null>(null);
+    const { userId } = useContext(LoginContext);
+    const [service, setService] = useState<ISeniorService | null>(null);
 
     useEffect(() => {
         if (id) {
             http.get(`/seniorService/${id}`).then((response) => {
-                setContract(response.data);
+                setService(response.data);
+                console.log('Service:', response.data);
             });
         }
     }, [id]);
 
-    if (!contract) {
-        return (
-            <div className='flex justify-center items-center h-screen'>
-                Carregando...
-            </div>
-        );
-    }
+    const requestService = () => {
+        if (service && userId) {
+            const serviceRequest = {
+                caregiverId: userId,
+                serviceId: service.id
+            };
 
-    const handleServiceRequest = async () => {
-        try {
-            const response = await http.post('/service-request', {
-                contractId: id
-            });
-            console.log('Serviço solicitado com sucesso', response.data);
-            // Redirecione para outra página se necessário
-            router.push('/');
-        } catch (error) {
-            console.error('Erro ao solicitar serviço', error);
+            http.post('http://localhost:8000/service-request', serviceRequest)
+                .then((response) => {
+                    alert('Serviço solicitado com sucesso!');
+                })
+                .catch((error) => {
+                    console.error('Erro ao solicitar serviço:', error);
+                });
+        } else {
+            console.error('Caregiver ID or Service is missing');
         }
     };
 
+    if (!service) {
+        return <div>Carregando...</div>;
+    }
+
     return (
-        <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>{contract.serviceType}</h1>
+        <div className='p-4 bg-white rounded-lg shadow-md'>
+            <h3 className='text-lg font-semibold'>{service.serviceType}</h3>
 
-            <p>
-                <span className='font-bold'>Data:</span>{' '}
-                {contract.dateService
-                    ? formatISODateToBrazilian(contract.dateService.toString())
-                    : ''}
+            <p className='text-gray-600'>Nome: {service.senior.name}</p>
+            <p className='text-gray-600'>
+                Data: {formatISODateToBrazilian(service.dateService)}
             </p>
-            <p>
-                <span className='font-bold'>Horário:</span> {contract.startTime}{' '}
-                - {contract.endTime}
+            <p className='text-gray-600'>Valor: {service.price}</p>
+            <p className='text-gray-600'>Localização: {service.location}</p>
+            <p className='text-gray-600'>
+                Nível de Urgência: {service.urgencyLevel}
             </p>
-            <p>
-                <span className='font-bold'>Medicação:</span>{' '}
-                {contract.medication}
-            </p>
-            <p>
-                <span className='font-bold'>Localização:</span>{' '}
-                {contract.location}
-            </p>
-            <p>
-                <span className='font-bold'>Descrição:</span>{' '}
-                {contract.description}
-            </p>
-            <p>
-                <span className='font-bold'>Preço:</span> {contract.price}
-            </p>
-            <p>
-                <span className='font-bold'>Nível de Urgência:</span>{' '}
-                {contract.urgencyLevel}
-            </p>
-            {contract.senior && (
-                <div className='mt-4'>
-                    <h2 className='text-xl font-bold mb-2'>Dados do Senior</h2>
-                    <p>
-                        <span className='font-bold'>Nome:</span>{' '}
-                        {contract.senior.name}
-                    </p>
-                    <p>
-                        <span className='font-bold'>CPF:</span>{' '}
-                        {contract.senior.cpf}
-                    </p>
-                    <p>
-                        <span className='font-bold'>Descrição:</span>{' '}
-                        {contract.senior.description}
-                    </p>
-                    <p>
-                        <span className='font-bold'>Tipo de Usuário:</span>{' '}
-                        {contract.senior.userType}
-                    </p>
-                </div>
-            )}
+            <p className='text-gray-600'>Descrição: {service.description}</p>
 
-            <div className='mt-8 flex justify-between'>
-                <Button onClick={handleServiceRequest}>
-                    Solicitar Serviço
-                </Button>
+            <Button
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
+                onClick={requestService}
+            >
+                Solicitar Serviço
+            </Button>
 
-                <Button
-                    onClick={() =>
-                        router.push(
-                            '/ServicesOptions/List-Service/Order-SeniorList/page'
-                        )
-                    }
-                >
-                    Voltar
-                </Button>
-            </div>
+            <Button
+                className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4'
+                onClick={() =>
+                    router.push('/List-Service/Order-SeniorList/page')
+                }
+            >
+                Voltar
+            </Button>
         </div>
     );
 };
