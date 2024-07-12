@@ -42,9 +42,7 @@ const SeniorProposals = () => {
                     <p className='text-gray-600'>
                         Valor: R$ {service.price.toLocaleString()}
                     </p>
-                    <p className='text-gray-600'>
-                        Localização: {service.location}
-                    </p>
+
                     <p className='text-gray-600'>
                         Nível de Urgência: {service.urgencyLevel}
                     </p>

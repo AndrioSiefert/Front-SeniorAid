@@ -37,7 +37,7 @@ export default function Header() {
     const myServices = `/ServicesOptions/${
         userType === 'senior'
             ? 'Senior-Controller/List-Service'
-            : 'Caregiver-Controller/List-Service'
+            : 'Caregiver-Controller/MyServices'
     }/${userId}`;
 
     const createService = `/ServicesOptions/${

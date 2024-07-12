@@ -43,21 +43,47 @@ const ContractSenior = () => {
     if (!service) {
         return <div>Carregando...</div>;
     }
-
     return (
         <div className='p-4 bg-white rounded-lg shadow-md'>
             <h3 className='text-lg font-semibold'>{service.serviceType}</h3>
 
-            <p className='text-gray-600'>Nome: {service.senior.name}</p>
-            <p className='text-gray-600'>
-                Data: {formatISODateToBrazilian(service.dateService)}
-            </p>
-            <p className='text-gray-600'>Valor: {service.price}</p>
-            <p className='text-gray-600'>Localização: {service.location}</p>
-            <p className='text-gray-600'>
-                Nível de Urgência: {service.urgencyLevel}
-            </p>
-            <p className='text-gray-600'>Descrição: {service.description}</p>
+            <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
+                <h4 className='text-lg font-semibold'>Informações do Idoso:</h4>
+                <p className='text-gray-600'>Nome: {service.senior.name}</p>
+                <p className='text-gray-600'>
+                    Idade: {service.senior.age} anos
+                </p>
+                <p className='text-gray-600'>
+                    Localização: {service.senior.street},{' '}
+                    {service.senior.neighborhood}, {service.senior.city}
+                </p>
+                <p className='text-gray-600'>
+                    Número da Casa: {service.senior.address_number}
+                </p>
+            </div>
+
+            <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
+                <h4 className='text-lg font-semibold'>
+                    Informações do Serviço:
+                </h4>
+                <p className='text-gray-600'>
+                    Data do serviço:{' '}
+                    {service.dateService
+                        ? formatISODateToBrazilian(service.dateService)
+                        : 'Data não disponível'}
+                </p>
+                <p className='text-gray-600'>Hora do serviço: {service.time}</p>
+                <p className='text-gray-600'>Valor R$: {service.price}</p>
+                <p className='text-gray-600'>
+                    Medicamentos: {service.medications}
+                </p>
+                <p className='text-gray-600'>
+                    Nível de Urgência: {service.urgencyLevel}
+                </p>
+                <p className='text-gray-600'>
+                    Descrição: {service.description}
+                </p>
+            </div>
 
             <Button
                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'

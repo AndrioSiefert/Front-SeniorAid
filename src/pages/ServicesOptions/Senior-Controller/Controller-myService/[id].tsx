@@ -3,6 +3,7 @@ import { Button } from '@/_components/ui/button';
 import http from '@/http';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const ServiceRequestDetails = () => {
     const router = useRouter();
@@ -46,6 +47,12 @@ const ServiceRequestDetails = () => {
         }
     };
 
+    const getStatusColor = (accepted: boolean) => {
+        return accepted
+            ? 'bg-green-200 text-green-800'
+            : 'bg-red-200 text-red-800';
+    };
+
     return (
         <div className='max-w-3xl mx-auto mt-8'>
             <h1 className='text-2xl font-bold mb-4'>Propostas de Serviço</h1>
@@ -59,26 +66,35 @@ const ServiceRequestDetails = () => {
                             <div className='flex justify-between items-center'>
                                 <div>
                                     <p>
-                                        <span className='font-bold'>ID:</span>{' '}
-                                        {request.id}
-                                    </p>
-                                    <p>
                                         <span className='font-bold'>
-                                            Caregiver:
-                                        </span>{' '}
+                                            Nome do cuidador:{' '}
+                                        </span>
                                         {request.caregiver.name}
                                     </p>
                                     <p>
                                         <span className='font-bold'>
-                                            Serviço:
-                                        </span>{' '}
-                                        {request.service.serviceType}
+                                            Informações do cuidador{' '}
+                                        </span>
+                                        {request.caregiver.description}
                                     </p>
-                                    <p>
+                                    <Image
+                                        width={100}
+                                        height={100}
+                                        src={request.caregiver.photo}
+                                        alt='Foto do cuidador'
+                                    />
+
+                                    <p
+                                        className={`font-bold ${getStatusColor(
+                                            request.accepted
+                                        )} p-2 rounded-md inline-block mt-2`}
+                                    >
                                         <span className='font-bold'>
-                                            Aceito:
-                                        </span>{' '}
-                                        {request.accepted ? 'Sim' : 'Não'}
+                                            Contrato:{' '}
+                                        </span>
+                                        {request.accepted
+                                            ? 'ACEITO'
+                                            : 'NÃO ACEITO'}
                                     </p>
                                 </div>
                                 {!request.accepted && (

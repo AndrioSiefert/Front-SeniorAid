@@ -7,19 +7,17 @@ import ISeniorService from '@/Interface/ISenior-Service';
 
 const SeniorProposals = () => {
     const router = useRouter();
-    const [seniorService, setSeniorService] = useState<ISeniorService | null>(
-        null
-    );
+    const [seniorServices, setSeniorServices] = useState<ISeniorService[]>([]);
     const { userId } = useContext(LoginContext);
 
     useEffect(() => {
         if (userId) {
-            http.get(`/seniorService/${userId}`)
+            http.get(`/seniorService/senior/${userId}`)
                 .then((response) => {
-                    setSeniorService(response.data);
+                    setSeniorServices(response.data);
                 })
                 .catch((error) => {
-                    console.error('Erro ao carregar serviço do senior', error);
+                    console.error('Erro ao carregar serviços do senior', error);
                 });
         }
     }, [userId]);
@@ -37,7 +35,7 @@ const SeniorProposals = () => {
         }
     };
 
-    if (!seniorService) {
+    if (seniorServices.length === 0) {
         return (
             <div className='flex justify-center items-center h-screen'>
                 <h1>Nenhum serviço encontrado</h1>
@@ -48,55 +46,61 @@ const SeniorProposals = () => {
     return (
         <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
             <h1 className='text-2xl font-bold mb-4'>
-                Detalhes do Serviço do Senior
+                Detalhes dos Serviços do Senior
             </h1>
 
-            <p>
-                <span className='font-bold'>Tipo de Serviço:</span>{' '}
-                {seniorService.serviceType}
-            </p>
-            <p>
-                <span className='font-bold'>Valor:</span> {seniorService.price}
-            </p>
-            <p>
-                <span className='font-bold'>Localização:</span>{' '}
-                {seniorService.location}
-            </p>
-            <p>
-                <span className='font-bold'>Nível de Urgência:</span>{' '}
-                {seniorService.urgencyLevel}
-            </p>
-            <p>
-                <span className='font-bold'>Descrição:</span>{' '}
-                {seniorService.description}
-            </p>
+            {seniorServices.map((service) => (
+                <div key={service.id} className='mb-4'>
+                    <p>
+                        <span className='font-bold'>Tipo de Serviço:</span>{' '}
+                        {service.serviceType}
+                    </p>
+                    <p>
+                        <span className='font-bold'>Valor:</span>{' '}
+                        {service.price}
+                    </p>
+                    <p>
+                        <span className='font-bold'>Localização:</span>{' '}
+                        {service.location}
+                    </p>
+                    <p>
+                        <span className='font-bold'>Nível de Urgência:</span>{' '}
+                        {service.urgencyLevel}
+                    </p>
+                    <p>
+                        <span className='font-bold'>Descrição:</span>{' '}
+                        {service.description}
+                    </p>
 
-            <div className='mt-8 flex justify-between'>
-                <Button
-                    onClick={() =>
-                        router.push(
-                            `/ServicesOptions/Senior-Controller/Edit-Contract-Senior/${seniorService.id}`
-                        )
-                    }
-                >
-                    Editar contrato
-                </Button>
-                <Button
-                    onClick={() =>
-                        router.push(
-                            `/ServicesOptions/Senior-Controller/Controller-myService/${seniorService.id}`
-                        )
-                    }
-                >
-                    Ver Propostas
-                </Button>
-                <Button
-                    onClick={() => deleteContract(seniorService.id)}
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-                >
-                    Excluir contrato
-                </Button>
-            </div>
+                    <div className='mt-2 flex justify-between'>
+                        <Button
+                            onClick={() =>
+                                router.push(
+                                    `/ServicesOptions/Senior-Controller/Edit-Contract-Senior/${service.id}`
+                                )
+                            }
+                        >
+                            Editar contrato
+                        </Button>
+                        <Button
+                            onClick={() =>
+                                router.push(
+                                    `/ServicesOptions/Senior-Controller/Controller-myService/${service.id}`
+                                )
+                            }
+                        >
+                            Ver Propostas
+                        </Button>
+                        <Button
+                            onClick={() => deleteContract(service.id)}
+                            className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                        >
+                            Excluir contrato
+                        </Button>
+                    </div>
+                    <hr className='my-4' />
+                </div>
+            ))}
         </div>
     );
 };

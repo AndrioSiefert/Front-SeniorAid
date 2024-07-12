@@ -3,6 +3,7 @@ import ErrorMessage from '@/_components/ErrorMessage/error';
 import InputMask from '@/_components/Mask/mask';
 import { Button } from '@/_components/ui/button';
 import http from '@/http';
+import { useRouter } from 'next/router';
 import { useForm, Controller } from 'react-hook-form';
 
 export default function CadastroCuidador() {
@@ -17,7 +18,7 @@ export default function CadastroCuidador() {
     } = useForm<ICaregiver>({
         mode: 'all'
     });
-
+    const router = useRouter();
     const senha = watch('password');
     const cepDigitado = watch('cep');
 
@@ -60,6 +61,7 @@ export default function CadastroCuidador() {
         http.post('caregiver', data)
             .then((response) => {
                 console.log(response);
+                router.push('/Login/Login-Caregiver/page');
             })
             .catch((error) => {
                 console.log(error);
@@ -67,10 +69,10 @@ export default function CadastroCuidador() {
     };
 
     return (
-        <div className='flex items-start justify-center min-h-screen register'>
+        <div className='flex items-start justify-center min-h-screen'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-96  form p-8 rounded-3xl shadow-lg'
+                className='w-96 p-8 rounded-3xl shadow-lg'
             >
                 <label htmlFor='name' className='block text-lg  text-white-600'>
                     Nome:
