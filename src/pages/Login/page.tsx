@@ -13,7 +13,7 @@ export default function Login() {
     const [senhaVisivel, setSenhaVisivel] = useState(false);
     const [senhaValue, setSenhaValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
-    const { userId, userName, mudaId, mudaNome, mudaUserType } =
+    const { userId, userType, userName, mudaId, mudaNome, mudaUserType } =
         useContext(LoginContext);
     const router = useRouter();
 
@@ -21,7 +21,7 @@ export default function Login() {
         if (userId && userName) {
             router.push('/');
         }
-    }, [userId, userName, router]);
+    }, [userId, userName, router, userType]);
 
     function visibilidadeSenha() {
         setSenhaVisivel(!senhaVisivel);
@@ -30,7 +30,7 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await http.post('senior/login', {
+            const response = await http.post('user/login', {
                 email: emailValue,
                 password: senhaValue
             });
@@ -41,7 +41,6 @@ export default function Login() {
             mudaId(decoded.id);
             mudaNome(decoded.name);
             mudaUserType(decoded.userType);
-
             router.push('/');
         } catch (error) {
             console.log(error);

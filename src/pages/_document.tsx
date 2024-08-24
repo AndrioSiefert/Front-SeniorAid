@@ -5,6 +5,10 @@ export default function Document() {
         <Html lang='pt-br'>
             <Head />
             <link rel='shortcut icon' href='/old.png' type='image/x-icon' />
+            <link
+                href='https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap'
+                rel='stylesheet'
+            />
 
             <body>
                 <Main />

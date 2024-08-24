@@ -1,8 +1,6 @@
-import { LogOut, Menu, Search } from 'lucide-react';
-import Image from 'next/image';
+import { LogOut, Menu, UserRound } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
 import { useContext } from 'react';
 import { LoginContext } from '@/context/LoginContext';
 import { useRouter } from 'next/router';
@@ -14,6 +12,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from './ui/dropdown-menu';
+import { routes } from '@/routes/constants';
 
 export default function Header() {
     const { userId, userName, userType, mudaId, mudaNome, mudaUserType } =
@@ -30,72 +29,54 @@ export default function Header() {
         router.push('/');
     };
 
-    const profilePath = `/Profile/${
-        userType === 'senior' ? 'Profile-Senior' : 'Profile-Caregiver'
-    }/${userId}`;
-
-    const myServices = `/ServicesOptions/${
-        userType === 'senior'
-            ? 'Senior-Controller/List-Service'
-            : 'Caregiver-Controller/MyServices'
-    }/${userId}`;
-
-    const createService = `/ServicesOptions/${
-        userType === 'senior'
-            ? 'Senior-Controller/Create-Senior-Service/page'
-            : 'Caregiver-Controller/Create-Caregiver-Service/page'
-    }`;
-
-    const listService = `/List-Service/${
-        userType === 'senior'
-            ? 'Order-CaregiverList/page'
-            : 'Order-SeniorList/page'
-    }`;
+    const profilePath = routes.profilePath(userType, userId);
+    const myServices = routes.myServices(userType, userId);
+    const createService = routes.createService(userType);
+    const listService = routes.listService(userType);
 
     return (
-        <div className='header sticky inset-x-0 top-0 z-50 flex flex-col md:flex-row justify-center items-center pt-4 px-4 gap-3'>
-            <div className='flex items-center justify-center flex-1'>
+        <header className='flex justify-between items-center  sticky inset-x-0 top-0 z-50 bg-colorHeader2 p-7'>
+            <nav className='flex space-x-4'>
                 <Link href='/'>
-                    <Image
-                        src='/logo.png'
-                        alt='Logo Senior'
-                        width={1920}
-                        height={1080}
-                        className='img-logo'
-                    />
+                    <Button>
+                        <h1>Sobre nós</h1>
+                    </Button>
+                </Link>
+                <Link href='/'>
+                    <Button>Contato</Button>
+                </Link>
+                <Link href='/'>
+                    <Button>
+                        <h1>Serviços</h1>
+                    </Button>
+                </Link>
+                <Link href='/'>
+                    <Button>Contato</Button>
+                </Link>
+                <Link href='/'>
+                    <Button>Contato</Button>
+                </Link>
+            </nav>
+
+            <div className='absolute left-1/2 transform -translate-x-1/2 text-center emilys-candy-regular'>
+                <Link href='/'>
+                    <h1 className='text-colorTextLogo text-5xl'>
+                        SENIOR
+                        <span className='block text-2xl'>AID</span>
+                    </h1>
                 </Link>
             </div>
 
-            <div className='flex justify-center items-center md:w-auto mx-auto flex-1'>
-                <div className='flex gap-2 noto-sans '>
-                    <Input
-                        placeholder='Buscar por serviços...'
-                        type='text'
-                        className='rounded-full border-none text-center p-2 w-96 bg-slate-300'
-                    />
-
-                    <Button
-                        size='icon'
-                        variant='link'
-                        className='bg-transparent border-none'
-                    >
-                        <Search className='border-none bg-transparent text-black' />
-                    </Button>
-                </div>
-            </div>
-
-            <div className='flex space-x-5 items-center justify-center flex-1 '>
+            <aside className='flex items-center space-x-4'>
                 {userName ? (
                     <>
-                        <h1 className='noto-sans  text-black text-[20px]'>
-                            {userName}
-                        </h1>
+                        <h1 className=' text-black text-[20px]'>{userName}</h1>
                         <div className='text-black'>
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
                                     <Menu />
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className=' bg-white border border-gray-300 shadow-lg rounded-lg'>
+                                <DropdownMenuContent className='bg-white border border-gray-300 shadow-lg rounded-lg'>
                                     <DropdownMenuLabel className='px-4 py-2 font-bold text-gray-700'>
                                         <Link href={profilePath}>
                                             Meu perfil
@@ -129,19 +110,20 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        <Link href='/Login/Login-Select/page'>
-                            <h1 className='noto-sans text-black text-[20px]'>
-                                Login
-                            </h1>
+                        <Link href='/Login/page'>
+                            <Button className='text-lg p-1'>
+                                <UserRound size={28} />
+                                Entrar
+                            </Button>
                         </Link>
-                        <Link href='/Registration/SelectionPage/page'>
-                            <h1 className='noto-sans text-black text-[20px]'>
+                        <Link href='/Registration/page'>
+                            <Button className='text-lg bg-yellow-500 text-white border-2 border-yellow-600 hover:bg-yellow-600'>
                                 Cadastrar-se
-                            </h1>
+                            </Button>
                         </Link>
                     </>
                 )}
-            </div>
-        </div>
+            </aside>
+        </header>
     );
 }

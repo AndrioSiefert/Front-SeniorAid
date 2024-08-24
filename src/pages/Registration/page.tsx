@@ -1,4 +1,4 @@
-import ICaregiver from '@/Interface/ICaregiver';
+import IUser from '@/Interface/IUser';
 import ErrorMessage from '@/_components/ErrorMessage/error';
 import InputMask from '@/_components/Mask/mask';
 import { Button } from '@/_components/ui/button';
@@ -6,7 +6,7 @@ import http from '@/http';
 import { useRouter } from 'next/router';
 import { useForm, Controller } from 'react-hook-form';
 
-export default function CadastroCuidador() {
+export default function Registration() {
     const {
         register,
         handleSubmit,
@@ -15,7 +15,7 @@ export default function CadastroCuidador() {
         watch,
         control,
         formState: { errors }
-    } = useForm<ICaregiver>({
+    } = useForm<IUser>({
         mode: 'all'
     });
     const router = useRouter();
@@ -57,11 +57,11 @@ export default function CadastroCuidador() {
         }
     };
 
-    const onSubmit = async (data: ICaregiver) => {
-        http.post('caregiver', data)
+    const onSubmit = async (data: IUser) => {
+        http.post('user', data)
             .then((response) => {
                 console.log(response);
-                router.push('/Login/Login-Caregiver/page');
+                router.push('/Login/page');
             })
             .catch((error) => {
                 console.log(error);
@@ -108,6 +108,7 @@ export default function CadastroCuidador() {
                 {errors.email && (
                     <ErrorMessage>{errors.email.message}</ErrorMessage>
                 )}
+
                 <label htmlFor='password' className='block mt-4'>
                     Senha:
                 </label>
@@ -129,8 +130,9 @@ export default function CadastroCuidador() {
                 {errors.password && (
                     <ErrorMessage>{errors.password.message}</ErrorMessage>
                 )}
+
                 <label htmlFor='password_confirmation' className='block mt-4'>
-                    Confirmação de Senha:
+                    Confirme sua Senha:
                 </label>
                 <input
                     id='password_confirmation'
@@ -161,15 +163,18 @@ export default function CadastroCuidador() {
                     placeholder='Digite seu CPF'
                     {...register('cpf')}
                 />
-                <label htmlFor='description' className='block mt-4'>
-                    Descrição:
+
+                <label htmlFor='age' className='block mt-4'>
+                    Idade:
                 </label>
-                <textarea
-                    id='description'
+                <input
+                    id='age'
+                    type='number'
                     className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
-                    placeholder='Digite uma descrição sobre você'
-                    {...register('description')}
-                ></textarea>
+                    placeholder='Digite sua idade'
+                    {...register('age')}
+                />
+
                 <label htmlFor='cep' className='block mt-4'>
                     CEP:
                 </label>
@@ -241,11 +246,17 @@ export default function CadastroCuidador() {
                     {...register('address_number')}
                 />
 
-                <input
-                    type='hidden'
-                    value='caregiver'
-                    {...register('userType')}
-                />
+                <label htmlFor='user_type' className='block mt-4'>
+                    Tipo de Usuário:
+                </label>
+                <select
+                    id='user_type'
+                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                    {...register('user_type')}
+                >
+                    <option value='caregiver'>Cuidador</option>
+                    <option value='senior'>Idoso</option>
+                </select>
 
                 <label htmlFor='photo' className='block mt-4'>
                     Foto:
