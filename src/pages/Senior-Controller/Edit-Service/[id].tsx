@@ -51,9 +51,7 @@ const EditContractSenior = () => {
         if (id) {
             http.put(`/seniorService/${id}`, formData).then((response) => {
                 setContract(response.data);
-                router.push(
-                    `/ServicesOptions/Senior-Controller/List-Service/${id}`
-                );
+                router.push(`/Senior-Controller/List-Service/${id}`);
             });
         }
     };
@@ -162,9 +160,7 @@ const EditContractSenior = () => {
                     <Button type='submit'>Salvar Alterações</Button>
                     <Button
                         onClick={() =>
-                            router.push(
-                                `/ServicesOptions/Senior-Controller/List-Service/${id}`
-                            )
+                            router.push(`/Senior-Controller/MyService/${id}`)
                         }
                     >
                         Voltar

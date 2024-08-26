@@ -18,7 +18,7 @@ const ServiceRequestDetails = () => {
 
     const fetchServiceRequests = async () => {
         try {
-            const response = await http.get(`/service-request/all`);
+            const response = await http.get(`/service-request`);
             setServiceRequests(response.data);
         } catch (error) {
             console.error('Erro ao carregar solicitações de serviço', error);
@@ -80,7 +80,7 @@ const ServiceRequestDetails = () => {
                                     <Image
                                         width={100}
                                         height={100}
-                                        src={request.caregiver.photo}
+                                        src={`/${request.caregiver.photo}`}
                                         alt='Foto do cuidador'
                                     />
 
@@ -124,9 +124,7 @@ const ServiceRequestDetails = () => {
             <div className='mt-8'>
                 <Button
                     onClick={() =>
-                        router.push(
-                            `/ServicesOptions/Senior-Controller/List-Service/${id}`
-                        )
+                        router.push(`/Senior-Controller/MyService/${id}`)
                     }
                 >
                     Voltar

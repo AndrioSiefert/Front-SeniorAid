@@ -11,15 +11,18 @@ export default function CreateCaregiverService() {
     });
 
     const { userId } = useContext(LoginContext);
+    console.log('User ID:', userId);
 
     const onSubmit = async (data: ICaregiverService) => {
         console.log('Dados enviados:', data);
         try {
             const requestData = { ...data, caregiverId: userId };
+            console.log('Dados da requisição:', requestData);
             const response = await http.post('caregiver-service', requestData);
             console.log('Resposta do servidor:', response);
             alert('Serviço de cuidador criado com sucesso!');
         } catch (error: any) {
+            console.error('Erro ao criar serviço de cuidador:', error);
             if (error.response && error.response.status === 400) {
                 alert(
                     'Já existe um serviço de cuidador criado para este usuário.'
@@ -35,11 +38,11 @@ export default function CreateCaregiverService() {
             <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl'>
                 <div className='mb-6 text-center'>
                     <h1 className='text-2xl font-bold'>
-                        Formulário de Criação de Serviço de Cuidador
+                        Crie sua oferta de serviço de cuidador
                     </h1>
                     <p className='text-gray-600 mt-2'>
-                        Preencha as informações detalhadas sobre o serviço de
-                        cuidador.
+                        Preencha as informações detalhadas sobre o serviço que
+                        você deseja oferecer.
                     </p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>

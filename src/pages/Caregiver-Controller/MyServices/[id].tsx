@@ -17,7 +17,7 @@ const ServiceRequestDetailsCaregiver = () => {
 
     const fetchServiceRequests = async () => {
         try {
-            const response = await http.get(`/service-request/all`);
+            const response = await http.get(`/service-request`);
             setServiceRequests(response.data);
         } catch (error) {
             console.error('Erro ao carregar solicitações de serviço', error);

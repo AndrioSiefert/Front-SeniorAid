@@ -4,16 +4,16 @@ export const routes = {
             userType === 'senior' ? 'Profile-Senior' : 'Profile-Caregiver'
         }/${userId}`,
     myServices: (userType: string, userId: number | null) =>
-        `/ServicesOptions/${
+        `/${
             userType === 'senior'
-                ? 'Senior-Controller/List-Service'
+                ? 'Senior-Controller/MyService'
                 : 'Caregiver-Controller/MyServices'
         }/${userId}`,
     createService: (userType: string) =>
-        `/ServicesOptions/${
+        `/${
             userType === 'senior'
-                ? 'Senior-Controller/Create-Senior-Service/page'
-                : 'Caregiver-Controller/Create-Caregiver-Service/page'
+                ? 'Senior-Controller/Create-Service/page'
+                : 'Caregiver-Controller/Create-Service/page'
         }`,
     listService: (userType: string) =>
         `/List-Service/${
