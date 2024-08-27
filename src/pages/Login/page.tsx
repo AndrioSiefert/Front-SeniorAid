@@ -48,49 +48,54 @@ export default function Login() {
     };
 
     return (
-        <div className='flex items-center h-screen'>
-            <div className='w-1/2'>
+        <div className='relative flex h-screen bg-colorHeader'>
+            <div className='absolute inset-0'>
                 <Image
-                    src='/loginn.png'
+                    src='/Retratoo.jpg'
                     alt='Logo Senior'
-                    width={350}
-                    height={100}
+                    layout='fill'
+                    objectFit='cover'
+                    className='opacity-50 filter blur-sm'
                 />
             </div>
 
-            <div className='flex justify-end items-center h-full'>
-                <div className='text-center'>
-                    <div className='mb-4'>
-                        <h1 className='text-3xl font-bold'>Login</h1>
-
-                        <p>
-                            Acesse o Senior Aid para ter acesso a todas as
-                            funcionalidades.
-                        </p>
-                    </div>
-
-                    <div>
-                        <form onSubmit={handleSubmit}>
-                            <div className='flex justify-normal'>
-                                <label className='p-2' htmlFor='email'>
-                                    E-mail:
-                                </label>
+            <div className='relative flex-1 flex flex-col justify-center items-center p-8'>
+                <div className='w-full max-w-md bg-white bg-opacity-80 p-8 rounded-lg shadow-lg'>
+                    <h1 className='text-3xl font-bold mb-4 text-center'>
+                        Bem-vindo de volta!
+                    </h1>
+                    <p className='text-center mb-6'>
+                        Acesse a sua conta para ter acesso a todas as
+                        funcionalidades.
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                        <div className='mb-4'>
+                            <label
+                                className='block mb-2 text-gray-700 font-semibold'
+                                htmlFor='email'
+                            >
+                                E-mail:
+                            </label>
+                            <input
+                                className='rounded-lg border-2 border-gray-300 p-3 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none'
+                                type='email'
+                                id='email'
+                                name='email'
+                                onChange={(e) => {
+                                    setEmailValue(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className='mb-6'>
+                            <label
+                                className='block mb-2 text-gray-700 font-semibold'
+                                htmlFor='password'
+                            >
+                                Senha:
+                            </label>
+                            <div className='relative'>
                                 <input
-                                    className='rounded-full border-2 border-gray-300 p-2 w-96'
-                                    type='email'
-                                    id='email'
-                                    name='email'
-                                    onChange={(e) => {
-                                        setEmailValue(e.target.value);
-                                    }}
-                                />
-                            </div>
-                            <div className='mt-4'>
-                                <label className='p-2' htmlFor='password'>
-                                    Senha:
-                                </label>
-                                <input
-                                    className='rounded-full border-2 border-gray-300 p-2 w-96'
+                                    className='rounded-lg border-2 border-gray-300 p-3 w-full pr-10 focus:ring-2 focus:ring-blue-500 focus:outline-none'
                                     type={senhaVisivel ? 'text' : 'password'}
                                     id='password'
                                     name='password'
@@ -102,23 +107,27 @@ export default function Login() {
                                 <button
                                     type='button'
                                     onClick={visibilidadeSenha}
-                                    className='ml-2 '
+                                    className='absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700'
                                 >
                                     {senhaVisivel ? <EyeOff /> : <Eye />}
                                 </button>
                             </div>
-
-                            <div className='mt-4'>
-                                <Button type='submit'>Entrar</Button>
-
-                                <p>ou</p>
-
-                                <Link href='/Cadastro/SelectionPage/page'>
-                                    <Button>Criar conta</Button>
-                                </Link>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div className='flex flex-col items-center'>
+                            <Button
+                                type='submit'
+                                className='w-full py-2 mb-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700'
+                            >
+                                Entrar
+                            </Button>
+                            <p className='mb-2 text-gray-500'>ou</p>
+                            <Link href='/Cadastro/SelectionPage/page'>
+                                <Button className='w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600'>
+                                    Criar conta
+                                </Button>
+                            </Link>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

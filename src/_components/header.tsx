@@ -13,6 +13,7 @@ import {
     DropdownMenuTrigger
 } from './ui/dropdown-menu';
 import { routes } from '@/routes/constants';
+import Image from 'next/image';
 
 export default function Header() {
     const { userId, userName, userType, mudaId, mudaNome, mudaUserType } =
@@ -50,20 +51,17 @@ export default function Header() {
                         <h1>Serviços</h1>
                     </Button>
                 </Link>
-                <Link href='/'>
-                    <Button>Contato</Button>
-                </Link>
-                <Link href='/'>
-                    <Button>Contato</Button>
-                </Link>
             </nav>
 
             <div className='absolute left-1/2 transform -translate-x-1/2 text-center emilys-candy-regular'>
                 <Link href='/'>
-                    <h1 className='text-colorTextLogo text-5xl'>
-                        SENIOR
-                        <span className='block text-2xl'>AID</span>
-                    </h1>
+                    <Image
+                        src='/logotipo.png'
+                        alt='Logo Senior'
+                        width={200}
+                        height={200}
+                        className='object-cover justify-normal'
+                    />
                 </Link>
             </div>
 

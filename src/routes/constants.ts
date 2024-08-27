@@ -1,7 +1,9 @@
 export const routes = {
     profilePath: (userType: string, userId: number | null) =>
-        `/Profile/${
-            userType === 'senior' ? 'Profile-Senior' : 'Profile-Caregiver'
+        `/${
+            userType === 'senior'
+                ? 'Senior-Controller/Profile-Senior'
+                : 'Caregiver-Controller/Profile-Caregiver'
         }/${userId}`,
     myServices: (userType: string, userId: number | null) =>
         `/${

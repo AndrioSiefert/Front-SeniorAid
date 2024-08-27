@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ISenior from '@/Interface/ISenior';
 import http from '@/http';
+import { Button } from '@/_components/ui/button';
 
 const ProfileSenior = () => {
     const [senior, setSenior] = useState<ISenior | null>(null);
@@ -40,9 +41,7 @@ const ProfileSenior = () => {
 
     return (
         <div className='max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg'>
-            <h1 className='text-2xl font-bold mb-6 text-center'>
-                Edit Senior Profile
-            </h1>
+            <h1 className='text-2xl font-bold mb-6 text-center'>Meu Perfil</h1>
             <form onSubmit={handleSubmit} className='space-y-4'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <label className='block'>
@@ -55,26 +54,7 @@ const ProfileSenior = () => {
                             className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
                         />
                     </label>
-                    <label className='block'>
-                        <span className='text-gray-700'>Email:</span>
-                        <input
-                            type='email'
-                            name='email'
-                            value={senior.email}
-                            onChange={handleChange}
-                            className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
-                        />
-                    </label>
-                    <label className='block'>
-                        <span className='text-gray-700'>Password:</span>
-                        <input
-                            type='password'
-                            name='password'
-                            value={senior.password}
-                            onChange={handleChange}
-                            className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
-                        />
-                    </label>
+
                     <label className='block'>
                         <span className='text-gray-700'>CPF:</span>
                         <input
@@ -165,23 +145,13 @@ const ProfileSenior = () => {
                             className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
                         />
                     </label>
-                    <label className='block'>
-                        <span className='text-gray-700'>Description:</span>
-                        <input
-                            type='text'
-                            name='description'
-                            value={senior.description}
-                            onChange={handleChange}
-                            className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
-                        />
-                    </label>
                 </div>
-                <button
+                <Button
                     type='submit'
                     className='w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600'
                 >
-                    Save
-                </button>
+                    Salvar
+                </Button>
             </form>
         </div>
     );

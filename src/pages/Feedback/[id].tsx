@@ -13,9 +13,6 @@ export default function Feedback() {
     const [ratings, setRatings] = useState<number[]>([]); // rating que já foi feito
     const [caregiverId, setCaregiverId] = useState(null);
 
-    // PRECISO QUE O USUARIO LOGADO SEJA O QUE ESTÁ AVALIANDO
-    // PRECISO QUE ELE PEGUE O ID DO CUIDADOR QUE ESTÁ SENDO AVALIADO
-
     useEffect(() => {}, []);
 
     const handleSubmit = async () => {

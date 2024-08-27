@@ -1,5 +1,6 @@
+import About from '@/_components/About/about';
 import Footer from '@/_components/Footer/footer';
-import About from '@/_components/about';
+
 import News from '@/_components/newSubject';
 
 export default function Home() {

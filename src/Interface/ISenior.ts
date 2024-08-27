@@ -12,7 +12,6 @@ interface ISenior {
     city: string;
     state: string;
     address_number: string;
-    description: string;
     userType: string;
 }
 
