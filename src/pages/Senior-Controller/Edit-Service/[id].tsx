@@ -9,15 +9,13 @@ const EditContractSenior = () => {
     const { id } = router.query;
     const [contract, setContract] = useState<ISeniorService | null>(null);
     const [formData, setFormData] = useState({
-        serviceType: '',
+        serviceName: '',
         dateService: '',
-        startTime: '',
-        endTime: '',
-        medication: '',
-        location: '',
+        time: '',
+        medications: '',
+        place: '',
         description: '',
-        price: '',
-        urgencyLevel: ''
+        price: ''
     });
 
     useEffect(() => {
@@ -25,15 +23,13 @@ const EditContractSenior = () => {
             http.get(`/seniorService/${id}`).then((response) => {
                 setContract(response.data);
                 setFormData({
-                    serviceType: response.data.serviceType,
+                    serviceName: response.data.serviceName,
                     dateService: response.data.dateService,
-                    startTime: response.data.startTime,
-                    endTime: response.data.endTime,
-                    medication: response.data.medication,
-                    location: response.data.location,
+                    time: response.data.time,
+                    medications: response.data.medications,
+                    place: response.data.place,
                     description: response.data.description,
-                    price: response.data.price,
-                    urgencyLevel: response.data.urgencyLevel
+                    price: response.data.price
                 });
             });
         }
@@ -74,8 +70,8 @@ const EditContractSenior = () => {
                     <label className='block font-bold'>Tipo de Serviço</label>
                     <input
                         type='text'
-                        name='serviceType'
-                        value={formData.serviceType}
+                        name='serviceName'
+                        value={formData.serviceName}
                         onChange={handleChange}
                         className='w-full p-2 border rounded'
                     />
@@ -94,25 +90,18 @@ const EditContractSenior = () => {
                     <label className='block font-bold'>Horário</label>
                     <input
                         type='time'
-                        name='startTime'
-                        value={formData.startTime}
+                        name='time'
+                        value={formData.time}
                         onChange={handleChange}
                         className='w-full p-2 border rounded'
-                    />
-                    <input
-                        type='time'
-                        name='endTime'
-                        value={formData.endTime}
-                        onChange={handleChange}
-                        className='w-full p-2 border rounded mt-2'
                     />
                 </div>
                 <div className='mb-4'>
                     <label className='block font-bold'>Medicação</label>
                     <input
                         type='text'
-                        name='medication'
-                        value={formData.medication}
+                        name='medications'
+                        value={formData.medications}
                         onChange={handleChange}
                         className='w-full p-2 border rounded'
                     />
@@ -121,8 +110,8 @@ const EditContractSenior = () => {
                     <label className='block font-bold'>Localização</label>
                     <input
                         type='text'
-                        name='location'
-                        value={formData.location}
+                        name='place'
+                        value={formData.place}
                         onChange={handleChange}
                         className='w-full p-2 border rounded'
                     />
@@ -146,16 +135,7 @@ const EditContractSenior = () => {
                         className='w-full p-2 border rounded'
                     />
                 </div>
-                <div className='mb-4'>
-                    <label className='block font-bold'>Nível de Urgência</label>
-                    <input
-                        type='text'
-                        name='urgencyLevel'
-                        value={formData.urgencyLevel}
-                        onChange={handleChange}
-                        className='w-full p-2 border rounded'
-                    />
-                </div>
+
                 <div className='mt-8 flex justify-between'>
                     <Button type='submit'>Salvar Alterações</Button>
                     <Button

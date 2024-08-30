@@ -9,7 +9,7 @@ interface ICaregiverService {
     languages?: string;
     description: string;
     price: number;
-    caregiverId: ICaregiver;
+    caregiver: ICaregiver;
 }
 
 export default ICaregiverService;

@@ -46,7 +46,7 @@ export default function Header() {
                 <Link href='/'>
                     <Button>Contato</Button>
                 </Link>
-                <Link href='/'>
+                <Link href='/List/CaregiverList/page'>
                     <Button>
                         <h1>Serviços</h1>
                     </Button>

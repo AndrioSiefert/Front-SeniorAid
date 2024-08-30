@@ -5,7 +5,6 @@ interface ICaregiver {
     password: string;
     password_confirmation: string;
     cpf: string;
-    description: string;
     address_number: string;
     phone: string;
     cep: string;

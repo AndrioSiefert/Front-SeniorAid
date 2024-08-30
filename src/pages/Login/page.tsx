@@ -121,7 +121,7 @@ export default function Login() {
                                 Entrar
                             </Button>
                             <p className='mb-2 text-gray-500'>ou</p>
-                            <Link href='/Cadastro/SelectionPage/page'>
+                            <Link href='/Registration/page'>
                                 <Button className='w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600'>
                                     Criar conta
                                 </Button>

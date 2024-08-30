@@ -1,10 +1,11 @@
 import { Button } from '@/_components/ui/button';
 import { useRouter } from 'next/router';
-import { use, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StarRating } from '@/_components/StarRating/starRanting';
 import { calculateRating } from '@/utils/calculateUtils';
 import http from '@/http';
 import { LoginContext } from '@/context/LoginContext';
+import Image from 'next/image';
 export default function Feedback() {
     const router = useRouter();
     const { userId, userType } = useContext(LoginContext);
@@ -32,35 +33,61 @@ export default function Feedback() {
     };
 
     return (
-        <div>
-            <div>
-                <h2>Avalie o cuidador</h2>
-                <form className='flex'>
-                    <label
-                        htmlFor='comment'
-                        className='block text-sm font-medium text-gray-700'
-                    >
-                        Comentário:
-                    </label>
-                    <input
-                        type='text'
-                        name='comment'
-                        id='comment'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
+        <div className='max-w-5xl mx-auto p-6 bg-white shadow-md rounded-lg'>
+            <h2 className='text-2xl font-bold mb-6 text-gray-800'>
+                Avalie o Cuidador
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                <div className='flex flex-col items-center'>
+                    <Image
+                        src='/path-to-caregiver-photo.jpg'
+                        alt='Foto do Cuidador'
+                        width={128}
+                        height={128}
+                        className='w-32 h-32 rounded-full mb-4 object-cover'
                     />
-
-                    <label
-                        htmlFor='rating'
-                        className='block text-sm font-medium text-gray-700'
-                    >
-                        Avaliação:
-                    </label>
-                    <StarRating rating={rating} setRating={setRating} />
-                </form>
-                <Button onClick={handleSubmit}>Enviar</Button>
-                <Button onClick={() => router.push('/')}>Cancelar</Button>
+                    <h3 className='text-xl font-semibold text-gray-700'>
+                        Nome do Cuidador
+                    </h3>
+                    <p className='text-gray-600'>
+                        Informações do cuidador aqui...
+                    </p>
+                </div>
+                <div>
+                    <form>
+                        <div className='mb-4'>
+                            <label
+                                htmlFor='comment'
+                                className='block text-sm font-medium text-gray-700'
+                            >
+                                Comentário:
+                            </label>
+                            <input
+                                type='text'
+                                name='comment'
+                                id='comment'
+                                className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 '
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label
+                                htmlFor='rating'
+                                className='block text-sm font-medium text-gray-700'
+                            >
+                                Avaliação:
+                            </label>
+                            <StarRating rating={rating} setRating={setRating} />
+                        </div>
+                        <div className='flex space-x-4'>
+                            <Button onClick={handleSubmit}>Enviar</Button>
+                            <Button onClick={() => router.push('/')}>
+                                Cancelar
+                            </Button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

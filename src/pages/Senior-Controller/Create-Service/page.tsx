@@ -3,16 +3,23 @@ import { Button } from '@/_components/ui/button';
 import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { NumericFormat } from 'react-number-format';
+import { format } from 'date-fns';
 
 export default function SeniorService() {
-    const { handleSubmit, register } = useForm<ISeniorService>({
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+        setValue
+    } = useForm<ISeniorService>({
         mode: 'all'
     });
-
     const router = useRouter();
     const { userId } = useContext(LoginContext);
+    const today = format(new Date(), 'yyyy-MM-dd'); // Pega a data atual e nega dias anteriores
 
     const onSubmit = async (data: ISeniorService) => {
         try {
@@ -24,6 +31,7 @@ export default function SeniorService() {
             alert('Serviço criado com sucesso!');
         } catch (error) {
             console.error('Erro ao enviar a solicitação:', error);
+
             alert('Erro ao enviar a solicitação!');
         }
     };
@@ -43,19 +51,18 @@ export default function SeniorService() {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                         <div className='mb-4'>
                             <label
-                                htmlFor='serviceType'
+                                htmlFor='serviceName'
                                 className='block text-gray-700'
                             >
-                                Tipo da Solicitação:
+                                Nome do Serviço:
                             </label>
                             <input
                                 type='text'
-                                id='serviceType'
+                                id='serviceName'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('serviceType', { required: true })}
+                                {...register('serviceName', { required: true })}
                             />
                         </div>
-
                         <div className='mb-4'>
                             <label
                                 htmlFor='dateService'
@@ -66,6 +73,7 @@ export default function SeniorService() {
                             <input
                                 type='date'
                                 id='dateService'
+                                min={today}
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 {...register('dateService', { required: true })}
                             />
@@ -88,13 +96,13 @@ export default function SeniorService() {
 
                         <div className='mb-4 col-span-2'>
                             <label
-                                htmlFor='medication'
+                                htmlFor='medications'
                                 className='block text-gray-700'
                             >
                                 Medicamentos:
                             </label>
                             <textarea
-                                id='medication'
+                                id='medications'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 placeholder='Descreva os medicamentos, dosagem e horários...'
                                 {...register('medications', { required: true })}
@@ -103,16 +111,16 @@ export default function SeniorService() {
 
                         <div className='mb-4'>
                             <label
-                                htmlFor='location'
+                                htmlFor='place'
                                 className='block text-gray-700'
                             >
                                 Local do Serviço:
                             </label>
                             <input
                                 type='text'
-                                id='location'
+                                id='place'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('location', { required: true })}
+                                {...register('place', { required: true })}
                             />
                         </div>
 
@@ -138,31 +146,37 @@ export default function SeniorService() {
                             >
                                 Valor a Ser Pago:
                             </label>
-                            <input
-                                type='number'
+                            <NumericFormat
                                 id='price'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 placeholder='Digite o valor a ser pago...'
-                                {...register('price', { required: true })}
-                            />
-                        </div>
-
-                        <div className='mb-4 col-span-2'>
-                            <label
-                                htmlFor='urgencyLevel'
-                                className='block text-gray-700'
-                            >
-                                Nível de Urgência:
-                            </label>
-                            <input
-                                type='text'
-                                id='urgencyLevel'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                placeholder='Digite o nível de urgência...'
-                                {...register('urgencyLevel', {
-                                    required: true
+                                thousandSeparator='.'
+                                decimalSeparator=','
+                                prefix='R$ '
+                                decimalScale={2}
+                                fixedDecimalScale
+                                allowNegative={false}
+                                onValueChange={(values) => {
+                                    setValue(
+                                        'price',
+                                        values.floatValue
+                                            ? values.floatValue.toString()
+                                            : ''
+                                    );
+                                }}
+                                {...register('price', {
+                                    required: 'Valor a ser pago é obrigatório',
+                                    min: {
+                                        value: 20,
+                                        message: 'O valor mínimo é R$ 20,00'
+                                    }
                                 })}
                             />
+                            {errors.price && (
+                                <p className='text-red-500 text-sm'>
+                                    {errors.price.message}
+                                </p>
+                            )}
                         </div>
                     </div>
                     <div className='text-center'>
