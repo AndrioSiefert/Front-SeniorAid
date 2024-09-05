@@ -109,22 +109,7 @@ export default function ProfileCaregiver() {
                             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         />
                     </div>
-                    <div className='mb-4'>
-                        <label
-                            htmlFor='description'
-                            className='block text-gray-700 font-bold mb-2'
-                        >
-                            Descrição:
-                        </label>
-                        <textarea
-                            id='description'
-                            name='description'
-                            value={editFormData?.description || ''}
-                            onChange={handleChange}
-                            placeholder='Descrição'
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                        />
-                    </div>
+
                     <div className='mb-4'>
                         <label
                             htmlFor='phone'
@@ -276,9 +261,7 @@ export default function ProfileCaregiver() {
                     <p>
                         <strong>CPF:</strong> {user?.cpf}
                     </p>
-                    <p>
-                        <strong>Descrição:</strong> {user?.description}
-                    </p>
+
                     <p>
                         <strong>Telefone:</strong> {user?.phone}
                     </p>

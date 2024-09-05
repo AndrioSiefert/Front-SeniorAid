@@ -7,19 +7,34 @@ import { useEffect, useState } from 'react';
 
 export default function CaregiverList() {
     const [caregivers, setCaregivers] = useState<ICaregiverService[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const router = useRouter();
 
-    // Pegar apenas os cuidadores disponíveis com serviço ativo  === OK
-
-    // Arrumar a rota para o perfil do cuidador
-
     useEffect(() => {
-        http.get('/caregiver-service/caregiver').then((response) => {
-            console.log('Dados recebidos:', response.data);
-            setCaregivers(response.data);
-        });
+        http.get('/caregiver-service/caregiver')
+            .then((response) => {
+                console.log('Dados recebidos:', response.data);
+                setCaregivers(response.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error('Erro ao buscar dados:', err);
+                setError(
+                    'Não foi possível carregar os cuidadores. Tente novamente mais tarde.'
+                );
+                setLoading(false);
+            });
     }, []);
+
+    if (loading) {
+        return <p className='flex text-center'>Carregando...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>

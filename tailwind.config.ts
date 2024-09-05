@@ -24,7 +24,9 @@ const config = {
                 colorHeader: '#D9B589',
                 colorHeader2: '#e6decf',
                 colorTextLogo: '#78593b',
-                colorTextHeader: '#ad9676'
+                colorTextHeader: '#ad9676',
+                colorPageInfo: '#ac6d5b',
+                colorPageInfo2: '#585656'
             }
         }
     }

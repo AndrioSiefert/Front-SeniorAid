@@ -43,8 +43,8 @@ export default function Header() {
                         <h1>Sobre nós</h1>
                     </Button>
                 </Link>
-                <Link href='/'>
-                    <Button>Contato</Button>
+                <Link href='/Information/page'>
+                    <Button>Como Funciona</Button>
                 </Link>
                 <Link href='/List/CaregiverList/page'>
                     <Button>
