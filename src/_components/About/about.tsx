@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <section className='bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20 px-8 md:px-20'>
+        <section className='bg-gradient-to-r from-stone-800 to-amber-950 text-white py-20 px-8 md:px-20'>
             <div className='max-w-4xl mx-auto text-center'>
                 <h1 className='text-4xl md:text-6xl font-bold mb-8'>
                     Quem Somos?

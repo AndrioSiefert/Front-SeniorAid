@@ -10,10 +10,15 @@ export default function Document() {
                 type='image/x-icon'
             />
             <link
-                href='https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap'
+                href='https://fonts.googleapis.com/css2?family=Courgette&display=swap'
+                rel='stylesheet'
+            />
+            <link
+                href='https://fonts.googleapis.com/css2?family=Fenix&display=swap'
                 rel='stylesheet'
             />
 
+            <title>Senior Aid</title>
             <body>
                 <Main />
                 <NextScript />

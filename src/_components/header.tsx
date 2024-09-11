@@ -1,4 +1,4 @@
-import { LogOut, Menu, UserRound } from 'lucide-react';
+import { LogOut, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { useContext } from 'react';
@@ -14,11 +14,12 @@ import {
 } from './ui/dropdown-menu';
 import { routes } from '@/routes/constants';
 import Image from 'next/image';
+import { FaRegUser } from 'react-icons/fa';
 
 export default function Header() {
+    const router = useRouter();
     const { userId, userName, userType, mudaId, mudaNome, mudaUserType } =
         useContext(LoginContext);
-    const router = useRouter();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -36,39 +37,39 @@ export default function Header() {
     const listService = routes.listService(userType);
 
     return (
-        <header className='flex justify-between items-center  sticky inset-x-0 top-0 z-50 bg-colorHeader2 p-7'>
-            <nav className='flex space-x-4'>
+        <header className='flex flex-col sm:flex-row justify-between items-center sm:sticky sm:inset-x-0 sm:top-0 sm:z-50 bg-colorHeader2 p-7'>
+            <nav className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-center courgette'>
                 <Link href='/'>
                     <Button>
-                        <h1>Sobre nós</h1>
+                        <h1>Sobre Nós</h1>
                     </Button>
                 </Link>
                 <Link href='/Information/page'>
-                    <Button>Como Funciona</Button>
+                    <Button>Como Funciona?</Button>
                 </Link>
                 <Link href='/List/CaregiverList/page'>
                     <Button>
-                        <h1>Serviços</h1>
+                        <h1>Nossos Serviços</h1>
                     </Button>
                 </Link>
             </nav>
 
-            <div className='absolute left-1/2 transform -translate-x-1/2 text-center emilys-candy-regular'>
+            <div className='relative my-4 sm:my-0 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 text-center emilys-candy-regular'>
                 <Link href='/'>
                     <Image
                         src='/logotipo.png'
                         alt='Logo Senior'
                         width={200}
                         height={200}
-                        className='object-cover justify-normal'
+                        className='object-cover'
                     />
                 </Link>
             </div>
 
-            <aside className='flex items-center space-x-4'>
+            <aside className='flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4'>
                 {userName ? (
                     <>
-                        <h1 className=' text-black text-[20px]'>{userName}</h1>
+                        <h1 className='text-black text-[20px]'>{userName}</h1>
                         <div className='text-black'>
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
@@ -109,8 +110,8 @@ export default function Header() {
                 ) : (
                     <>
                         <Link href='/Login/page'>
-                            <Button className='text-lg p-1'>
-                                <UserRound size={28} />
+                            <Button className='text-xl p-1 fenix gap-1'>
+                                <FaRegUser size={28} />
                                 Entrar
                             </Button>
                         </Link>

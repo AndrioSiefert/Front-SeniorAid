@@ -1,5 +1,4 @@
 import Header from '@/_components/header';
-
 import LoginProvider from '@/context/LoginContext';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';

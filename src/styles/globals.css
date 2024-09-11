@@ -1,21 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fenix&display=swap');
 
 
-/* FONTE DO HEADER */
-.noto-sans {
-  font-family: "Noto Sans";
+/* FONTE DO TITULO NO HEADER*/
+.courgette {
+  font-family: "Courgette";
 }
 
-.emilys-candy-regular {
-  font-family: "Emilys Candy";
+/* FONTE DO TITULO NO FOOTER*/
+.fenix {
+  font-family: "Fenix";
 }
-
-
-
 
 .text-colorTextLogo {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
