@@ -3,11 +3,39 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fenix&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,100..700&display=swap');
 
 
 /* FONTE DO TITULO NO HEADER*/
 .courgette {
   font-family: "Courgette";
+}
+
+/* FONTE DE TEXTO PAGE "ABOUT"*/
+.MontaguSlab {
+  font-family: "Montagu Slab";
+  font-weight: 400;
+}
+
+/* FONTE teste*/
+.oleoScript-regular {
+  font-family: "Oleo Script", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.oleoScript-bold {
+  font-family: "Oleo Script", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sacramento {
+  font-family: "Sacramento", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* FONTE DO TITULO NO FOOTER*/

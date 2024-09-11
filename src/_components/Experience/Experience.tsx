@@ -37,7 +37,7 @@ export default function Experience() {
 
     return (
         <div className='max-w-7xl mx-auto py-10 px-4'>
-            <h1 className='text-4xl font-bold text-center text-gray-800 mb-10'>
+            <h1 className='text-4xl font-bold text-center text-gray-800 mb-10 oleoScript-regular'>
                 Como foi a experiência dos nossos usuários?
             </h1>
 
