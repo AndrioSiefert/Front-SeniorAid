@@ -45,7 +45,7 @@ const ContractSenior = () => {
     }
     return (
         <div className='p-4 bg-white rounded-lg shadow-md'>
-            <h3 className='text-lg font-semibold'>{service.serviceType}</h3>
+            <h3 className='text-lg font-semibold'>{service.serviceName}</h3>
 
             <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
                 <h4 className='text-lg font-semibold'>Informações do Idoso:</h4>
@@ -76,9 +76,6 @@ const ContractSenior = () => {
                 <p className='text-gray-600'>Valor R$: {service.price}</p>
                 <p className='text-gray-600'>
                     Medicamentos: {service.medications}
-                </p>
-                <p className='text-gray-600'>
-                    Nível de Urgência: {service.urgencyLevel}
                 </p>
                 <p className='text-gray-600'>
                     Descrição: {service.description}
