@@ -45,7 +45,7 @@ const ServiceRequestDetailsCaregiver = () => {
                             <div className='flex justify-between items-center'>
                                 <div>
                                     <h2 className='text-lg font-semibold'>
-                                        {request.service.serviceType}
+                                        {request.service.serviceName}
                                     </h2>
                                     <p
                                         className={`font-bold ${getStatusColor(

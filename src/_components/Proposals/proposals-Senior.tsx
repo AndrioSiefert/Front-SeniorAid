@@ -37,14 +37,10 @@ const SeniorProposals = () => {
                     className='p-4 bg-white rounded-lg shadow-md'
                 >
                     <h3 className='text-lg font-semibold'>
-                        {service.serviceType}
+                        {service.serviceName}
                     </h3>
                     <p className='text-gray-600'>
                         Valor: R$ {service.price.toLocaleString()}
-                    </p>
-
-                    <p className='text-gray-600'>
-                        Nível de Urgência: {service.urgencyLevel}
                     </p>
                     <p className='text-gray-600'>
                         Descrição: {service.description}

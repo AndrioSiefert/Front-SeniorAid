@@ -1,6 +1,5 @@
 import { LogOut, Menu } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from './ui/button';
 import { useContext } from 'react';
 import { LoginContext } from '@/context/LoginContext';
 import { useRouter } from 'next/router';
@@ -15,6 +14,7 @@ import {
 import { routes } from '@/routes/constants';
 import Image from 'next/image';
 import { FaRegUser } from 'react-icons/fa';
+import { Button } from './ui/button';
 
 export default function Header() {
     const router = useRouter();
@@ -44,7 +44,7 @@ export default function Header() {
                         <h1>Sobre Nós</h1>
                     </Button>
                 </Link>
-                <Link href='/Information/page'>
+                <Link href='/Information/page' prefetch={false}>
                     <Button>Como Funciona?</Button>
                 </Link>
                 <Link href='/List/CaregiverList/page'>

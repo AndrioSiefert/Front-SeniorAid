@@ -55,20 +55,13 @@ const SeniorProposals = () => {
             <div className='mb-4'>
                 <p>
                     <span className='font-bold'>Tipo de Serviço:</span>{' '}
-                    {seniorServices.serviceType}
+                    {seniorServices.serviceName}
                 </p>
                 <p>
                     <span className='font-bold'>Valor:</span>{' '}
                     {seniorServices.price}
                 </p>
-                <p>
-                    <span className='font-bold'>Localização:</span>{' '}
-                    {seniorServices.location}
-                </p>
-                <p>
-                    <span className='font-bold'>Nível de Urgência:</span>{' '}
-                    {seniorServices.urgencyLevel}
-                </p>
+
                 <p>
                     <span className='font-bold'>Descrição:</span>{' '}
                     {seniorServices.description}

@@ -71,12 +71,6 @@ const ServiceRequestDetails = () => {
                                         </span>
                                         {request.caregiver.name}
                                     </p>
-                                    <p>
-                                        <span className='font-bold'>
-                                            Informações do cuidador{' '}
-                                        </span>
-                                        {request.caregiver.description}
-                                    </p>
                                     <Image
                                         width={100}
                                         height={100}
