@@ -44,7 +44,7 @@ export default function Header() {
                         <h1>Sobre Nós</h1>
                     </Button>
                 </Link>
-                <Link href='/Information/page' prefetch={false}>
+                <Link href='/Information/page'>
                     <Button>Como Funciona?</Button>
                 </Link>
                 <Link href='/List/CaregiverList/page'>

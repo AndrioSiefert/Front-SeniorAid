@@ -7,13 +7,13 @@ export default function Experience() {
             name: 'Maria',
             category: 'Senior',
             comment: 'Eu Amei a experiência de contratar um cuidador.',
-            photo: 'https://randomuser.me/api/portraits/women/74.jpg'
+            photo: 'https://randomuser.me/api/portraits/women/60.jpg'
         },
         {
             name: 'José',
             category: 'Cuidador',
             comment: 'Trabalhar com idosos me trouxe muita gratificação.',
-            photo: 'https://randomuser.me/api/portraits/men/10.jpg'
+            photo: 'https://randomuser.me/api/portraits/men/16.jpg'
         },
         {
             name: 'Ana',

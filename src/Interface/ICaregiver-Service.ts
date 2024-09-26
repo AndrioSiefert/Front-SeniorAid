@@ -2,13 +2,11 @@ import ICaregiver from './ICaregiver';
 
 interface ICaregiverService {
     id: number;
-    qualification: string;
-    skills: string;
-    aboutMe: string;
-    experience?: string;
-    languages?: string;
-    description: string;
+    preference: string;
+    experience: string;
+    about: string;
     price: number;
+    caregiverId: number;
     caregiver: ICaregiver;
 }
 

@@ -11,7 +11,6 @@ export default function CreateCaregiverService() {
     });
 
     const { userId } = useContext(LoginContext);
-    console.log('User ID:', userId);
 
     const onSubmit = async (data: ICaregiverService) => {
         console.log('Dados enviados:', data);
@@ -49,47 +48,111 @@ export default function CreateCaregiverService() {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                         <div className='mb-4'>
                             <label
-                                htmlFor='qualification'
+                                htmlFor='preference'
                                 className='block text-gray-700'
                             >
-                                Qualificação:
+                                Preferencia do Cuidador:
                             </label>
-                            <input
-                                type='text'
-                                id='qualification'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('qualification', {
-                                    required: true
-                                })}
-                            />
+                            <div className='mt-2'>
+                                <div>
+                                    <input
+                                        type='checkbox'
+                                        id='preference'
+                                        value='Viagens'
+                                        {...register('preference')}
+                                    />
+                                    <label
+                                        htmlFor='preference'
+                                        className='ml-2'
+                                    >
+                                        Viagens
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='checkbox'
+                                        id='preference'
+                                        value='Passeios'
+                                        {...register('preference')}
+                                    />
+                                    <label
+                                        htmlFor='preference'
+                                        className='ml-2'
+                                    >
+                                        Passeios
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='checkbox'
+                                        id='preference'
+                                        value='Passar a noite no hospital'
+                                        {...register('preference')}
+                                    />
+                                    <label
+                                        htmlFor='preference'
+                                        className='ml-2'
+                                    >
+                                        Passar a noite no hospital
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='checkbox'
+                                        id='preference'
+                                        value='Cuidar do idoso em casa'
+                                        {...register('preference')}
+                                    />
+                                    <label
+                                        htmlFor='preference'
+                                        className='ml-2'
+                                    >
+                                        Cuidar do idoso em casa
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='checkbox'
+                                        id='preference'
+                                        value='Outros'
+                                        {...register('preference')}
+                                    />
+                                    <label
+                                        htmlFor='preference'
+                                        className='ml-2'
+                                    >
+                                        Outros
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div className='mb-4'>
                             <label
-                                htmlFor='skills'
+                                htmlFor='experience'
                                 className='block text-gray-700'
                             >
                                 Habilidades:
                             </label>
                             <input
                                 type='text'
-                                id='skills'
+                                id='experience'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('skills', { required: true })}
+                                {...register('experience', { required: true })}
                             />
                         </div>
 
                         <div className='mb-4'>
                             <label
-                                htmlFor='aboutMe'
+                                htmlFor='about'
                                 className='block text-gray-700'
                             >
                                 Sobre Mim:
                             </label>
                             <textarea
-                                id='aboutMe'
+                                id='about'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('aboutMe', { required: true })}
+                                {...register('about', { required: true })}
                             />
                         </div>
 
@@ -105,35 +168,6 @@ export default function CreateCaregiverService() {
                                 id='experience'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 {...register('experience')}
-                            />
-                        </div>
-
-                        <div className='mb-4'>
-                            <label
-                                htmlFor='languages'
-                                className='block text-gray-700'
-                            >
-                                Idiomas:
-                            </label>
-                            <input
-                                type='text'
-                                id='languages'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('languages')}
-                            />
-                        </div>
-
-                        <div className='mb-4'>
-                            <label
-                                htmlFor='description'
-                                className='block text-gray-700'
-                            >
-                                Descrição:
-                            </label>
-                            <textarea
-                                id='description'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
-                                {...register('description', { required: true })}
                             />
                         </div>
 

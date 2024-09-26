@@ -15,7 +15,10 @@ export default function CaregiverList() {
     useEffect(() => {
         http.get('/caregiver-service/caregiver')
             .then((response) => {
-                console.log('Dados recebidos:', response.data);
+                console.log(
+                    'Dados recebidos:',
+                    JSON.stringify(response.data, null, 2)
+                );
                 setCaregivers(response.data);
                 setLoading(false);
             })
