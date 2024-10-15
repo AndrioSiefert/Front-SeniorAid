@@ -17,5 +17,6 @@ interface IUser {
     state?: string;
     photo: string;
     user_type: string;
+    [key: string]: any;
 }
 export default IUser;

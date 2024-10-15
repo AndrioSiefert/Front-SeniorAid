@@ -15,36 +15,44 @@ export default function Registration() {
         setValue,
         watch,
         control,
-        formState: { errors }
+        formState: { errors },
     } = useForm<IUser>({
-        mode: 'all'
+        mode: 'all',
     });
     const router = useRouter();
     const senha = watch('password');
     const cepDigitado = watch('cep');
     const [name, setName] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
+    const [image, setImage] = useState('');
+
+    const hanldeImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (!files) return;
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImage(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+    };
 
     const validaSenha = {
-        obrigatorio: (e: string) =>
-            !!e || 'Por favor, preencha este campo novamente',
-        tamanhoMinimo: (e: string) =>
-            e.length >= 6 || 'Senha deve ter no mínimo 6 caracteres',
-        senhaIgual: (e: string) => e === senha || 'As senhas não são iguais'
+        obrigatorio: (e: string) => !!e || 'Por favor, preencha este campo novamente',
+        tamanhoMinimo: (e: string) => e.length >= 6 || 'Senha deve ter no mínimo 6 caracteres',
+        senhaIgual: (e: string) => e === senha || 'As senhas não são iguais',
     };
 
     const fetchEndereco = async (cep: string) => {
         if (!cep) {
             setError('cep', {
                 type: 'manual',
-                message: 'CEP é invalido'
+                message: 'CEP é invalido',
             });
             return;
         }
         try {
-            const response = await fetch(
-                `https://viacep.com.br/ws/${cep}/json/`
-            );
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
             const data = await response.json();
 
             if (response.ok) {
@@ -61,14 +69,30 @@ export default function Registration() {
     };
 
     const onSubmit = async (data: IUser) => {
-        http.post('user', data)
-            .then((response) => {
-                console.log(response);
-                router.push('/Login/page');
-            })
-            .catch((error) => {
-                console.log(error);
+        const formData = new FormData();
+
+        // Adicione todos os campos do usuário ao FormData
+        for (const key in data) {
+            formData.append(key, data[key]);
+        }
+
+        if (image) {
+            const blob = await fetch(image).then(r => r.blob());
+            console.log('Blob da imagem:', blob); // Adicione isto para depurar
+            formData.append('photo', blob, 'image.jpg');
+        }
+
+        try {
+            const response = await http.post('user', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
+            console.log(response);
+            router.push('/Login/page');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +129,7 @@ export default function Registration() {
             if (value === '') {
                 setError('age', {
                     type: 'manual',
-                    message: 'Data de nascimento inválida'
+                    message: 'Data de nascimento inválida',
                 });
             }
         }
@@ -116,13 +140,9 @@ export default function Registration() {
         <div className='flex justify-center py-10 bg-gray-100'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full max-w-4xl p-8 bg-white rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6'
-            >
+                className='w-full max-w-4xl p-8 bg-white rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='mb-4'>
-                    <label
-                        htmlFor='name'
-                        className='text-sm font-medium text-gray-700'
-                    >
+                    <label htmlFor='name' className='text-sm font-medium text-gray-700'>
                         Nome:
                     </label>
                     <input
@@ -133,18 +153,13 @@ export default function Registration() {
                         }`}
                         placeholder='Digite seu nome'
                         {...register('name', {
-                            required: 'O nome é obrigatório'
+                            required: 'O nome é obrigatório',
                         })}
                         value={name}
                         onChange={handleNameChange}
                     />
-                    {errors.name && (
-                        <ErrorMessage>{errors.name.message}</ErrorMessage>
-                    )}
-                    <label
-                        htmlFor='email'
-                        className='block mt-4 text-lg text-white-600'
-                    >
+                    {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+                    <label htmlFor='email' className='block mt-4 text-lg text-white-600'>
                         E-mail:
                     </label>
                     <input
@@ -155,12 +170,10 @@ export default function Registration() {
                         }`}
                         placeholder='Digite seu e-mail'
                         {...register('email', {
-                            required: 'Email obrigatório'
+                            required: 'Email obrigatório',
                         })}
                     />
-                    {errors.email && (
-                        <ErrorMessage>{errors.email.message}</ErrorMessage>
-                    )}
+                    {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                     <label htmlFor='password' className='block mt-4'>
                         Senha:
                     </label>
@@ -175,17 +188,12 @@ export default function Registration() {
                             required: 'Senha obrigatória',
                             minLength: {
                                 value: 6,
-                                message: 'Senha deve ter no mínimo 6 caracteres'
-                            }
+                                message: 'Senha deve ter no mínimo 6 caracteres',
+                            },
                         })}
                     />
-                    {errors.password && (
-                        <ErrorMessage>{errors.password.message}</ErrorMessage>
-                    )}
-                    <label
-                        htmlFor='password_confirmation'
-                        className='block mt-4'
-                    >
+                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+                    <label htmlFor='password_confirmation' className='block mt-4'>
                         Confirme sua Senha:
                     </label>
                     <input
@@ -197,13 +205,11 @@ export default function Registration() {
                         placeholder='Repita a senha'
                         {...register('password_confirmation', {
                             required: 'Repita a senha',
-                            validate: validaSenha
+                            validate: validaSenha,
                         })}
                     />
                     {errors.password_confirmation && (
-                        <ErrorMessage>
-                            {errors.password_confirmation.message}
-                        </ErrorMessage>
+                        <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>
                     )}
                     <label htmlFor='cpf' className='block mt-4 px-2'>
                         CPF:
@@ -228,9 +234,7 @@ export default function Registration() {
                         value={dataNascimento}
                         onChange={getDataNascimento}
                     />
-                    {errors.age && (
-                        <ErrorMessage>{errors.age.message}</ErrorMessage>
-                    )}
+                    {errors.age && <ErrorMessage>{errors.age.message}</ErrorMessage>}
 
                     <label htmlFor='gender' className='block mt-4'>
                         Gênero:
@@ -239,8 +243,7 @@ export default function Registration() {
                         id='gender'
                         className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
                         {...register('gender')}
-                        required
-                    >
+                        required>
                         <option value='' disabled hidden>
                             Selecione o gênero
                         </option>
@@ -248,16 +251,11 @@ export default function Registration() {
                         <option value='woman'>Feminino</option>
                     </select>
 
-                    {errors.gender && (
-                        <ErrorMessage>{errors.gender.message}</ErrorMessage>
-                    )}
+                    {errors.gender && <ErrorMessage>{errors.gender.message}</ErrorMessage>}
                 </div>
 
                 <div className='mb-4'>
-                    <label
-                        htmlFor='cep'
-                        className='text-sm font-medium text-gray-700'
-                    >
+                    <label htmlFor='cep' className='text-sm font-medium text-gray-700'>
                         CEP:
                     </label>
                     <input
@@ -268,15 +266,13 @@ export default function Registration() {
                         }`}
                         placeholder='Digite o CEP'
                         {...register('cep', {
-                            required: 'CEP é obrigatório'
+                            required: 'CEP é obrigatório',
                         })}
-                        onBlur={(e) => {
+                        onBlur={e => {
                             fetchEndereco(cepDigitado);
                         }}
                     />
-                    {errors.cep && (
-                        <ErrorMessage>{errors.cep.message}</ErrorMessage>
-                    )}
+                    {errors.cep && <ErrorMessage>{errors.cep.message}</ErrorMessage>}
                     <label htmlFor='street' className='block mt-4'>
                         Rua:
                     </label>
@@ -334,8 +330,7 @@ export default function Registration() {
                     <select
                         id='user_type'
                         className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
-                        {...register('user_type')}
-                    >
+                        {...register('user_type')}>
                         <option value='caregiver'>Cuidador</option>
                         <option value='senior'>Idoso</option>
                     </select>
@@ -345,10 +340,9 @@ export default function Registration() {
                     </label>
                     <input
                         id='photo'
-                        type='text'
+                        type='file'
                         className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
-                        placeholder='Coloque uma foto sua'
-                        {...register('photo')}
+                        onChange={hanldeImageChange}
                     />
                     <Controller
                         control={control}
@@ -356,9 +350,9 @@ export default function Registration() {
                         rules={{
                             pattern: {
                                 value: /^\(\d{2,3}\) \d{5}-\d{4}$/,
-                                message: 'Telefone inválido'
+                                message: 'Telefone inválido',
                             },
-                            required: 'Telefone é obrigatório'
+                            required: 'Telefone é obrigatório',
                         }}
                         render={({ field }) => (
                             <>
@@ -371,9 +365,7 @@ export default function Registration() {
                                     onChange={field.onChange}
                                 />
                                 {errors.phone && (
-                                    <ErrorMessage>
-                                        {errors.phone.message}
-                                    </ErrorMessage>
+                                    <ErrorMessage>{errors.phone.message}</ErrorMessage>
                                 )}
                             </>
                         )}
@@ -381,8 +373,7 @@ export default function Registration() {
                 </div>
                 <Button
                     type='submit'
-                    className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                >
+                    className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
                     Criar Conta
                 </Button>
             </form>
