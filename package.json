@@ -9,7 +9,8 @@
     "lint": "next lint",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.0",
@@ -20,7 +21,7 @@
     "date-fns": "^3.6.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.376.0",
-    "next": "14.2.2",
+    "next": "^14.2.13",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
@@ -42,6 +43,7 @@
     "@storybook/nextjs": "^8.3.0",
     "@storybook/react": "^8.3.0",
     "@storybook/test": "^8.3.0",
+    "@types/jest": "^29.5.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -50,9 +52,13 @@
     "eslint-config-next": "14.2.2",
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

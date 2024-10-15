@@ -9,7 +9,7 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger
+    DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import { routes } from '@/routes/constants';
 import Image from 'next/image';
@@ -18,8 +18,7 @@ import { Button } from './ui/button';
 
 export default function Header() {
     const router = useRouter();
-    const { userId, userName, userType, mudaId, mudaNome, mudaUserType } =
-        useContext(LoginContext);
+    const { userId, userName, userType, mudaId, mudaNome, mudaUserType } = useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -37,8 +36,10 @@ export default function Header() {
     const listService = routes.listService(userType);
 
     return (
-        <header className='flex flex-col sm:flex-row justify-between items-center sm:sticky sm:inset-x-0 sm:top-0 sm:z-50 bg-colorHeader2 p-7'>
-            <nav className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-center courgette'>
+        <header
+            className='flex items-center justify-between sm:sticky sm:inset-x-0 sm:top-0 sm:z-50 bg-colorHeader2'
+            style={{ height: '80px' }}>
+            <nav className='flex courgette '>
                 <Link href='/'>
                     <Button>
                         <h1>Sobre Nós</h1>
@@ -53,16 +54,9 @@ export default function Header() {
                     </Button>
                 </Link>
             </nav>
-
-            <div className='relative my-4 sm:my-0 sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 text-center emilys-candy-regular'>
+            <div className='left-1/2 transform -translate-x-1/2'>
                 <Link href='/'>
-                    <Image
-                        src='/logotipo.png'
-                        alt='Logo Senior'
-                        width={200}
-                        height={200}
-                        className='object-cover'
-                    />
+                    <Image src='/logotipo.png' alt='Logo Senior' width={150} height={150} />
                 </Link>
             </div>
 
@@ -77,33 +71,24 @@ export default function Header() {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className='bg-white border border-gray-300 shadow-lg rounded-lg'>
                                     <DropdownMenuLabel className='px-4 py-2 font-bold text-gray-700'>
-                                        <Link href={profilePath}>
-                                            Meu perfil
-                                        </Link>
+                                        <Link href={profilePath}>Meu perfil</Link>
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={createService}>
-                                            Criar um serviço
-                                        </Link>
+                                        <Link href={createService}>Criar um serviço</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={myServices}>
-                                            Meus Serviços
-                                        </Link>
+                                        <Link href={myServices}>Meus Serviços</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={listService}>
-                                            Lista de Serviços
-                                        </Link>
+                                        <Link href={listService}>Lista de Serviços</Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
                         <Button
                             onClick={handleLogout}
-                            className='noto-sans font-semibold text-black text-[15px] cursor-pointer'
-                        >
+                            className='noto-sans font-semibold text-black text-[15px] cursor-pointer'>
                             <LogOut />
                         </Button>
                     </>

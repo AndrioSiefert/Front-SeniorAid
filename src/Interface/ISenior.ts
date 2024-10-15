@@ -1,18 +1,5 @@
-interface ISenior {
-    id?: number;
-    name: string;
-    email: string;
-    password: string;
-    cpf: string;
-    age: number;
-    phone: string;
-    cep: string;
-    street: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    address_number: string;
-    userType: string;
-}
+import IUser from './IUser';
+
+interface ISenior extends IUser {}
 
 export default ISenior;

@@ -141,7 +141,6 @@ export default function Registration() {
                     {errors.name && (
                         <ErrorMessage>{errors.name.message}</ErrorMessage>
                     )}
-
                     <label
                         htmlFor='email'
                         className='block mt-4 text-lg text-white-600'
@@ -162,7 +161,6 @@ export default function Registration() {
                     {errors.email && (
                         <ErrorMessage>{errors.email.message}</ErrorMessage>
                     )}
-
                     <label htmlFor='password' className='block mt-4'>
                         Senha:
                     </label>
@@ -184,7 +182,6 @@ export default function Registration() {
                     {errors.password && (
                         <ErrorMessage>{errors.password.message}</ErrorMessage>
                     )}
-
                     <label
                         htmlFor='password_confirmation'
                         className='block mt-4'
@@ -208,7 +205,6 @@ export default function Registration() {
                             {errors.password_confirmation.message}
                         </ErrorMessage>
                     )}
-
                     <label htmlFor='cpf' className='block mt-4 px-2'>
                         CPF:
                     </label>
@@ -220,7 +216,6 @@ export default function Registration() {
                         placeholder='Digite seu CPF'
                         {...register('cpf')}
                     />
-
                     <label htmlFor='age' className='block mt-4'>
                         Data de Nascimento:
                     </label>
@@ -235,6 +230,26 @@ export default function Registration() {
                     />
                     {errors.age && (
                         <ErrorMessage>{errors.age.message}</ErrorMessage>
+                    )}
+
+                    <label htmlFor='gender' className='block mt-4'>
+                        Gênero:
+                    </label>
+                    <select
+                        id='gender'
+                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        {...register('gender')}
+                        required
+                    >
+                        <option value='' disabled hidden>
+                            Selecione o gênero
+                        </option>
+                        <option value='man'>Masculino</option>
+                        <option value='woman'>Feminino</option>
+                    </select>
+
+                    {errors.gender && (
+                        <ErrorMessage>{errors.gender.message}</ErrorMessage>
                     )}
                 </div>
 

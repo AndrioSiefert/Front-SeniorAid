@@ -9,7 +9,7 @@ interface ISeniorService {
     place: string;
     description: string;
     price: string;
-    seniorId: string;
+    seniorId: number;
     senior: ISenior;
 }
 

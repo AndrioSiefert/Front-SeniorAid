@@ -16,14 +16,11 @@ export default function CaregiverInfo() {
     useEffect(() => {
         if (id) {
             http.get(`/caregiver-service/${id}`)
-                .then((response) => {
+                .then(response => {
                     setCaregiver(response.data);
                 })
-                .catch((error) => {
-                    console.error(
-                        'Erro ao carregar serviço do cuidador',
-                        error
-                    );
+                .catch(error => {
+                    console.error('Erro ao carregar serviço do cuidador', error);
                 });
         }
     }, [id]);
@@ -56,26 +53,19 @@ export default function CaregiverInfo() {
                         Informações do Serviço
                     </h2>
                     <p className='text-gray-700 mb-2'>
-                        <strong>Qualificação:</strong> {caregiver.qualification}
+                        <strong>Sobre:</strong> {caregiver.about}
                     </p>
                     <p className='text-gray-700 mb-2'>
-                        <strong>Habilidades:</strong> {caregiver.skills}
+                        <strong>Preferencia:</strong> {caregiver.preference}
                     </p>
                     {caregiver.experience && (
                         <p className='text-gray-700 mb-2'>
                             <strong>Experiência:</strong> {caregiver.experience}
                         </p>
                     )}
-                    {caregiver.languages && (
-                        <p className='text-gray-700 mb-2'>
-                            <strong>Idiomas:</strong> {caregiver.languages}
-                        </p>
-                    )}
+
                     <p className='text-gray-700 mb-2'>
-                        <strong>Sobre Mim:</strong> {caregiver.aboutMe}
-                    </p>
-                    <p className='text-gray-700 mb-2'>
-                        <strong>Descrição:</strong> {caregiver.description}
+                        <strong>Sobre Mim:</strong> {caregiver.about}
                     </p>
                     <p className='text-gray-700 mb-4'>
                         <strong>Preço:</strong> R${caregiver.price.toFixed(2)}
@@ -84,7 +74,7 @@ export default function CaregiverInfo() {
                 {userType === 'senior' && (
                     <div className='mb-6 text-center'>
                         <Button className='bg-green-500 text-white hover:bg-green-600'>
-                            <Link href={`/request-contract/${id}`}>
+                            <Link href={`/Senior-Controller/request-contract/${id}`}>
                                 Solicitar Contrato
                             </Link>
                         </Button>

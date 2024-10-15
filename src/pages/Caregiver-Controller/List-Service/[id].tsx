@@ -7,21 +7,17 @@ import ICaregiverServiceForm from '@/Interface/ICaregiver-Service';
 
 const CaregiverProposals = () => {
     const router = useRouter();
-    const [caregiverService, setCaregiverService] =
-        useState<ICaregiverServiceForm | null>(null);
+    const [caregiverService, setCaregiverService] = useState<ICaregiverServiceForm | null>(null);
     const { userId } = useContext(LoginContext);
 
     useEffect(() => {
         if (userId) {
             http.get(`/caregiver-service/${userId}`)
-                .then((response) => {
+                .then(response => {
                     setCaregiverService(response.data);
                 })
-                .catch((error) => {
-                    console.error(
-                        'Erro ao carregar serviço do cuidador',
-                        error
-                    );
+                .catch(error => {
+                    console.error('Erro ao carregar serviço do cuidador', error);
                 });
         }
     }, [userId]);
@@ -33,7 +29,7 @@ const CaregiverProposals = () => {
                     console.log(`Contrato ${id} excluído com sucesso.`);
                     router.push('/');
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error('Erro ao excluir contrato:', error);
                 });
         }
@@ -49,62 +45,44 @@ const CaregiverProposals = () => {
 
     return (
         <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>
-                Detalhes do Serviço do Cuidador
-            </h1>
+            <h1 className='text-2xl font-bold mb-4'>Detalhes do Serviço do Cuidador</h1>
 
             <p>
-                <span className='font-bold'>Qualificação:</span>{' '}
-                {caregiverService.qualification}
+                <span className='font-bold'>Qualificação:</span> {caregiverService.preference}
             </p>
             <p>
-                <span className='font-bold'>Habilidades:</span>{' '}
-                {caregiverService.skills}
+                <span className='font-bold'>Habilidades:</span> {caregiverService.experience}
             </p>
             <p>
-                <span className='font-bold'>Sobre Mim:</span>{' '}
-                {caregiverService.aboutMe}
+                <span className='font-bold'>Sobre Mim:</span> {caregiverService.about}
             </p>
             <p>
-                <span className='font-bold'>Experiência:</span>{' '}
-                {caregiverService.experience}
+                <span className='font-bold'>Experiência:</span> {caregiverService.experience}
             </p>
             <p>
-                <span className='font-bold'>Idiomas:</span>{' '}
-                {caregiverService.languages}
-            </p>
-            <p>
-                <span className='font-bold'>Descrição:</span>{' '}
-                {caregiverService.description}
-            </p>
-            <p>
-                <span className='font-bold'>Preço:</span>{' '}
-                {caregiverService.price}
+                <span className='font-bold'>Preço:</span> {caregiverService.price}
             </p>
 
             <div className='mt-8 flex justify-between'>
                 <Button
                     onClick={() =>
                         router.push(
-                            `/ServicesOptions/Caregiver-Controller/Edit-Contract-Caregiver/${caregiverService.id}`
+                            `/ServicesOptions/Caregiver-Controller/Edit-Contract-Caregiver/${caregiverService.id}`,
                         )
-                    }
-                >
+                    }>
                     Editar contrato
                 </Button>
                 <Button
                     onClick={() =>
                         router.push(
-                            `/ServicesOptions/Caregiver-Controller/Controller-myService/${caregiverService.id}`
+                            `/ServicesOptions/Caregiver-Controller/Controller-myService/${caregiverService.id}`,
                         )
-                    }
-                >
+                    }>
                     Ver Propostas
                 </Button>
                 <Button
                     onClick={() => deleteContract(caregiverService.id)}
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-                >
+                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
                     Excluir contrato
                 </Button>
             </div>

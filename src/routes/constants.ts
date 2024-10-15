@@ -18,9 +18,5 @@ export const routes = {
                 : 'Caregiver-Controller/Create-Service/page'
         }`,
     listService: (userType: string) =>
-        `/List-Service/${
-            userType === 'senior'
-                ? 'Order-CaregiverList/page'
-                : 'Order-SeniorList/page'
-        }`
+        `/${userType === 'senior' ? 'List/CaregiverList/page' : 'Order-CaregiverList/page'}`,
 };

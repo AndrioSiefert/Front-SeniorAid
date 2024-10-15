@@ -6,9 +6,10 @@ interface IUser {
     password_confirmation: string;
     cpf: string;
     age: number;
+    gender: 'man' | 'woman';
+    phone: string;
     description: string;
     address_number: string;
-    phone: string;
     cep: string;
     street?: string;
     neighborhood?: string;

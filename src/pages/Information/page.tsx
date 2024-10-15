@@ -21,8 +21,8 @@ export default function Information() {
                         <Image
                             src='/banner.jpg'
                             alt='Information'
-                            width={1920}
-                            height={1080}
+                            width={500}
+                            height={500}
                             layout='responsive'
                             objectFit='cover'
                             objectPosition='top'

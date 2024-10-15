@@ -14,7 +14,7 @@ const ContractSenior = () => {
 
     useEffect(() => {
         if (id) {
-            http.get(`/seniorService/${id}`).then((response) => {
+            http.get(`/seniorService/id/${id}`).then(response => {
                 setService(response.data);
                 console.log('Service:', response.data);
             });
@@ -25,14 +25,14 @@ const ContractSenior = () => {
         if (service && userId) {
             const serviceRequest = {
                 caregiverId: userId,
-                serviceId: service.id
+                serviceId: service.id,
             };
 
             http.post('http://localhost:8000/service-request', serviceRequest)
-                .then((response) => {
+                .then(response => {
                     alert('Serviço solicitado com sucesso!');
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.error('Erro ao solicitar serviço:', error);
                 });
         } else {
@@ -50,22 +50,16 @@ const ContractSenior = () => {
             <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
                 <h4 className='text-lg font-semibold'>Informações do Idoso:</h4>
                 <p className='text-gray-600'>Nome: {service.senior.name}</p>
+                <p className='text-gray-600'>Idade: {service.senior.age} anos</p>
                 <p className='text-gray-600'>
-                    Idade: {service.senior.age} anos
+                    Localização: {service.senior.street}, {service.senior.neighborhood},{' '}
+                    {service.senior.city}
                 </p>
-                <p className='text-gray-600'>
-                    Localização: {service.senior.street},{' '}
-                    {service.senior.neighborhood}, {service.senior.city}
-                </p>
-                <p className='text-gray-600'>
-                    Número da Casa: {service.senior.address_number}
-                </p>
+                <p className='text-gray-600'>Número da Casa: {service.senior.address_number}</p>
             </div>
 
             <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
-                <h4 className='text-lg font-semibold'>
-                    Informações do Serviço:
-                </h4>
+                <h4 className='text-lg font-semibold'>Informações do Serviço:</h4>
                 <p className='text-gray-600'>
                     Data do serviço:{' '}
                     {service.dateService
@@ -74,29 +68,21 @@ const ContractSenior = () => {
                 </p>
                 <p className='text-gray-600'>Hora do serviço: {service.time}</p>
                 <p className='text-gray-600'>Valor R$: {service.price}</p>
-                <p className='text-gray-600'>
-                    Medicamentos: {service.medications}
-                </p>
-                <p className='text-gray-600'>
-                    Descrição: {service.description}
-                </p>
+                <p className='text-gray-600'>Medicamentos: {service.medications}</p>
+                <p className='text-gray-600'>Descrição: {service.description}</p>
             </div>
 
             <Button
                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
-                onClick={requestService}
-            >
+                onClick={requestService}>
                 Solicitar Serviço
             </Button>
-
+            {/* 
             <Button
                 className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4'
-                onClick={() =>
-                    router.push('/List-Service/Order-SeniorList/page')
-                }
-            >
+                onClick={() => router.push('/List-Service/Order-SeniorList/page')}>
                 Voltar
-            </Button>
+            </Button> */}
         </div>
     );
 };
