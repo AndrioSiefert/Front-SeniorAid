@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState, useContext } from 'react';
-import { LoginContext } from '@/context/LoginContext'; // Ajuste o caminho conforme necessário
+import { LoginContext } from '@/context/LoginContext';
 
 export default function CaregiverInfo() {
     const router = useRouter();
@@ -38,7 +38,7 @@ export default function CaregiverInfo() {
             <div className='bg-white shadow-lg rounded-lg p-6 max-w-lg w-full'>
                 <div className='flex flex-col items-center mb-6'>
                     <Image
-                        src={caregiver.caregiver.photo}
+                        src={`http://localhost:8000/images/${caregiver.caregiver.photo}`}
                         alt={caregiver.caregiver.name}
                         width={128}
                         height={128}
@@ -82,7 +82,7 @@ export default function CaregiverInfo() {
                 )}
                 <div className='text-center'>
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
-                        <Link href='/List/CaregiverList/page'>Voltar</Link>
+                        <Link href='/NossosServicos/List/CaregiverList/page'>Voltar</Link>
                     </Button>
                 </div>
             </div>

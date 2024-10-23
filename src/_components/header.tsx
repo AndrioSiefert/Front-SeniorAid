@@ -18,7 +18,8 @@ import { Button } from './ui/button';
 
 export default function Header() {
     const router = useRouter();
-    const { userId, userName, userType, mudaId, mudaNome, mudaUserType } = useContext(LoginContext);
+    const { userId, photo, userName, userType, mudaId, mudaNome, mudaUserType } =
+        useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -36,10 +37,8 @@ export default function Header() {
     const listService = routes.listService(userType);
 
     return (
-        <header
-            className='flex items-center justify-between sm:sticky sm:inset-x-0 sm:top-0 sm:z-50 bg-colorHeader2'
-            style={{ height: '80px' }}>
-            <nav className='flex courgette '>
+        <header className='flex flex-col justify-between items-center w-4/5 mx-20 // lg:flex-row'>
+            <nav className='courgette'>
                 <Link href='/'>
                     <Button>
                         <h1>Sobre Nós</h1>
@@ -54,16 +53,29 @@ export default function Header() {
                     </Button>
                 </Link>
             </nav>
-            <div className='left-1/2 transform -translate-x-1/2'>
-                <Link href='/'>
-                    <Image src='/logotipo.png' alt='Logo Senior' width={150} height={150} />
-                </Link>
-            </div>
 
-            <aside className='flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4'>
-                {userName ? (
-                    <>
-                        <h1 className='text-black text-[20px]'>{userName}</h1>
+            <Link href='/'>
+                <Image
+                    src='/logotipo.png'
+                    alt='Logo Senior'
+                    width={150}
+                    height={150}
+                    className='flex items-center'
+                />
+            </Link>
+
+            <div className='flex items-center'>
+                {userName || photo ? (
+                    <div className='flex items-center space-x-2'>
+                        <Image
+                            src={`http://localhost:8000/images/${photo}`}
+                            alt='Foto do usuário'
+                            width={40}
+                            height={40}
+                            className='rounded-full'
+                        />
+                        <h1 className='text-black text-[20px] courgette'>{userName}</h1>{' '}
+                        {/* Nome do usuário */}
                         <div className='text-black'>
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
@@ -83,31 +95,32 @@ export default function Header() {
                                     <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
                                         <Link href={listService}>Lista de Serviços</Link>
                                     </DropdownMenuItem>
+                                    <Button
+                                        onClick={handleLogout}
+                                        className='noto-sans font-semibold text-black text-[15px] cursor-pointer'>
+                                        Sair
+                                        <LogOut />
+                                    </Button>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
-                        <Button
-                            onClick={handleLogout}
-                            className='noto-sans font-semibold text-black text-[15px] cursor-pointer'>
-                            <LogOut />
-                        </Button>
-                    </>
+                    </div>
                 ) : (
-                    <>
-                        <Link href='/Login/page'>
-                            <Button className='text-xl p-1 fenix gap-1'>
-                                <FaRegUser size={28} />
-                                Entrar
-                            </Button>
-                        </Link>
+                    <div className='flex items-center'>
                         <Link href='/Registration/page'>
                             <Button className='text-lg bg-yellow-500 text-white border-2 border-yellow-600 hover:bg-yellow-600'>
                                 Cadastrar-se
                             </Button>
                         </Link>
-                    </>
+                        <Link href='/Login/page'>
+                            <Button className='courgette gap-2 mx-2 text-lg bg-blue-500 text-white border-2 border-blue-600 hover:bg-blue-600'>
+                                Entrar
+                                <FaRegUser size={24} />
+                            </Button>
+                        </Link>
+                    </div>
                 )}
-            </aside>
+            </div>
         </header>
     );
 }

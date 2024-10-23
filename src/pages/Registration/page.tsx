@@ -78,7 +78,7 @@ export default function Registration() {
 
         if (image) {
             const blob = await fetch(image).then(r => r.blob());
-            console.log('Blob da imagem:', blob); // Adicione isto para depurar
+            console.log('Blob da imagem:', blob);
             formData.append('photo', blob, 'image.jpg');
         }
 

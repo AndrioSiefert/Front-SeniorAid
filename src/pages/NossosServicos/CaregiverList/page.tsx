@@ -15,7 +15,7 @@ export default function CaregiverList() {
     useEffect(() => {
         http.get('/caregiver-service/caregiver')
             .then(response => {
-                console.log('Dados recebidos:', JSON.stringify(response.data, null, 2));
+                // console.log('Dados recebidos:', JSON.stringify(response.data, null, 2));
                 setCaregivers(response.data);
                 setLoading(false);
             })
@@ -55,7 +55,11 @@ export default function CaregiverList() {
                         </p>
                         <Button
                             className='mt-4 w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600'
-                            onClick={() => router.push(`/List/CaregiverInfo/${caregiver.id}`)}>
+                            onClick={() =>
+                                router.push(
+                                    `/NossosServicos/CaregiverInfo/${caregiver.caregiver.id}`,
+                                )
+                            }>
                             {`Ver informações do ${caregiver.caregiver.name}`}
                         </Button>
                     </div>

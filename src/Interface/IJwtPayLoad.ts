@@ -4,6 +4,7 @@ interface IJwtPayload {
     userType: string;
     caregiverId?: number;
     seniorId?: number;
+    photo?: string;
 }
 
 export default IJwtPayload;

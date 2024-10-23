@@ -8,6 +8,7 @@ interface LoginContextData {
     userType: string;
     caregiverId: number | null;
     seniorId: number | null;
+    photo: string;
     mudaId: (id: number | null) => void;
     mudaNome: (name: string) => void;
     mudaUserType: (type: string) => void;
@@ -27,6 +28,7 @@ function LoginProvider({ children }: LoginProviderProps) {
     const [userType, setUserType] = useState<string>('');
     const [caregiverId, setCaregiverId] = useState<number | null>(null);
     const [seniorId, setSeniorId] = useState<number | null>(null);
+    const [photo, setPhoto] = useState<string>('');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -39,9 +41,11 @@ function LoginProvider({ children }: LoginProviderProps) {
                 setUserType(decoded.userType);
                 setCaregiverId(decoded.caregiverId || null);
                 setSeniorId(decoded.seniorId || null);
+                setPhoto(decoded.photo || '');
                 console.log('User Type:', decoded.userType);
                 console.log('Caregiver ID:', decoded.caregiverId);
                 console.log('Senior ID:', decoded.seniorId);
+                console.log('Photo:', decoded.photo);
             } catch (error) {
                 console.error('Erro ao decodificar o token:', error);
             }
@@ -81,6 +85,7 @@ function LoginProvider({ children }: LoginProviderProps) {
                 mudaUserType,
                 mudaCaregiverId,
                 mudaSeniorId,
+                photo,
             }}>
             {children}
         </LoginContext.Provider>
