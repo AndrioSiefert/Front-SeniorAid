@@ -71,7 +71,6 @@ export default function Registration() {
     const onSubmit = async (data: IUser) => {
         const formData = new FormData();
 
-        // Adicione todos os campos do usuário ao FormData
         for (const key in data) {
             formData.append(key, data[key]);
         }

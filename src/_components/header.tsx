@@ -18,8 +18,16 @@ import { Button } from './ui/button';
 
 export default function Header() {
     const router = useRouter();
-    const { userId, photo, userName, userType, mudaId, mudaNome, mudaUserType } =
-        useContext(LoginContext);
+
+    const {
+        userId,
+        photo,
+        userName,
+        userType,
+        mudaId,
+        mudaNome,
+        mudaUserType,
+    } = useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -37,73 +45,78 @@ export default function Header() {
     const listService = routes.listService(userType);
 
     return (
-        <header className='flex flex-col justify-between items-center w-4/5 mx-20 // lg:flex-row'>
-            <nav className='courgette'>
+        <header className='flex fenix flex-col items-center justify-between w-4/5 mx-auto ||| lg:flex-row'>
+            <div className='flex justify-center'>
+                <Link href='/'>
+                    <Image
+                        src='/logotipo.png'
+                        alt='Logo Senior'
+                        width={150}
+                        height={150}
+                        className='flex'
+                    />
+                </Link>
+            </div>
+            <div className='flex mb-5'>
                 <Link href='/'>
                     <Button>
-                        <h1>Sobre Nós</h1>
+                        <h1 className='text-lg'>Sobre Nós</h1>
                     </Button>
                 </Link>
                 <Link href='/Information/page'>
-                    <Button>Como Funciona?</Button>
+                    <Button className='text-lg'>Como Funciona?</Button>
                 </Link>
-                <Link href='/List/CaregiverList/page'>
+                <Link href='NossosServicos/CaregiverList/page'>
                     <Button>
-                        <h1>Nossos Serviços</h1>
+                        <h1 className='text-lg'>Nossos Serviços</h1>
                     </Button>
                 </Link>
-            </nav>
+            </div>
 
-            <Link href='/'>
-                <Image
-                    src='/logotipo.png'
-                    alt='Logo Senior'
-                    width={150}
-                    height={150}
-                    className='flex items-center'
-                />
-            </Link>
-
-            <div className='flex items-center'>
-                {userName || photo ? (
+            <div className='flex items-center mb-5'>
+                {userName ? (
                     <div className='flex items-center space-x-2'>
                         <Image
                             src={`http://localhost:8000/images/${photo}`}
                             alt='Foto do usuário'
                             width={40}
                             height={40}
-                            className='rounded-full'
+                            className='rounded-lg'
                         />
-                        <h1 className='text-black text-[20px] courgette'>{userName}</h1>{' '}
-                        {/* Nome do usuário */}
-                        <div className='text-black'>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                    <Menu />
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className='bg-white border border-gray-300 shadow-lg rounded-lg'>
-                                    <DropdownMenuLabel className='px-4 py-2 font-bold text-gray-700'>
-                                        <Link href={profilePath}>Meu perfil</Link>
-                                    </DropdownMenuLabel>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={createService}>Criar um serviço</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={myServices}>Meus Serviços</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                        <Link href={listService}>Lista de Serviços</Link>
-                                    </DropdownMenuItem>
-                                    <Button
-                                        onClick={handleLogout}
-                                        className='noto-sans font-semibold text-black text-[15px] cursor-pointer'>
-                                        Sair
-                                        <LogOut />
-                                    </Button>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
+                        <h1 className='text-black text-[20px] fenix'>
+                            {userName}
+                        </h1>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <Menu />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className='bg-white border border-gray-300 shadow-lg rounded-lg'>
+                                <DropdownMenuLabel className='px-4 py-2 font-bold text-gray-700'>
+                                    <Link href={profilePath}>Meu perfil</Link>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                    <Link href={createService}>
+                                        Criar um serviço
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                    <Link href={myServices}>Meus Serviços</Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                    <Link href={listService}>
+                                        Lista de Serviços
+                                    </Link>
+                                </DropdownMenuItem>
+                                <Button
+                                    onClick={handleLogout}
+                                    className='noto-sans font-semibold text-black text-[15px] cursor-pointer'
+                                >
+                                    Sair
+                                    <LogOut />
+                                </Button>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
                 ) : (
                     <div className='flex items-center'>

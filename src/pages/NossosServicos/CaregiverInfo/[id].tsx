@@ -16,11 +16,14 @@ export default function CaregiverInfo() {
     useEffect(() => {
         if (id) {
             http.get(`/caregiver-service/${id}`)
-                .then(response => {
+                .then((response) => {
                     setCaregiver(response.data);
                 })
-                .catch(error => {
-                    console.error('Erro ao carregar serviço do cuidador', error);
+                .catch((error) => {
+                    console.error(
+                        'Erro ao carregar serviço do cuidador',
+                        error,
+                    );
                 });
         }
     }, [id]);
@@ -74,7 +77,9 @@ export default function CaregiverInfo() {
                 {userType === 'senior' && (
                     <div className='mb-6 text-center'>
                         <Button className='bg-green-500 text-white hover:bg-green-600'>
-                            <Link href={`/Senior-Controller/request-contract/${id}`}>
+                            <Link
+                                href={`/Contract/Contract-request-to-caregiver/${id}`}
+                            >
                                 Solicitar Contrato
                             </Link>
                         </Button>
@@ -82,7 +87,9 @@ export default function CaregiverInfo() {
                 )}
                 <div className='text-center'>
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
-                        <Link href='/NossosServicos/List/CaregiverList/page'>Voltar</Link>
+                        <Link href='/NossosServicos/CaregiverList/page'>
+                            Voltar
+                        </Link>
                     </Button>
                 </div>
             </div>

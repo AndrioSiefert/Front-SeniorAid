@@ -14,13 +14,16 @@ interface LoginContextData {
     mudaUserType: (type: string) => void;
     mudaCaregiverId: (id: number | null) => void;
     mudaSeniorId: (id: number | null) => void;
+    mudaPhoto: (photo: string) => void;
 }
 
 interface LoginProviderProps {
     children: React.ReactNode;
 }
 
-export const LoginContext = createContext<LoginContextData>({} as LoginContextData);
+export const LoginContext = createContext<LoginContextData>(
+    {} as LoginContextData,
+);
 
 function LoginProvider({ children }: LoginProviderProps) {
     const [userId, setUserId] = useState<number | null>(null);
@@ -72,6 +75,10 @@ function LoginProvider({ children }: LoginProviderProps) {
         setSeniorId(id);
     }
 
+    function mudaPhoto(photo: string) {
+        setPhoto(photo);
+    }
+
     return (
         <LoginContext.Provider
             value={{
@@ -86,7 +93,9 @@ function LoginProvider({ children }: LoginProviderProps) {
                 mudaCaregiverId,
                 mudaSeniorId,
                 photo,
-            }}>
+                mudaPhoto,
+            }}
+        >
             {children}
         </LoginContext.Provider>
     );

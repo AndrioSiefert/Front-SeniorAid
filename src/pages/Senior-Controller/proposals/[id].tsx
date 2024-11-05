@@ -8,9 +8,7 @@ import Image from 'next/image';
 const ServiceRequestDetails = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [serviceRequests, setServiceRequests] = useState<IServiceRequest[]>(
-        []
-    );
+    const [serviceRequests, setServiceRequests] = useState<IServiceRequest[]>([]);
 
     useEffect(() => {
         fetchServiceRequests();
@@ -28,7 +26,7 @@ const ServiceRequestDetails = () => {
     const handleAcceptRequest = async (id: number) => {
         try {
             const response = await http.put(`/service-request/accept/${id}`, {
-                accepted: true
+                accepted: true,
             });
             console.log('Solicitação aceita com sucesso', response.data);
             fetchServiceRequests();
@@ -48,62 +46,59 @@ const ServiceRequestDetails = () => {
     };
 
     const getStatusColor = (accepted: boolean) => {
-        return accepted
-            ? 'bg-green-200 text-green-800'
-            : 'bg-red-200 text-red-800';
+        return accepted ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800';
     };
 
     return (
-        <div className='max-w-3xl mx-auto mt-8'>
-            <h1 className='text-2xl font-bold mb-4'>Propostas de Serviço</h1>
+        <div className='max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg'>
+            <h1 className='text-3xl font-semibold mb-6 text-center'>Propostas de Serviço</h1>
 
             {serviceRequests.length === 0 ? (
-                <p>Nenhuma proposta de serviço encontrada.</p>
+                <p className='text-center text-gray-500'>Nenhuma proposta de serviço encontrada.</p>
             ) : (
                 <ul className='divide-y divide-gray-300'>
                     {serviceRequests.map((request) => (
                         <li key={request.id} className='py-4'>
                             <div className='flex justify-between items-center'>
-                                <div>
-                                    <p>
-                                        <span className='font-bold'>
-                                            Nome do cuidador:{' '}
-                                        </span>
+                                <div className='flex-1'>
+                                    <p className='text-lg font-bold'>
+                                        <span className='font-semibold'>Nome do cuidador: </span>
                                         {request.caregiver.name}
                                     </p>
-                                    <Image
-                                        width={100}
-                                        height={100}
-                                        src={`/${request.caregiver.photo}`}
-                                        alt='Foto do cuidador'
-                                    />
+                                    <p className='text-md'>
+                                        <span className='font-semibold'>Telefone: </span>
+                                        {request.caregiver.phone}
+                                    </p>
+                                    <div className='my-2'>
+                                        <Image
+                                            width={100}
+                                            height={100}
+                                            src={`http://localhost:8000/images/${request.caregiver.photo}`}
+                                            alt='Foto do cuidador'
+                                            className='rounded-full shadow-md'
+                                        />
+                                    </div>
 
                                     <p
                                         className={`font-bold ${getStatusColor(
-                                            request.accepted
+                                            request.accepted,
                                         )} p-2 rounded-md inline-block mt-2`}
                                     >
-                                        <span className='font-bold'>
-                                            Contrato:{' '}
-                                        </span>
-                                        {request.accepted
-                                            ? 'ACEITO'
-                                            : 'NÃO ACEITO'}
+                                        <span className='font-semibold'>Contrato: </span>
+                                        {request.accepted ? 'ACEITO' : 'NÃO ACEITO'}
                                     </p>
                                 </div>
                                 {!request.accepted && (
-                                    <div className='space-x-2'>
+                                    <div className='flex space-x-2'>
                                         <Button
-                                            onClick={() =>
-                                                handleAcceptRequest(request.id)
-                                            }
+                                            onClick={() => handleAcceptRequest(request.id)}
+                                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
                                         >
                                             Aceitar
                                         </Button>
                                         <Button
-                                            onClick={() =>
-                                                handleDeclineRequest(request.id)
-                                            }
+                                            onClick={() => handleDeclineRequest(request.id)}
+                                            className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
                                         >
                                             Recusar
                                         </Button>
@@ -117,9 +112,8 @@ const ServiceRequestDetails = () => {
 
             <div className='mt-8'>
                 <Button
-                    onClick={() =>
-                        router.push(`/Senior-Controller/MyService/${id}`)
-                    }
+                    onClick={() => router.push(`/Senior-Controller/MyService/${id}`)}
+                    className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'
                 >
                     Voltar
                 </Button>

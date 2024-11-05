@@ -14,7 +14,7 @@ const ContractSenior = () => {
 
     useEffect(() => {
         if (id) {
-            http.get(`/seniorService/id/${id}`).then(response => {
+            http.get(`/seniorService/id/${id}`).then((response) => {
                 setService(response.data);
                 console.log('Service:', response.data);
             });
@@ -29,10 +29,10 @@ const ContractSenior = () => {
             };
 
             http.post('http://localhost:8000/service-request', serviceRequest)
-                .then(response => {
+                .then((response) => {
                     alert('Serviço solicitado com sucesso!');
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error('Erro ao solicitar serviço:', error);
                 });
         } else {
@@ -52,8 +52,7 @@ const ContractSenior = () => {
                 <p className='text-gray-600'>Nome: {service.senior.name}</p>
                 <p className='text-gray-600'>Idade: {service.senior.age} anos</p>
                 <p className='text-gray-600'>
-                    Localização: {service.senior.street}, {service.senior.neighborhood},{' '}
-                    {service.senior.city}
+                    Localização: {service.senior.street}, {service.senior.neighborhood}, {service.senior.city}
                 </p>
                 <p className='text-gray-600'>Número da Casa: {service.senior.address_number}</p>
             </div>
@@ -62,9 +61,7 @@ const ContractSenior = () => {
                 <h4 className='text-lg font-semibold'>Informações do Serviço:</h4>
                 <p className='text-gray-600'>
                     Data do serviço:{' '}
-                    {service.dateService
-                        ? formatISODateToBrazilian(service.dateService)
-                        : 'Data não disponível'}
+                    {service.dateService ? formatISODateToBrazilian(service.dateService) : 'Data não disponível'}
                 </p>
                 <p className='text-gray-600'>Hora do serviço: {service.time}</p>
                 <p className='text-gray-600'>Valor R$: {service.price}</p>
@@ -74,15 +71,17 @@ const ContractSenior = () => {
 
             <Button
                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
-                onClick={requestService}>
+                onClick={requestService}
+            >
                 Solicitar Serviço
             </Button>
-            {/* 
+
             <Button
                 className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4'
-                onClick={() => router.push('/List-Service/Order-SeniorList/page')}>
+                onClick={() => router.push('/NossosServicos/CaregiverList/page')}
+            >
                 Voltar
-            </Button> */}
+            </Button>
         </div>
     );
 };

@@ -8,9 +8,7 @@ import Experience from '@/_components/Experience/Experience';
 export default function Home() {
     return (
         <div className='flex flex-col min-h-screen'>
-            <main className='flex-grow grid'>
-                <About />
-            </main>
+            <About />
             <Experience />
             <SeniorInformation />
             <CaregiverInformation />

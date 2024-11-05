@@ -7,14 +7,12 @@ import ISeniorService from '@/Interface/ISenior-Service';
 
 const SeniorProposals = () => {
     const router = useRouter();
-    const [seniorServices, setSeniorServices] = useState<ISeniorService | null>(
-        null
-    );
-    const { userId } = useContext(LoginContext);
+    const [seniorServices, setSeniorServices] = useState<ISeniorService | null>(null);
+    const { seniorId } = useContext(LoginContext);
 
     useEffect(() => {
-        if (userId) {
-            http.get(`/seniorService/${userId}`)
+        if (seniorId) {
+            http.get(`/seniorService/${seniorId}`)
                 .then((response) => {
                     console.log('Resposta da API:', response.data);
                     setSeniorServices(response.data);
@@ -23,7 +21,7 @@ const SeniorProposals = () => {
                     console.error('Erro ao carregar serviços do senior', error);
                 });
         }
-    }, [userId]);
+    }, [seniorId]);
 
     const deleteContract = (id: number | undefined) => {
         if (id) {
@@ -48,42 +46,25 @@ const SeniorProposals = () => {
 
     return (
         <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>
-                Detalhes dos Serviços do Senior
-            </h1>
+            <h1 className='text-2xl font-bold mb-4'>Detalhes dos Serviços do Senior</h1>
 
             <div className='mb-4'>
                 <p>
-                    <span className='font-bold'>Tipo de Serviço:</span>{' '}
-                    {seniorServices.serviceName}
+                    <span className='font-bold'>Tipo de Serviço:</span> {seniorServices.serviceName}
                 </p>
                 <p>
-                    <span className='font-bold'>Valor:</span>{' '}
-                    {seniorServices.price}
+                    <span className='font-bold'>Valor:</span> {seniorServices.price}
                 </p>
 
                 <p>
-                    <span className='font-bold'>Descrição:</span>{' '}
-                    {seniorServices.description}
+                    <span className='font-bold'>Descrição:</span> {seniorServices.description}
                 </p>
 
                 <div className='mt-2 flex justify-between'>
-                    <Button
-                        onClick={() =>
-                            router.push(
-                                `/Senior-Controller/Edit-Service/${seniorServices.id}`
-                            )
-                        }
-                    >
+                    <Button onClick={() => router.push(`/Senior-Controller/Edit-Service/${seniorServices.id}`)}>
                         Editar Serviço
                     </Button>
-                    <Button
-                        onClick={() =>
-                            router.push(
-                                `/Senior-Controller/proposals/${seniorServices.id}`
-                            )
-                        }
-                    >
+                    <Button onClick={() => router.push(`/Senior-Controller/proposals/${seniorServices.id}`)}>
                         Ver Propostas
                     </Button>
                     <Button

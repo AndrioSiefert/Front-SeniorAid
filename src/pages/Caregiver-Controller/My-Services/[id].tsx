@@ -13,10 +13,10 @@ const CaregiverProposals = () => {
     useEffect(() => {
         if (userId) {
             http.get(`/caregiver-service/${userId}`)
-                .then(response => {
+                .then((response) => {
                     setCaregiverService(response.data);
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error('Erro ao carregar serviço do cuidador', error);
                 });
         }
@@ -29,7 +29,7 @@ const CaregiverProposals = () => {
                     console.log(`Contrato ${id} excluído com sucesso.`);
                     router.push('/');
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error('Erro ao excluir contrato:', error);
                 });
         }
@@ -64,25 +64,18 @@ const CaregiverProposals = () => {
             </p>
 
             <div className='mt-8 flex justify-between'>
-                <Button
-                    onClick={() =>
-                        router.push(
-                            `/ServicesOptions/Caregiver-Controller/Edit-Contract-Caregiver/${caregiverService.id}`,
-                        )
-                    }>
+                {/* <Button
+                    onClick={() => router.push(`/Caregiver-Controller/Edit-Contract-Caregiver/${caregiverService.id}`)}
+                >
                     Editar contrato
-                </Button>
-                <Button
-                    onClick={() =>
-                        router.push(
-                            `/ServicesOptions/Caregiver-Controller/Controller-myService/${caregiverService.id}`,
-                        )
-                    }>
+                </Button> */}
+                {/* <Button onClick={() => router.push(`/Caregiver-Controller/My-Services/${caregiverService.id}`)}>
                     Ver Propostas
-                </Button>
+                </Button> */}
                 <Button
                     onClick={() => deleteContract(caregiverService.id)}
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
+                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                >
                     Excluir contrato
                 </Button>
             </div>
