@@ -15,7 +15,7 @@ const EditContractSenior = () => {
         medications: '',
         place: '',
         description: '',
-        price: ''
+        price: '',
     });
 
     useEffect(() => {
@@ -29,15 +29,13 @@ const EditContractSenior = () => {
                     medications: response.data.medications,
                     place: response.data.place,
                     description: response.data.description,
-                    price: response.data.price
+                    price: response.data.price,
                 });
             });
         }
     }, [id]);
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
@@ -53,18 +51,12 @@ const EditContractSenior = () => {
     };
 
     if (!contract) {
-        return (
-            <div className='flex justify-center items-center h-screen'>
-                Carregando...
-            </div>
-        );
+        return <div className='flex justify-center items-center h-screen'>Carregando...</div>;
     }
 
     return (
         <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>
-                Editar Contrato #{contract.id}
-            </h1>
+            <h1 className='text-2xl font-bold mb-4'>Editar Contrato #{contract.id}</h1>
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     <label className='block font-bold'>Tipo de Serviço</label>
@@ -138,13 +130,7 @@ const EditContractSenior = () => {
 
                 <div className='mt-8 flex justify-between'>
                     <Button type='submit'>Salvar Alterações</Button>
-                    <Button
-                        onClick={() =>
-                            router.push(`/Senior-Controller/MyService/${id}`)
-                        }
-                    >
-                        Voltar
-                    </Button>
+                    <Button onClick={() => router.push(`/Senior-Controller/SeniorServiceCreated/${id}`)}>Voltar</Button>
                 </div>
             </form>
         </div>

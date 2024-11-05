@@ -19,15 +19,7 @@ import { Button } from './ui/button';
 export default function Header() {
     const router = useRouter();
 
-    const {
-        userId,
-        photo,
-        userName,
-        userType,
-        mudaId,
-        mudaNome,
-        mudaUserType,
-    } = useContext(LoginContext);
+    const { userId, photo, userName, userType, mudaId, mudaNome, mudaUserType } = useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -48,13 +40,7 @@ export default function Header() {
         <header className='flex fenix flex-col items-center justify-between w-4/5 mx-auto ||| lg:flex-row'>
             <div className='flex justify-center'>
                 <Link href='/'>
-                    <Image
-                        src='/logotipo.png'
-                        alt='Logo Senior'
-                        width={150}
-                        height={150}
-                        className='flex'
-                    />
+                    <Image src='/logotipo.png' alt='Logo Senior' width={150} height={150} className='flex' />
                 </Link>
             </div>
             <div className='flex mb-5'>
@@ -66,7 +52,8 @@ export default function Header() {
                 <Link href='/Information/page'>
                     <Button className='text-lg'>Como Funciona?</Button>
                 </Link>
-                <Link href='NossosServicos/CaregiverList/page'>
+                {/* CRIAR UM GRID QUE MOSTRE SERVIÇOS DE CAREGIVER E SENIOR */}
+                <Link href='/'>
                     <Button>
                         <h1 className='text-lg'>Nossos Serviços</h1>
                     </Button>
@@ -83,9 +70,7 @@ export default function Header() {
                             height={40}
                             className='rounded-lg'
                         />
-                        <h1 className='text-black text-[20px] fenix'>
-                            {userName}
-                        </h1>
+                        <h1 className='text-black text-[20px] fenix'>{userName}</h1>
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <Menu />
@@ -96,17 +81,13 @@ export default function Header() {
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                    <Link href={createService}>
-                                        Criar um serviço
-                                    </Link>
+                                    <Link href={createService}>Criar um serviço</Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
                                     <Link href={myServices}>Meus Serviços</Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
-                                    <Link href={listService}>
-                                        Lista de Serviços
-                                    </Link>
+                                    <Link href={listService}>Lista de Serviços</Link>
                                 </DropdownMenuItem>
                                 <Button
                                     onClick={handleLogout}

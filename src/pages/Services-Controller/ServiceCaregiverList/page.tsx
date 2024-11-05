@@ -14,12 +14,12 @@ export default function CaregiverList() {
 
     useEffect(() => {
         http.get('/caregiver-service/caregiver')
-            .then(response => {
+            .then((response) => {
                 // console.log('Dados recebidos:', JSON.stringify(response.data, null, 2));
                 setCaregivers(response.data);
                 setLoading(false);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error('Erro ao buscar dados:', err);
                 setError('Não foi possível carregar os cuidadores. Tente novamente mais tarde.');
                 setLoading(false);
@@ -41,7 +41,8 @@ export default function CaregiverList() {
                 {caregivers.map((caregiver, index) => (
                     <div
                         key={index}
-                        className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'>
+                        className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
+                    >
                         <Image
                             src={`http://localhost:8000/images/${caregiver.caregiver.photo}`}
                             alt={`Foto de ${caregiver.caregiver.name}`}
@@ -50,16 +51,15 @@ export default function CaregiverList() {
                             className='rounded-full mx-auto mb-4'
                         />
 
-                        <p className='text-lg font-semibold text-center mb-2'>
-                            {caregiver.caregiver.name}
-                        </p>
+                        <p className='text-lg font-semibold text-center mb-2'>{caregiver.caregiver.name}</p>
                         <Button
                             className='mt-4 w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600'
                             onClick={() =>
                                 router.push(
-                                    `/NossosServicos/CaregiverInfo/${caregiver.caregiver.id}`,
+                                    `/Services-Controller/ServiceCaregiverInformation/${caregiver.caregiver.id}`,
                                 )
-                            }>
+                            }
+                        >
                             {`Ver informações do ${caregiver.caregiver.name}`}
                         </Button>
                     </div>

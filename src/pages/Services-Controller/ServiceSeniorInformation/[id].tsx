@@ -70,7 +70,7 @@ export default function SeniorInfo() {
                 )}
                 <div className='text-center'>
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
-                        <Link href='/NossosServicos/SeniorList/page'>Voltar</Link>
+                        <Link href='/Services-Controller/ServiceSeniorList/page'>Voltar</Link>
                     </Button>
                 </div>
             </div>

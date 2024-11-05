@@ -90,7 +90,8 @@ export default function SeniorService() {
                                 id='medications'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 placeholder='Descreva os medicamentos, dosagem e horários...'
-                                {...register('medications', { required: true })}></textarea>
+                                {...register('medications', { required: true })}
+                            ></textarea>
                         </div>
 
                         <div className='mb-4'>
@@ -113,7 +114,8 @@ export default function SeniorService() {
                                 id='description'
                                 className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
                                 placeholder='Descreva o motivo do serviço (passear, cuidado em casa, etc.)'
-                                {...register('description', { required: true })}></textarea>
+                                {...register('description', { required: true })}
+                            ></textarea>
                         </div>
 
                         <div className='mb-4'>
@@ -130,11 +132,8 @@ export default function SeniorService() {
                                 decimalScale={2}
                                 fixedDecimalScale
                                 allowNegative={false}
-                                onValueChange={values => {
-                                    setValue(
-                                        'price',
-                                        values.floatValue ? values.floatValue.toString() : '',
-                                    );
+                                onValueChange={(values) => {
+                                    setValue('price', values.floatValue ? values.floatValue.toString() : '');
                                 }}
                                 {...register('price', {
                                     required: 'Valor a ser pago é obrigatório',
@@ -144,15 +143,14 @@ export default function SeniorService() {
                                     },
                                 })}
                             />
-                            {errors.price && (
-                                <p className='text-red-500 text-sm'>{errors.price.message}</p>
-                            )}
+                            {errors.price && <p className='text-red-500 text-sm'>{errors.price.message}</p>}
                         </div>
                     </div>
                     <div className='text-center'>
                         <Button
                             type='submit'
-                            className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'>
+                            className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'
+                        >
                             Enviar
                         </Button>
                     </div>

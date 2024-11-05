@@ -87,7 +87,7 @@ export default function CaregiverInfo() {
                 )}
                 <div className='text-center'>
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
-                        <Link href='/NossosServicos/CaregiverList/page'>
+                        <Link href='/Services-Controller/ServiceCaregiverList/page'>
                             Voltar
                         </Link>
                     </Button>

@@ -53,9 +53,8 @@ const ServiceRequestDetailsCaregiver = () => {
                     ))}
                 </ul>
             )}
-
             <div className='mt-8'>
-                <Button onClick={() => router.push(`/ServicesOptions/Caregiver-Controller/List-Service/${id}`)}>
+                <Button onClick={() => router.push(`/Caregiver-Controller/CaregiverServicesCreated/${id}`)}>
                     Voltar
                 </Button>
             </div>

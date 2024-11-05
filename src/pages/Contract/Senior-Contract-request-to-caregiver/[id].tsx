@@ -78,7 +78,7 @@ const ContractSenior = () => {
 
             <Button
                 className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4'
-                onClick={() => router.push('/NossosServicos/CaregiverList/page')}
+                onClick={() => router.push('/Services-Controller/ServiceCaregiverList/page')}
             >
                 Voltar
             </Button>

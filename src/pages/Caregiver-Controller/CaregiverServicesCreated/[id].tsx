@@ -69,9 +69,15 @@ const CaregiverProposals = () => {
                 >
                     Editar contrato
                 </Button> */}
-                {/* <Button onClick={() => router.push(`/Caregiver-Controller/My-Services/${caregiverService.id}`)}>
+                <Button
+                    onClick={() =>
+                        router.push(
+                            `/Caregiver-Controller/Caregiver-Proposals-Controller/ProposalsSubmitted/${caregiverService.id}`,
+                        )
+                    }
+                >
                     Ver Propostas
-                </Button> */}
+                </Button>
                 <Button
                     onClick={() => deleteContract(caregiverService.id)}
                     className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
