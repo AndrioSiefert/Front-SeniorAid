@@ -21,9 +21,7 @@ interface LoginProviderProps {
     children: React.ReactNode;
 }
 
-export const LoginContext = createContext<LoginContextData>(
-    {} as LoginContextData,
-);
+export const LoginContext = createContext<LoginContextData>({} as LoginContextData);
 
 function LoginProvider({ children }: LoginProviderProps) {
     const [userId, setUserId] = useState<number | null>(null);

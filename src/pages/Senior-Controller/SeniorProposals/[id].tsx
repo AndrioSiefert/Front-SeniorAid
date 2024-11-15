@@ -4,6 +4,7 @@ import http from '@/http';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Feedback from '@/pages/Feedback/[id]';
 
 const ServiceRequestDetails = () => {
     const router = useRouter();
@@ -50,8 +51,8 @@ const ServiceRequestDetails = () => {
     };
 
     return (
-        <div className='max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg'>
-            <h1 className='text-3xl font-semibold mb-6 text-center'>Propostas de Serviço</h1>
+        <div className='mx-auto mt-8 max-w-3xl rounded-lg bg-white p-6 shadow-lg'>
+            <h1 className='mb-6 text-center text-3xl font-semibold'>Propostas de Serviço</h1>
 
             {serviceRequests.length === 0 ? (
                 <p className='text-center text-gray-500'>Nenhuma proposta de serviço encontrada.</p>
@@ -59,7 +60,7 @@ const ServiceRequestDetails = () => {
                 <ul className='divide-y divide-gray-300'>
                     {serviceRequests.map((request) => (
                         <li key={request.id} className='py-4'>
-                            <div className='flex justify-between items-center'>
+                            <div className='flex items-center justify-between'>
                                 <div className='flex-1'>
                                     <p className='text-lg font-bold'>
                                         <span className='font-semibold'>Nome do cuidador: </span>
@@ -82,23 +83,29 @@ const ServiceRequestDetails = () => {
                                     <p
                                         className={`font-bold ${getStatusColor(
                                             request.accepted,
-                                        )} p-2 rounded-md inline-block mt-2`}
+                                        )} mt-2 inline-block rounded-md p-2`}
                                     >
                                         <span className='font-semibold'>Contrato: </span>
                                         {request.accepted ? 'ACEITO' : 'NÃO ACEITO'}
                                     </p>
+                                    <Button
+                                        onClick={() => router.push(`/Feedback/${request.caregiver.id}`)}
+                                        className='mt-2'
+                                    >
+                                        Dar Feedback
+                                    </Button>
                                 </div>
                                 {!request.accepted && (
                                     <div className='flex space-x-2'>
                                         <Button
                                             onClick={() => handleAcceptRequest(request.id)}
-                                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                                            className='rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
                                         >
                                             Aceitar
                                         </Button>
                                         <Button
                                             onClick={() => handleDeclineRequest(request.id)}
-                                            className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                                            className='rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700'
                                         >
                                             Recusar
                                         </Button>
@@ -113,7 +120,7 @@ const ServiceRequestDetails = () => {
             <div className='mt-8'>
                 <Button
                     onClick={() => router.push(`/Senior-Controller/SeniorServiceCreated/${id}`)}
-                    className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'
+                    className='rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700'
                 >
                     Voltar
                 </Button>

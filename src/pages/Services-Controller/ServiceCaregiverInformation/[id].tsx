@@ -20,19 +20,14 @@ export default function CaregiverInfo() {
                     setCaregiver(response.data);
                 })
                 .catch((error) => {
-                    console.error(
-                        'Erro ao carregar serviço do cuidador',
-                        error,
-                    );
+                    console.error('Erro ao carregar serviço do cuidador', error);
                 });
         }
     }, [id]);
 
     if (!caregiver) {
         return (
-            <div className='flex justify-center items-center min-h-screen bg-gray-100 text-gray-700'>
-                Carregando...
-            </div>
+            <div className='flex justify-center items-center min-h-screen bg-gray-100 text-gray-700'>Carregando...</div>
         );
     }
 
@@ -47,14 +42,10 @@ export default function CaregiverInfo() {
                         height={128}
                         className='w-32 h-32 rounded-full border-4 border-blue-500 mb-4'
                     />
-                    <h1 className='text-3xl font-bold mb-2 text-blue-600'>
-                        {caregiver.caregiver.name}
-                    </h1>
+                    <h1 className='text-3xl font-bold mb-2 text-blue-600'>{caregiver.caregiver.name}</h1>
                 </div>
                 <div className='mb-6'>
-                    <h2 className='text-2xl font-semibold mb-4 text-center text-blue-500'>
-                        Informações do Serviço
-                    </h2>
+                    <h2 className='text-2xl font-semibold mb-4 text-center text-blue-500'>Informações do Serviço</h2>
                     <p className='text-gray-700 mb-2'>
                         <strong>Sobre:</strong> {caregiver.about}
                     </p>
@@ -77,19 +68,13 @@ export default function CaregiverInfo() {
                 {userType === 'senior' && (
                     <div className='mb-6 text-center'>
                         <Button className='bg-green-500 text-white hover:bg-green-600'>
-                            <Link
-                                href={`/Contract/Contract-request-to-caregiver/${id}`}
-                            >
-                                Solicitar Contrato
-                            </Link>
+                            <Link href={`/Contract/Contract-request-to-caregiver/${id}`}>Solicitar Contrato</Link>
                         </Button>
                     </div>
                 )}
                 <div className='text-center'>
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
-                        <Link href='/Services-Controller/ServiceCaregiverList/page'>
-                            Voltar
-                        </Link>
+                        <Link href='/Services-Controller/ServiceCaregiverList/page'>Voltar</Link>
                     </Button>
                 </div>
             </div>

@@ -37,13 +37,13 @@ export default function Header() {
     const listService = routes.listService(userType);
 
     return (
-        <header className='flex fenix flex-col items-center justify-between w-4/5 mx-auto ||| lg:flex-row'>
+        <header className='||| mx-auto flex w-4/5 flex-col items-center justify-between lg:flex-row'>
             <div className='flex justify-center'>
                 <Link href='/'>
                     <Image src='/logotipo.png' alt='Logo Senior' width={150} height={150} className='flex' />
                 </Link>
             </div>
-            <div className='flex mb-5'>
+            <div className='mb-5 flex'>
                 <Link href='/'>
                     <Button>
                         <h1 className='text-lg'>Sobre Nós</h1>
@@ -60,7 +60,7 @@ export default function Header() {
                 </Link>
             </div>
 
-            <div className='flex items-center mb-5'>
+            <div className='mb-5 flex items-center'>
                 {userName ? (
                     <div className='flex items-center space-x-2'>
                         <Image
@@ -70,28 +70,28 @@ export default function Header() {
                             height={40}
                             className='rounded-lg'
                         />
-                        <h1 className='text-black text-[20px] fenix'>{userName}</h1>
+                        <h1 className='fenix text-[20px] text-black'>{userName}</h1>
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <Menu />
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className='bg-white border border-gray-300 shadow-lg rounded-lg'>
+                            <DropdownMenuContent className='rounded-lg border border-gray-300 bg-white shadow-lg'>
                                 <DropdownMenuLabel className='px-4 py-2 font-bold text-gray-700'>
                                     <Link href={profilePath}>Meu perfil</Link>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                <DropdownMenuItem className='px-4 py-2 hover:bg-gray-100'>
                                     <Link href={createService}>Criar um serviço</Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                <DropdownMenuItem className='px-4 py-2 hover:bg-gray-100'>
                                     <Link href={myServices}>Meus Serviços</Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem className='hover:bg-gray-100 px-4 py-2'>
+                                <DropdownMenuItem className='px-4 py-2 hover:bg-gray-100'>
                                     <Link href={listService}>Lista de Serviços</Link>
                                 </DropdownMenuItem>
                                 <Button
                                     onClick={handleLogout}
-                                    className='noto-sans font-semibold text-black text-[15px] cursor-pointer'
+                                    className='noto-sans cursor-pointer text-[15px] font-semibold text-black'
                                 >
                                     Sair
                                     <LogOut />
@@ -102,12 +102,12 @@ export default function Header() {
                 ) : (
                     <div className='flex items-center'>
                         <Link href='/Registration/page'>
-                            <Button className='text-lg bg-yellow-500 text-white border-2 border-yellow-600 hover:bg-yellow-600'>
+                            <Button className='border-2 border-yellow-600 bg-yellow-500 text-lg text-white hover:bg-yellow-600'>
                                 Cadastrar-se
                             </Button>
                         </Link>
                         <Link href='/Login/page'>
-                            <Button className='courgette gap-2 mx-2 text-lg bg-blue-500 text-white border-2 border-blue-600 hover:bg-blue-600'>
+                            <Button className='courgette mx-2 gap-2 border-2 border-blue-600 bg-blue-500 text-lg text-white hover:bg-blue-600'>
                                 Entrar
                                 <FaRegUser size={24} />
                             </Button>

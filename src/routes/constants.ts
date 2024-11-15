@@ -6,8 +6,8 @@ export const routes = {
     myServices: (userType: string, userId: number | null) =>
         `/${
             userType === 'senior'
-                ? 'Senior-Controller/SeniorServicesCreated'
-                : 'Caregiver-Controller/CaregiverServicesCreated'
+                ? 'Senior-Controller/SeniorServiceCreated/'
+                : 'Caregiver-Controller/CaregiverServicesCreated/'
         }/${userId}`,
     createService: (userType: string) =>
         `/${

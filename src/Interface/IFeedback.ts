@@ -1,5 +1,6 @@
 interface IFeedback {
-    id: number;
+    giverId: number | null;
+    receiverId: string | string[] | undefined;
     comment: string;
     rating: number;
 }
