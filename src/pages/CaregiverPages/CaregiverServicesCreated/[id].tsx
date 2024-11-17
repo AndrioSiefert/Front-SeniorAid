@@ -64,18 +64,7 @@ const CaregiverServiceComponent = () => {
             </p>
 
             <div className='mt-8 flex justify-between'>
-                {/* <Button
-                    onClick={() => router.push(`/Caregiver-Controller/Edit-Contract-Caregiver/${caregiverService.id}`)}
-                >
-                    Editar contrato
-                </Button> */}
-                <Button
-                    onClick={() =>
-                        router.push(
-                            `/Caregiver-Controller/Caregiver-Proposals-Controller/ProposalsSubmitted/${caregiverService.id}`,
-                        )
-                    }
-                >
+                <Button onClick={() => router.push(`/CaregiverPages/ProposalsSubmitted/${caregiverService.id}`)}>
                     Ver Propostas
                 </Button>
                 <Button

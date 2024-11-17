@@ -68,7 +68,7 @@ export default function CaregiverInfo() {
                 {userType === 'senior' && (
                     <div className='mb-6 text-center'>
                         <Button className='bg-green-500 text-white hover:bg-green-600'>
-                            <Link href={`/Contract/Senior-Contract-request-to-caregiver/${id}`}>
+                            <Link href={`/SeniorPages/Contract/Senior-Contract-request-to-caregiver/${id}`}>
                                 Solicitar Contrato
                             </Link>
                         </Button>

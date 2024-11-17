@@ -6,7 +6,7 @@ import { LoginContext } from '@/context/LoginContext';
 import IFeedback from '@/Interface/IFeedback';
 import FeedbackStars from '@/components/FeedbackComponent/FeedbackStars/FeedbackStars';
 
-export default function FeedBack() {
+export default function Feedback() {
     const router = useRouter();
     const { id } = router.query;
     const [comment, setComment] = useState<string>('');

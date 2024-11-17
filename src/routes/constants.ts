@@ -1,24 +1,20 @@
 export const routes = {
     profilePath: (userType: string, userId: number | null) =>
         `/${
-            userType === 'senior' ? 'Senior-Controller/SeniorProfile' : 'Caregiver-Controller/CaregiverProfile'
+            userType === 'senior' ? 'SeniorPages/Senior-Controller/SeniorProfile' : 'CaregiverPages/CaregiverProfile'
         }/${userId}`,
     myServices: (userType: string, seniorId: number | null, caregiverId: number | null) =>
         `/${
             userType === 'senior'
-                ? `Senior-Controller/SeniorServiceCreated/${seniorId}`
-                : `Caregiver-Controller/CaregiverServicesCreated/${caregiverId}`
+                ? `SeniorPages/SeniorServiceCreated/${seniorId}`
+                : `CaregiverPages/CaregiverServicesCreated/${caregiverId}`
         }`,
     createService: (userType: string) =>
         `/${
             userType === 'senior'
-                ? 'Senior-Controller/SeniorCreateService/page'
-                : 'Caregiver-Controller/CaregiverCreateService/page'
+                ? 'SeniorPages/SeniorCreateService/page'
+                : 'CaregiverPages/CaregiverCreateService/page'
         }`,
     listService: (userType: string) =>
-        `/${
-            userType === 'senior'
-                ? 'Services-Controller/ServiceCaregiverList/page'
-                : 'Services-Controller/ServiceSeniorList/page'
-        }`,
+        `/${userType === 'senior' ? 'List/ServiceToSenior/page' : 'List/ServiceToCaregiver/page'}`,
 };

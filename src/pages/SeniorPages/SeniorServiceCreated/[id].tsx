@@ -58,10 +58,10 @@ const SeniorProposals = () => {
                         <span className='font-bold'>Descrição:</span> {service.description}
                     </p>
                     <div className='mt-2 flex justify-between'>
-                        <Button onClick={() => router.push(`/Senior-Controller/SeniorServiceEdit/${service.id}`)}>
+                        <Button onClick={() => router.push(`/SeniorPages/SeniorServiceEdit/${service.id}`)}>
                             Editar Serviço
                         </Button>
-                        <Button onClick={() => router.push(`/Senior-Controller/SeniorProposals/${service.id}`)}>
+                        <Button onClick={() => router.push(`/SeniorPages/SeniorProposals/${service.id}`)}>
                             Ver Propostas
                         </Button>
                         <Button

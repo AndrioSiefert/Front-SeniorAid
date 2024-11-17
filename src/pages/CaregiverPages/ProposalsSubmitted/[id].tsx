@@ -24,6 +24,14 @@ const ProposalsCaregiverSubmitted = () => {
         fetchServiceRequests();
     }, []);
 
+    if (!serviceRequests) {
+        return (
+            <div className='flex h-screen items-center justify-center'>
+                <h1>Nenhuma proposta encontrada</h1>
+            </div>
+        );
+    }
+
     const getStatusColor = (accepted: boolean) => {
         return accepted ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800';
     };
@@ -40,7 +48,6 @@ const ProposalsCaregiverSubmitted = () => {
                         <li key={request.id} className='py-4'>
                             <div className='flex items-center justify-between'>
                                 <div>
-                                    <h2 className='text-lg font-semibold'>{request.service.serviceName}</h2>
                                     <p
                                         className={`font-bold ${getStatusColor(
                                             request.accepted,
@@ -59,10 +66,9 @@ const ProposalsCaregiverSubmitted = () => {
                     ))}
                 </ul>
             )}
+
             <div className='mt-8'>
-                <Button onClick={() => router.push(`/Caregiver-Controller/CaregiverServicesCreated/${id}`)}>
-                    Voltar
-                </Button>
+                <Button onClick={() => router.push(`/CaregiverPages/CaregiverServicesCreated/${id}`)}>Voltar</Button>
             </div>
         </div>
     );

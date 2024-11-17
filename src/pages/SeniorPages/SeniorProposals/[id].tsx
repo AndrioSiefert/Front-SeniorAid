@@ -119,7 +119,7 @@ const ServiceRequestDetails = () => {
 
             <div className='mt-8'>
                 <Button
-                    onClick={() => router.push(`/Senior-Controller/SeniorServiceCreated/${id}`)}
+                    onClick={() => router.push(`/SeniorPages/SeniorServiceCreated/${id}`)}
                     className='rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700'
                 >
                     Voltar

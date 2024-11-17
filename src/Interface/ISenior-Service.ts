@@ -6,7 +6,6 @@ interface ISeniorService {
     dateService: string;
     time: string;
     medications: string;
-    place: string;
     description: string;
     price: string;
     seniorId: number;

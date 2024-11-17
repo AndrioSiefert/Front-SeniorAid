@@ -10,14 +10,18 @@ import { LoginContext } from '@/context/LoginContext';
 export default function SeniorInfo() {
     const router = useRouter();
     const { id } = router.query;
-    const [senior, setSenior] = useState<ISeniorService | null>(null);
+    const [senior, setSenior] = useState<ISeniorService>();
     const { userType } = useContext(LoginContext);
 
     useEffect(() => {
         if (id) {
+            console.log(id);
+
             http.get(`/seniorService/id/${id}`)
+
                 .then((response) => {
                     setSenior(response.data);
+                    console.log(response.data);
                 })
                 .catch((error) => {
                     console.error('Erro ao carregar informações do idoso', error);
@@ -35,13 +39,13 @@ export default function SeniorInfo() {
         <div className='flex min-h-screen items-center justify-center bg-gray-100 p-4'>
             <div className='w-full max-w-lg rounded-lg bg-white p-6 shadow-lg'>
                 <div className='mb-6 flex flex-col items-center'>
-                    <Image
-                        src={`http://localhost:8000/images/${senior.senior.photo}`} // Altere conforme a estrutura do objeto senior
+                    {/* <Image
+                        src={`http://localhost:8000/images/${senior.senior.photo}`}
                         alt={senior.senior.name}
                         width={128}
                         height={128}
                         className='mb-4 h-32 w-32 rounded-full border-4 border-blue-500'
-                    />
+                    /> */}
                     <h1 className='mb-2 text-3xl font-bold text-blue-600'>{senior.senior.name}</h1>
                 </div>
                 <div className='mb-6'>
