@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ISenior from '@/Interface/ISenior';
 import http from '@/http';
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 
 const ProfileSenior = () => {
     const [senior, setSenior] = useState<ISenior | null>(null);
@@ -13,17 +13,13 @@ const ProfileSenior = () => {
         if (id) {
             http.get<ISenior>(`/senior/${id}`)
                 .then((response) => setSenior(response.data))
-                .catch((error) =>
-                    console.error('Error fetching senior profile:', error)
-                );
+                .catch((error) => console.error('Error fetching senior profile:', error));
         }
     }, [id]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setSenior((prevSenior) =>
-            prevSenior ? { ...prevSenior, [name]: value } : null
-        );
+        setSenior((prevSenior) => (prevSenior ? { ...prevSenior, [name]: value } : null));
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,19 +27,17 @@ const ProfileSenior = () => {
         if (senior && id) {
             http.put(`/senior/${id}`, senior)
                 .then(() => alert('Alterado com sucesso!'))
-                .catch((error) =>
-                    console.error('Error updating profile:', error)
-                );
+                .catch((error) => console.error('Error updating profile:', error));
         }
     };
 
     if (!senior) return <div className='text-center text-xl'>Loading...</div>;
 
     return (
-        <div className='max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg'>
-            <h1 className='text-2xl font-bold mb-6 text-center'>Meu Perfil</h1>
+        <div className='mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md'>
+            <h1 className='mb-6 text-center text-2xl font-bold'>Meu Perfil</h1>
             <form onSubmit={handleSubmit} className='space-y-4'>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                     <label className='block'>
                         <span className='text-gray-700'>Name:</span>
                         <input
@@ -148,7 +142,7 @@ const ProfileSenior = () => {
                 </div>
                 <Button
                     type='submit'
-                    className='w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600'
+                    className='w-full rounded-md bg-blue-500 px-4 py-2 text-white shadow-sm hover:bg-blue-600'
                 >
                     Salvar
                 </Button>

@@ -1,4 +1,4 @@
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import http from '@/http';
 import ISeniorService from '@/Interface/ISenior-Service';
 import Image from 'next/image';
@@ -27,37 +27,37 @@ export default function SeniorInfo() {
 
     if (!senior) {
         return (
-            <div className='flex justify-center items-center min-h-screen bg-gray-100 text-gray-700'>Carregando...</div>
+            <div className='flex min-h-screen items-center justify-center bg-gray-100 text-gray-700'>Carregando...</div>
         );
     }
 
     return (
-        <div className='flex justify-center items-center min-h-screen bg-gray-100 p-4'>
-            <div className='bg-white shadow-lg rounded-lg p-6 max-w-lg w-full'>
-                <div className='flex flex-col items-center mb-6'>
+        <div className='flex min-h-screen items-center justify-center bg-gray-100 p-4'>
+            <div className='w-full max-w-lg rounded-lg bg-white p-6 shadow-lg'>
+                <div className='mb-6 flex flex-col items-center'>
                     <Image
                         src={`http://localhost:8000/images/${senior.senior.photo}`} // Altere conforme a estrutura do objeto senior
                         alt={senior.senior.name}
                         width={128}
                         height={128}
-                        className='w-32 h-32 rounded-full border-4 border-blue-500 mb-4'
+                        className='mb-4 h-32 w-32 rounded-full border-4 border-blue-500'
                     />
-                    <h1 className='text-3xl font-bold mb-2 text-blue-600'>{senior.senior.name}</h1>
+                    <h1 className='mb-2 text-3xl font-bold text-blue-600'>{senior.senior.name}</h1>
                 </div>
                 <div className='mb-6'>
-                    <h2 className='text-2xl font-semibold mb-4 text-center text-blue-500'>Informações do Idoso</h2>
-                    <p className='text-gray-700 mb-2'>
+                    <h2 className='mb-4 text-center text-2xl font-semibold text-blue-500'>Informações do Idoso</h2>
+                    <p className='mb-2 text-gray-700'>
                         <strong>Idade:</strong> {senior.senior.age} anos
                     </p>
-                    <p className='text-gray-700 mb-2'>
+                    <p className='mb-2 text-gray-700'>
                         <strong>Descrição:</strong> {senior.senior.description}
                     </p>
                     {senior.senior.history && (
-                        <p className='text-gray-700 mb-2'>
+                        <p className='mb-2 text-gray-700'>
                             <strong>Histórico:</strong> {senior.senior.history}
                         </p>
                     )}
-                    <p className='text-gray-700 mb-4'>
+                    <p className='mb-4 text-gray-700'>
                         <strong>Condições de Saúde:</strong> {senior.senior.healthConditions}
                     </p>
                 </div>

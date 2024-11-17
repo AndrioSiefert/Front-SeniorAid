@@ -1,5 +1,5 @@
 import ISeniorService from '@/Interface/ISenior-Service';
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import http from '@/http';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -51,12 +51,12 @@ const EditContractSenior = () => {
     };
 
     if (!contract) {
-        return <div className='flex justify-center items-center h-screen'>Carregando...</div>;
+        return <div className='flex h-screen items-center justify-center'>Carregando...</div>;
     }
 
     return (
-        <div className='max-w-3xl mx-auto mt-8 p-8 border rounded-lg shadow-md'>
-            <h1 className='text-2xl font-bold mb-4'>Editar Contrato #{contract.id}</h1>
+        <div className='mx-auto mt-8 max-w-3xl rounded-lg border p-8 shadow-md'>
+            <h1 className='mb-4 text-2xl font-bold'>Editar Contrato #{contract.id}</h1>
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     <label className='block font-bold'>Tipo de Serviço</label>
@@ -65,7 +65,7 @@ const EditContractSenior = () => {
                         name='serviceName'
                         value={formData.serviceName}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -75,7 +75,7 @@ const EditContractSenior = () => {
                         name='dateService'
                         value={formData.dateService}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -85,7 +85,7 @@ const EditContractSenior = () => {
                         name='time'
                         value={formData.time}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -95,7 +95,7 @@ const EditContractSenior = () => {
                         name='medications'
                         value={formData.medications}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -105,7 +105,7 @@ const EditContractSenior = () => {
                         name='place'
                         value={formData.place}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -114,7 +114,7 @@ const EditContractSenior = () => {
                         name='description'
                         value={formData.description}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
                 <div className='mb-4'>
@@ -124,7 +124,7 @@ const EditContractSenior = () => {
                         name='price'
                         value={formData.price}
                         onChange={handleChange}
-                        className='w-full p-2 border rounded'
+                        className='w-full rounded border p-2'
                     />
                 </div>
 

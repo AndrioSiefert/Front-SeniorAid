@@ -1,4 +1,4 @@
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import http from '@/http';
 import ICaregiverService from '@/Interface/ICaregiver-Service';
 import Image from 'next/image';
@@ -35,25 +35,25 @@ export default function CaregiverList() {
     }
 
     return (
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-            <h1 className='text-center text-3xl font-bold mb-8'>CUIDADORES DISPONÍVEIS</h1>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+            <h1 className='mb-8 text-center text-3xl font-bold'>CUIDADORES DISPONÍVEIS</h1>
+            <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                 {caregivers.map((caregiver, index) => (
                     <div
                         key={index}
-                        className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
+                        className='rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg'
                     >
                         <Image
                             src={`http://localhost:8000/images/${caregiver.caregiver.photo}`}
                             alt={`Foto de ${caregiver.caregiver.name}`}
                             width={200}
                             height={200}
-                            className='rounded-full mx-auto mb-4'
+                            className='mx-auto mb-4 rounded-full'
                         />
 
-                        <p className='text-lg font-semibold text-center mb-2'>{caregiver.caregiver.name}</p>
+                        <p className='mb-2 text-center text-lg font-semibold'>{caregiver.caregiver.name}</p>
                         <Button
-                            className='mt-4 w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600'
+                            className='mt-4 w-full rounded-md bg-blue-500 px-4 py-2 text-white shadow-sm hover:bg-blue-600'
                             onClick={() =>
                                 router.push(
                                     `/Services-Controller/ServiceCaregiverInformation/${caregiver.caregiver.id}`,

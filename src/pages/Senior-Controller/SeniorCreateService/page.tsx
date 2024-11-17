@@ -1,5 +1,5 @@
 import ISeniorService from '@/Interface/ISenior-Service';
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { useRouter } from 'next/router';
@@ -36,16 +36,16 @@ export default function SeniorService() {
         }
     };
     return (
-        <div className='bg-gray-100 flex items-center justify-center min-h-screen p-6'>
-            <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl'>
+        <div className='flex min-h-screen items-center justify-center bg-gray-100 p-6'>
+            <div className='w-full max-w-3xl rounded-lg bg-white p-8 shadow-lg'>
                 <div className='mb-6 text-center'>
                     <h1 className='text-2xl font-bold'>Formulário de Solicitação de Cuidador</h1>
-                    <p className='text-gray-600 mt-2'>
+                    <p className='mt-2 text-gray-600'>
                         Preencha as informações detalhadas sobre os cuidados que você precisa.
                     </p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                         <div className='mb-4'>
                             <label htmlFor='serviceName' className='block text-gray-700'>
                                 Nome do Serviço:
@@ -53,7 +53,7 @@ export default function SeniorService() {
                             <input
                                 type='text'
                                 id='serviceName'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('serviceName', { required: true })}
                             />
                         </div>
@@ -65,7 +65,7 @@ export default function SeniorService() {
                                 type='date'
                                 id='dateService'
                                 min={today}
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('dateService', { required: true })}
                             />
                         </div>
@@ -77,18 +77,18 @@ export default function SeniorService() {
                             <input
                                 type='time'
                                 id='time'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('time', { required: true })}
                             />
                         </div>
 
-                        <div className='mb-4 col-span-2'>
+                        <div className='col-span-2 mb-4'>
                             <label htmlFor='medications' className='block text-gray-700'>
                                 Medicamentos:
                             </label>
                             <textarea
                                 id='medications'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 placeholder='Descreva os medicamentos, dosagem e horários...'
                                 {...register('medications', { required: true })}
                             ></textarea>
@@ -101,7 +101,7 @@ export default function SeniorService() {
                             <input
                                 type='text'
                                 id='place'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('place', { required: true })}
                             />
                         </div>
@@ -112,7 +112,7 @@ export default function SeniorService() {
                             </label>
                             <textarea
                                 id='description'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 placeholder='Descreva o motivo do serviço (passear, cuidado em casa, etc.)'
                                 {...register('description', { required: true })}
                             ></textarea>
@@ -124,7 +124,7 @@ export default function SeniorService() {
                             </label>
                             <NumericFormat
                                 id='price'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 placeholder='Digite o valor a ser pago...'
                                 thousandSeparator='.'
                                 decimalSeparator=','
@@ -143,13 +143,13 @@ export default function SeniorService() {
                                     },
                                 })}
                             />
-                            {errors.price && <p className='text-red-500 text-sm'>{errors.price.message}</p>}
+                            {errors.price && <p className='text-sm text-red-500'>{errors.price.message}</p>}
                         </div>
                     </div>
                     <div className='text-center'>
                         <Button
                             type='submit'
-                            className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'
+                            className='rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300'
                         >
                             Enviar
                         </Button>

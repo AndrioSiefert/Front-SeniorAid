@@ -1,5 +1,5 @@
 import ISeniorService from '@/Interface/ISenior-Service';
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { formatISODateToBrazilian } from '@/utils/dateUtils';
@@ -44,10 +44,10 @@ const ContractSenior = () => {
         return <div>Carregando...</div>;
     }
     return (
-        <div className='p-4 bg-white rounded-lg shadow-md'>
+        <div className='rounded-lg bg-white p-4 shadow-md'>
             <h3 className='text-lg font-semibold'>{service.serviceName}</h3>
 
-            <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
+            <div className='my-4 border-b-2 border-t-2 border-gray-300 py-2'>
                 <h4 className='text-lg font-semibold'>Informações do Idoso:</h4>
                 <p className='text-gray-600'>Nome: {service.senior.name}</p>
                 <p className='text-gray-600'>Idade: {service.senior.age} anos</p>
@@ -57,7 +57,7 @@ const ContractSenior = () => {
                 <p className='text-gray-600'>Número da Casa: {service.senior.address_number}</p>
             </div>
 
-            <div className='border-t-2 border-b-2 border-gray-300 my-4 py-2'>
+            <div className='my-4 border-b-2 border-t-2 border-gray-300 py-2'>
                 <h4 className='text-lg font-semibold'>Informações do Serviço:</h4>
                 <p className='text-gray-600'>
                     Data do serviço:{' '}
@@ -70,14 +70,14 @@ const ContractSenior = () => {
             </div>
 
             <Button
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
+                className='mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
                 onClick={requestService}
             >
                 Solicitar Serviço
             </Button>
 
             <Button
-                className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4'
+                className='mt-4 rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-gray-700'
                 onClick={() => router.push('/Services-Controller/ServiceCaregiverList/page')}
             >
                 Voltar

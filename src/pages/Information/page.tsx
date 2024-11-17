@@ -1,4 +1,4 @@
-import VejaComoFunciona from '@/_components/VejaComoFunciona/VejaComoFunciona';
+import VejaComoFunciona from '@/components/VejaComoFunciona/VejaComoFunciona';
 
 export default function Information() {
     return (

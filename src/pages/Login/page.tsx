@@ -1,4 +1,4 @@
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 import { LoginContext } from '@/context/LoginContext';
 import http from '@/http';
 import { Eye, EyeOff } from 'lucide-react';
@@ -14,17 +14,8 @@ export default function Login() {
     const [senhaValue, setSenhaValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const {
-        userId,
-        userType,
-        userName,
-        mudaId,
-        mudaNome,
-        mudaUserType,
-        mudaCaregiverId,
-        mudaSeniorId,
-        mudaPhoto,
-    } = useContext(LoginContext);
+    const { userId, userType, userName, mudaId, mudaNome, mudaUserType, mudaCaregiverId, mudaSeniorId, mudaPhoto } =
+        useContext(LoginContext);
     const router = useRouter();
 
     useEffect(() => {
@@ -76,29 +67,21 @@ export default function Login() {
                     alt='Logo Senior'
                     layout='fill'
                     objectFit='cover'
-                    className='opacity-50 filter blur-sm'
+                    className='opacity-50 blur-sm filter'
                 />
             </div>
 
-            <div className='relative flex-1 flex flex-col justify-center items-center p-8'>
-                <div className='w-full max-w-md bg-white bg-opacity-80 p-8 rounded-lg shadow-lg'>
-                    <h1 className='text-3xl font-bold mb-4 text-center'>
-                        Bem-vindo de volta!
-                    </h1>
-                    <p className='text-center mb-6'>
-                        Acesse a sua conta para ter acesso a todas as
-                        funcionalidades.
-                    </p>
+            <div className='relative flex flex-1 flex-col items-center justify-center p-8'>
+                <div className='w-full max-w-md rounded-lg bg-white bg-opacity-80 p-8 shadow-lg'>
+                    <h1 className='mb-4 text-center text-3xl font-bold'>Bem-vindo de volta!</h1>
+                    <p className='mb-6 text-center'>Acesse a sua conta para ter acesso a todas as funcionalidades.</p>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-4'>
-                            <label
-                                className='block mb-2 text-gray-700 font-semibold'
-                                htmlFor='email'
-                            >
+                            <label className='mb-2 block font-semibold text-gray-700' htmlFor='email'>
                                 E-mail:
                             </label>
                             <input
-                                className='rounded-lg border-2 border-gray-300 p-3 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none'
+                                className='w-full rounded-lg border-2 border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 type='email'
                                 id='email'
                                 name='email'
@@ -108,15 +91,12 @@ export default function Login() {
                             />
                         </div>
                         <div className='mb-6'>
-                            <label
-                                className='block mb-2 text-gray-700 font-semibold'
-                                htmlFor='password'
-                            >
+                            <label className='mb-2 block font-semibold text-gray-700' htmlFor='password'>
                                 Senha:
                             </label>
                             <div className='relative'>
                                 <input
-                                    className='rounded-lg border-2 border-gray-300 p-3 w-full pr-10 focus:ring-2 focus:ring-blue-500 focus:outline-none'
+                                    className='w-full rounded-lg border-2 border-gray-300 p-3 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500'
                                     type={senhaVisivel ? 'text' : 'password'}
                                     id='password'
                                     name='password'
@@ -137,18 +117,14 @@ export default function Login() {
                         <div className='flex flex-col items-center'>
                             <Button
                                 type='submit'
-                                className='w-full py-2 mb-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700'
+                                className='mb-4 w-full rounded-lg bg-blue-600 py-2 text-white hover:bg-blue-700'
                             >
                                 Entrar
                             </Button>
-                            {errorMessage && (
-                                <p className='text-red-500 mb-4 text-center'>
-                                    {errorMessage}
-                                </p>
-                            )}
+                            {errorMessage && <p className='mb-4 text-center text-red-500'>{errorMessage}</p>}
                             <p className='mb-2 text-gray-500'>ou</p>
                             <Link href='/Registration/page'>
-                                <Button className='w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600'>
+                                <Button className='w-full rounded-lg bg-green-500 py-2 text-white hover:bg-green-600'>
                                     Criar conta
                                 </Button>
                             </Link>

@@ -1,4 +1,4 @@
-import CaregiverServiceComponent from '@/_components/CaregiverServiceComponent/CaregiverServiceComponent';
+import CaregiverServiceComponent from '@/components/CaregiverServiceComponent/CaregiverServiceComponent';
 
 const CaregiverProposals = () => {
     return (

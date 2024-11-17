@@ -26,6 +26,7 @@ export default function FeedBackComponent() {
             comment: comment,
             rating: rating,
         };
+        console.log('feedback:', feedback);
 
         try {
             await http.post(`/feedback`, feedback);
@@ -40,7 +41,7 @@ export default function FeedBackComponent() {
 
     return (
         <>
-            <h1>Feedback para o usuário {id}</h1>
+            <h1>Feedback para o usuário</h1>
             <div className='my-4'>
                 <h2>Avaliação</h2>
                 <FeedbackStars setRating={setRating} />

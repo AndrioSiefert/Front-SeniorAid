@@ -19,7 +19,8 @@ import { Button } from './ui/button';
 export default function Header() {
     const router = useRouter();
 
-    const { userId, photo, userName, userType, mudaId, mudaNome, mudaUserType } = useContext(LoginContext);
+    const { userId, seniorId, caregiverId, photo, userName, userType, mudaId, mudaNome, mudaUserType } =
+        useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -32,7 +33,7 @@ export default function Header() {
     };
 
     const profilePath = routes.profilePath(userType, userId);
-    const myServices = routes.myServices(userType, userId);
+    const myServices = routes.myServices(userType, seniorId, caregiverId);
     const createService = routes.createService(userType);
     const listService = routes.listService(userType);
 

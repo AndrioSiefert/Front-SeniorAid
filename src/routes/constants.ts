@@ -3,12 +3,12 @@ export const routes = {
         `/${
             userType === 'senior' ? 'Senior-Controller/SeniorProfile' : 'Caregiver-Controller/CaregiverProfile'
         }/${userId}`,
-    myServices: (userType: string, userId: number | null) =>
+    myServices: (userType: string, seniorId: number | null, caregiverId: number | null) =>
         `/${
             userType === 'senior'
-                ? 'Senior-Controller/SeniorServiceCreated/'
-                : 'Caregiver-Controller/CaregiverServicesCreated/'
-        }/${userId}`,
+                ? `Senior-Controller/SeniorServiceCreated/${seniorId}`
+                : `Caregiver-Controller/CaregiverServicesCreated/${caregiverId}`
+        }`,
     createService: (userType: string) =>
         `/${
             userType === 'senior'

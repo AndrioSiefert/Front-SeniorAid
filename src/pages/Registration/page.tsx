@@ -1,11 +1,11 @@
 import IUser from '@/Interface/IUser';
-import ErrorMessage from '@/_components/ErrorMessage/error';
+import ErrorMessage from '@/components/ErrorMessage/error';
 import http from '@/http';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import InputMask from '@/_components/Mask/mask';
-import { Button } from '@/_components/ui/button';
+import InputMask from '@/components/Mask/mask';
+import { Button } from '@/components/ui/button';
 
 export default function Registration() {
     const {
@@ -76,7 +76,7 @@ export default function Registration() {
         }
 
         if (image) {
-            const blob = await fetch(image).then(r => r.blob());
+            const blob = await fetch(image).then((r) => r.blob());
             console.log('Blob da imagem:', blob);
             formData.append('photo', blob, 'image.jpg');
         }
@@ -136,10 +136,11 @@ export default function Registration() {
     };
 
     return (
-        <div className='flex justify-center py-10 bg-gray-100'>
+        <div className='flex justify-center bg-gray-100 py-10'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full max-w-4xl p-8 bg-white rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6'>
+                className='grid w-full max-w-4xl grid-cols-1 gap-6 rounded-3xl bg-white p-8 shadow-lg md:grid-cols-2'
+            >
                 <div className='mb-4'>
                     <label htmlFor='name' className='text-sm font-medium text-gray-700'>
                         Nome:
@@ -147,7 +148,7 @@ export default function Registration() {
                     <input
                         id='name'
                         type='text'
-                        className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                        className={`mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${
                             errors.name ? 'border-red-500' : ''
                         }`}
                         placeholder='Digite seu nome'
@@ -158,13 +159,13 @@ export default function Registration() {
                         onChange={handleNameChange}
                     />
                     {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-                    <label htmlFor='email' className='block mt-4 text-lg text-white-600'>
+                    <label htmlFor='email' className='text-white-600 mt-4 block text-lg'>
                         E-mail:
                     </label>
                     <input
                         id='email'
                         type='email'
-                        className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  ${
+                        className={`mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${
                             errors.email ? 'border-red-500' : ''
                         }`}
                         placeholder='Digite seu e-mail'
@@ -173,13 +174,13 @@ export default function Registration() {
                         })}
                     />
                     {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-                    <label htmlFor='password' className='block mt-4'>
+                    <label htmlFor='password' className='mt-4 block'>
                         Senha:
                     </label>
                     <input
                         id='password'
                         type='password'
-                        className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                        className={`mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${
                             errors.password ? 'border-red-500' : ''
                         }`}
                         placeholder='Digite uma senha'
@@ -192,13 +193,13 @@ export default function Registration() {
                         })}
                     />
                     {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-                    <label htmlFor='password_confirmation' className='block mt-4'>
+                    <label htmlFor='password_confirmation' className='mt-4 block'>
                         Confirme sua Senha:
                     </label>
                     <input
                         id='password_confirmation'
                         type='password'
-                        className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                        className={`mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${
                             errors.password_confirmation ? 'border-red-500' : ''
                         }`}
                         placeholder='Repita a senha'
@@ -210,24 +211,24 @@ export default function Registration() {
                     {errors.password_confirmation && (
                         <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>
                     )}
-                    <label htmlFor='cpf' className='block mt-4 px-2'>
+                    <label htmlFor='cpf' className='mt-4 block px-2'>
                         CPF:
                     </label>
                     <input
                         id='cpf'
                         type='text'
                         maxLength={11}
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite seu CPF'
                         {...register('cpf')}
                     />
-                    <label htmlFor='age' className='block mt-4'>
+                    <label htmlFor='age' className='mt-4 block'>
                         Data de Nascimento:
                     </label>
                     <input
                         id='age'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite sua data de nascimento'
                         {...register('age')}
                         value={dataNascimento}
@@ -235,14 +236,15 @@ export default function Registration() {
                     />
                     {errors.age && <ErrorMessage>{errors.age.message}</ErrorMessage>}
 
-                    <label htmlFor='gender' className='block mt-4'>
+                    <label htmlFor='gender' className='mt-4 block'>
                         Gênero:
                     </label>
                     <select
                         id='gender'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         {...register('gender')}
-                        required>
+                        required
+                    >
                         <option value='' disabled hidden>
                             Selecione o gênero
                         </option>
@@ -260,87 +262,88 @@ export default function Registration() {
                     <input
                         id='cep'
                         type='text'
-                        className={`block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                        className={`mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ${
                             errors.cep ? 'border-red-500' : ''
                         }`}
                         placeholder='Digite o CEP'
                         {...register('cep', {
                             required: 'CEP é obrigatório',
                         })}
-                        onBlur={e => {
+                        onBlur={(e) => {
                             fetchEndereco(cepDigitado);
                         }}
                     />
                     {errors.cep && <ErrorMessage>{errors.cep.message}</ErrorMessage>}
-                    <label htmlFor='street' className='block mt-4'>
+                    <label htmlFor='street' className='mt-4 block'>
                         Rua:
                     </label>
                     <input
                         id='street'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite a rua'
                         {...register('street')}
                     />
-                    <label htmlFor='neighborhood' className='block mt-4'>
+                    <label htmlFor='neighborhood' className='mt-4 block'>
                         Bairro:
                     </label>
                     <input
                         id='neighborhood'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite o bairro'
                         {...register('neighborhood')}
                     />
-                    <label htmlFor='city' className='block mt-4'>
+                    <label htmlFor='city' className='mt-4 block'>
                         Cidade:
                     </label>
                     <input
                         id='city'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite a cidade'
                         {...register('city')}
                     />
-                    <label htmlFor='state' className='block mt-4'>
+                    <label htmlFor='state' className='mt-4 block'>
                         Estado:
                     </label>
                     <input
                         id='state'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite o estado'
                         {...register('state')}
                     />
-                    <label htmlFor='address_number' className='block mt-4'>
+                    <label htmlFor='address_number' className='mt-4 block'>
                         Número da Casa:
                     </label>
                     <input
                         id='address_number'
                         type='text'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         placeholder='Digite o número da casa'
                         {...register('address_number')}
                     />
 
-                    <label htmlFor='user_type' className='block mt-4'>
+                    <label htmlFor='user_type' className='mt-4 block'>
                         Tipo de Usuário:
                     </label>
                     <select
                         id='user_type'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
-                        {...register('user_type')}>
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
+                        {...register('user_type')}
+                    >
                         <option value='caregiver'>Cuidador</option>
                         <option value='senior'>Idoso</option>
                     </select>
 
-                    <label htmlFor='photo' className='block mt-4'>
+                    <label htmlFor='photo' className='mt-4 block'>
                         Foto:
                     </label>
                     <input
                         id='photo'
                         type='file'
-                        className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                        className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                         onChange={hanldeImageChange}
                     />
                     <Controller
@@ -357,22 +360,21 @@ export default function Registration() {
                             <>
                                 <label htmlFor=''>Telefone</label>
                                 <InputMask
-                                    className='block w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+                                    className='mt-1 block w-full rounded-full border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500'
                                     mask='(99) 99999-9999'
                                     placeholder='Digite seu telefone'
                                     $error={!!errors.phone}
                                     onChange={field.onChange}
                                 />
-                                {errors.phone && (
-                                    <ErrorMessage>{errors.phone.message}</ErrorMessage>
-                                )}
+                                {errors.phone && <ErrorMessage>{errors.phone.message}</ErrorMessage>}
                             </>
                         )}
                     />
                 </div>
                 <Button
                     type='submit'
-                    className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                    className='mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+                >
                     Criar Conta
                 </Button>
             </form>

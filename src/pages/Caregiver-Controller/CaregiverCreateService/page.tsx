@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import http from '@/http';
 import { LoginContext } from '@/context/LoginContext';
 import ICaregiverService from '@/Interface/ICaregiver-Service';
-import { Button } from '@/_components/ui/button';
+import { Button } from '@/components/ui/button';
 
 export default function CreateCaregiverService() {
     const { handleSubmit, register } = useForm<ICaregiverService>({
@@ -44,16 +44,16 @@ export default function CreateCaregiverService() {
     };
 
     return (
-        <div className='bg-gray-100 flex items-center justify-center min-h-screen p-6'>
-            <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl'>
+        <div className='flex min-h-screen items-center justify-center bg-gray-100 p-6'>
+            <div className='w-full max-w-3xl rounded-lg bg-white p-8 shadow-lg'>
                 <div className='mb-6 text-center'>
                     <h1 className='text-2xl font-bold'>Crie sua oferta de serviço de cuidador</h1>
-                    <p className='text-gray-600 mt-2'>
+                    <p className='mt-2 text-gray-600'>
                         Preencha as informações detalhadas sobre o serviço que você deseja oferecer.
                     </p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                         <div className='mb-4'>
                             <label htmlFor='preference' className='block text-gray-700'>
                                 Preferencia do Cuidador:
@@ -123,7 +123,7 @@ export default function CreateCaregiverService() {
                             </label>
                             <textarea
                                 id='about'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('about', { required: true })}
                             />
                         </div>
@@ -135,7 +135,7 @@ export default function CreateCaregiverService() {
                             <input
                                 type='text'
                                 id='experience'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 {...register('experience')}
                             />
                         </div>
@@ -148,7 +148,7 @@ export default function CreateCaregiverService() {
                                 type='text'
                                 id='price'
                                 placeholder='$'
-                                className='w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300'
+                                className='w-full rounded border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring'
                                 value={price}
                                 {...register('price', { required: true })}
                                 onChange={handlePriceChange}
@@ -159,7 +159,8 @@ export default function CreateCaregiverService() {
                     <div className='text-center'>
                         <Button
                             type='submit'
-                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+                            className='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
+                        >
                             Criar Serviço de Cuidador
                         </Button>
                     </div>

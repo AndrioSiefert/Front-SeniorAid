@@ -1,13 +1,13 @@
-import About from '@/_components/About/about';
-import Footer from '@/_components/Footer/footer';
-import News from '@/_components/newSubject';
-import CaregiverInformation from '@/_components/indexInformation/CaregiverInformation';
-import SeniorInformation from '@/_components/indexInformation/SeniorInformation';
-import Experience from '@/_components/Experience/Experience';
+import About from '@/components/About/about';
+import Footer from '@/components/Footer/footer';
+import News from '@/components/newSubject';
+import CaregiverInformation from '@/components/indexInformation/CaregiverInformation';
+import SeniorInformation from '@/components/indexInformation/SeniorInformation';
+import Experience from '@/components/Experience/Experience';
 
 export default function Home() {
     return (
-        <div className='flex flex-col min-h-screen'>
+        <div className='flex min-h-screen flex-col'>
             <About />
             <Experience />
             <SeniorInformation />
