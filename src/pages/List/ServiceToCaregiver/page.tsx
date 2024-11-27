@@ -53,9 +53,7 @@ export default function SeniorList() {
                         <p className='mb-2 text-center text-lg font-semibold'>{senior.senior.name}</p>
                         <Button
                             className='mt-4 w-full rounded-md bg-blue-500 px-4 py-2 text-white shadow-sm hover:bg-blue-600'
-                            onClick={() =>
-                                router.push(`/List/ServiceToCaregiver/ServiceInformation/${senior.senior.id}`)
-                            }
+                            onClick={() => router.push(`/CaregiverPages/ProposalsRequest/${senior.id}`)}
                         >
                             {`Ver informações do ${senior.senior.name}`}
                         </Button>

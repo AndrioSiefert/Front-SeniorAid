@@ -54,9 +54,7 @@ export default function CaregiverList() {
                         <p className='mb-2 text-center text-lg font-semibold'>{caregiver.caregiver.name}</p>
                         <Button
                             className='mt-4 w-full rounded-md bg-blue-500 px-4 py-2 text-white shadow-sm hover:bg-blue-600'
-                            onClick={() =>
-                                router.push(`/List/ServiceToSenior/ServiceInformation/${caregiver.caregiver.id}`)
-                            }
+                            onClick={() => router.push(`/SeniorPages/ProposalsRequest/${caregiver.caregiver.id}`)}
                         >
                             {`Ver informações do ${caregiver.caregiver.name}`}
                         </Button>

@@ -12,8 +12,8 @@ const EditContractSenior = () => {
         serviceName: '',
         dateService: '',
         time: '',
-        medications: '',
         place: '',
+        medications: '',
         description: '',
         price: '',
     });
@@ -26,8 +26,8 @@ const EditContractSenior = () => {
                     serviceName: response.data.serviceName,
                     dateService: response.data.dateService,
                     time: response.data.time,
-                    medications: response.data.medications,
                     place: response.data.place,
+                    medications: response.data.medications,
                     description: response.data.description,
                     price: response.data.price,
                 });
@@ -45,7 +45,7 @@ const EditContractSenior = () => {
         if (id) {
             http.put(`/seniorService/${id}`, formData).then((response) => {
                 setContract(response.data);
-                router.push(`/Senior-Controller/List-Service/${id}`);
+                router.push(`/SeniorPages/SeniorServiceCreated/${id}`);
             });
         }
     };
@@ -130,7 +130,7 @@ const EditContractSenior = () => {
 
                 <div className='mt-8 flex justify-between'>
                     <Button type='submit'>Salvar Alterações</Button>
-                    <Button onClick={() => router.push(`/Senior-Controller/SeniorServiceCreated/${id}`)}>Voltar</Button>
+                    <Button onClick={() => router.push(`/SeniorPages/SeniorServiceCreated/${id}`)}>Voltar</Button>
                 </div>
             </form>
         </div>
