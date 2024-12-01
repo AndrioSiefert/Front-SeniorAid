@@ -54,11 +54,11 @@ export default function Header() {
                     <Button className='text-lg'>Como Funciona?</Button>
                 </Link>
                 {/* CRIAR UM GRID QUE MOSTRE SERVIÇOS DE CAREGIVER E SENIOR */}
-                <Link href='/'>
+                {/* <Link href='/'>
                     <Button>
                         <h1 className='text-lg'>Nossos Serviços</h1>
                     </Button>
-                </Link>
+                </Link> */}
             </div>
 
             <div className='mb-5 flex items-center'>

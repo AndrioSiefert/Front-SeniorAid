@@ -68,14 +68,14 @@ export default function CaregiverInfo() {
                 <div className='mb-6'>
                     <h2 className='mb-4 text-center text-2xl font-semibold text-blue-500'>Informações do Serviço</h2>
                     <p className='mb-2 text-gray-700'>
-                        <strong>Sobre:</strong> {service.about}
+                        <strong>Sobre:</strong> {service.experience}
                     </p>
                     <p className='mb-2 text-gray-700'>
                         <strong>Preferencia:</strong> {service.preference}
                     </p>
 
                     <p className='mb-2 text-gray-700'>
-                        <strong>Sobre Mim:</strong> {service.about}
+                        <strong>Sobre Mim:</strong> {service.experience}
                     </p>
                     <p className='mb-4 text-gray-700'>
                         <strong>Preço:</strong> R${service.price}

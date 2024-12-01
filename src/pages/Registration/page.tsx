@@ -371,12 +371,14 @@ export default function Registration() {
                         )}
                     />
                 </div>
-                <Button
-                    type='submit'
-                    className='mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
-                >
-                    Criar Conta
-                </Button>
+                <div className=''>
+                    <Button
+                        type='submit'
+                        className='mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+                    >
+                        Criar Conta
+                    </Button>
+                </div>
             </form>
         </div>
     );
