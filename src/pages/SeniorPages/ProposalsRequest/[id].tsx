@@ -92,6 +92,9 @@ export default function CaregiverInfo() {
                     <Button className='bg-blue-500 text-white hover:bg-blue-600'>
                         <Link href='/List/ServiceToSenior/page'>Voltar</Link>
                     </Button>
+                    <Button onClick={() => router.push(`/CaregiverPages/CaregiverFeedback/${service.caregiver.id}`)}>
+                        Ver Feedbaks
+                    </Button>
                 </div>
             </div>
         </div>
