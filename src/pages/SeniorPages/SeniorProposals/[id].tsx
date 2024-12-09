@@ -81,10 +81,6 @@ const ServiceRequestDetails = () => {
                                                 <span className='font-semibold'>Nome do cuidador: </span>
                                                 {request.caregiver.name}
                                             </p>
-                                            <p className='text-md'>
-                                                <span className='font-semibold'>Telefone: </span>
-                                                {request.caregiver.phone}
-                                            </p>
                                             <div className='my-2'>
                                                 <Image
                                                     width={100}
@@ -105,6 +101,8 @@ const ServiceRequestDetails = () => {
                                         <span className='font-semibold'>Contrato: </span>
                                         {request.accepted ? 'ACEITO' : 'NÃO ACEITO'}
                                     </p>
+                                    <p>Telefone: {request.accepted ? request.caregiver.phone : ''}</p>
+
                                     <Button
                                         onClick={() => router.push(`/Feedback/${request.caregiver?.id}`)}
                                         className='mt-2'
