@@ -47,7 +47,7 @@ const ContractSenior = () => {
                 alert('Serviço solicitado com sucesso!');
             } catch (error) {
                 console.error('Erro ao solicitar serviço:', error);
-                alert('Erro ao solicitar o serviço. Tente novamente mais tarde.');
+                alert('Serviço já solicitado!.');
             }
         } else {
             console.error('Caregiver ID ou Serviço está ausente');

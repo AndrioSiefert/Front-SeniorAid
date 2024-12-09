@@ -20,7 +20,7 @@ export default function CreateCaregiverService() {
         inputValue = inputValue.replace(/[^\d.]/g, '');
 
         // Formata o valor com o símbolo $
-        const formattedValue = `$${inputValue}`;
+        const formattedValue = `R$${inputValue}`;
 
         setPrice(formattedValue);
     };

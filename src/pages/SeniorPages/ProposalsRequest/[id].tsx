@@ -78,7 +78,8 @@ export default function CaregiverInfo() {
                         <strong>Sobre Mim:</strong> {service.experience}
                     </p>
                     <p className='mb-4 text-gray-700'>
-                        <strong>Preço:</strong> R${service.price}
+                        <strong>Preço:</strong>
+                        {service.price}
                     </p>
                 </div>
 
